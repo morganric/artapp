@@ -9,7 +9,7 @@
     <%= f.input :description %>
     <%= f.input :dimensions %>
     <%= f.input :views, as: :hidden %>
-    <%= f.input :user_id, as: :hidden %>
+    <%= f.input :user_id, as: :hidden, value: current_user.id %>
     <%= f.input :price, as: :hidden %>
     <%= f.input :sold, as: :hidden %>
   </div>
