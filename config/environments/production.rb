@@ -1,4 +1,7 @@
 ENV["DOMAIN_NAME"] = "appart.herokuapp.com"
+ENV["ADMIN_NAME"] = "admin"
+ENV["ADMIN_EMAIL"] = "user@admin.com"
+ENV["ADMIN_PASSWORD"] = "chaneme123"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
