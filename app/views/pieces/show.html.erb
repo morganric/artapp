@@ -1,0 +1,34 @@
+<h1>
+  <%= @piece.title %>
+</h1>
+<hr/>
+
+
+<div class="row clearfix">
+  <div class="span3">
+    <p class="well">
+      <%= @piece.description %>
+    </p>
+    <p>
+      <strong>Dimensions:</strong>
+      <%= @piece.dimensions %>
+    </p>
+    <label class="label">
+      <%= @piece.views.to_i %> views
+    </label>        
+  </div>
+  <div class="span8 pull-left">
+    <%= image_tag @piece.image.url() %>
+  </div>
+</div>
+
+
+
+<hr/>
+
+
+
+<%= link_to 'Edit', edit_piece_path(@piece) %>
+
+<br/>
+<br/>

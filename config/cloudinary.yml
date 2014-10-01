@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: artapp
+  api_key: '975948348542526'
+  api_secret: LNOAsu80vG1BUiNc_SLjXdeuJyg
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: artapp
+  api_key: '975948348542526'
+  api_secret: LNOAsu80vG1BUiNc_SLjXdeuJyg
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: artapp
+  api_key: '975948348542526'
+  api_secret: LNOAsu80vG1BUiNc_SLjXdeuJyg
+  enhance_image_tag: true
+  static_image_support: false
