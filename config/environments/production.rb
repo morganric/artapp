@@ -1,4 +1,4 @@
-ENV["DOMAIN_NAME"] = "appart.com"
+ENV["DOMAIN_NAME"] = "appart.herokuapp.com/"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
