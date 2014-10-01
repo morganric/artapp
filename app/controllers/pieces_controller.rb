@@ -10,7 +10,7 @@ class PiecesController < ApplicationController
   # GET /pieces/1
   # GET /pieces/1.json
   def show
-    @piece.views = @piece.views + 1
+    @piece.views = @piece.views.to_i + 1
     @piece.save
   end
 
