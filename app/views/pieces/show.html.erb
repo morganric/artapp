@@ -1,5 +1,6 @@
 <h1>
   <%= @piece.title %>
+  <small>by <%= link_to @piece.user.name, @piece.user %></small>
 </h1>
 <hr/>
 
