@@ -1,16 +1,25 @@
 <h1>Trending Pieces</h1>
 <hr/>
-<ul >
-    <% @pieces.each do |piece| %>
-      <li class="clearfix">
-        <%= link_to image_tag(piece.image.url(:small), :class =>'pull-left'), piece %>
-        <h2><%= link_to piece.title, piece %>
-        <small>by <%= link_to piece.user.name, piece.user %></small>
-        </h2>
-        <p>
-        <label class="label pull-left"><%= piece.views.to_i %> views</label>
- 		</p>
-      </li>
-    <% end %>
+<div class="row">
+	<div class="span9">
+		<ul >
+		    <% @pieces.each do |piece| %>
+		      <li class="clearfix">
+		        <%= link_to image_tag(piece.image.url(:small), :class =>'pull-left thumbnail'), piece %>
+		        <span class="span7" >
+		        <h2><%= link_to piece.title, piece %>
+		        <small>by <%= link_to piece.user.name, profile_path(piece.user.profile) %></small>
+		        </h2>
+		        <label class="label pull-left"><%= piece.views.to_i %> views</label>
+		        </span>
+		      </li>
+		      <hr/>
+		    <% end %>
+		</ul>
+	</div>
 
-</ul>
+<div class="span3">
+	
+</div>
+
+</div>

@@ -1,12 +1,12 @@
 <h1>
   <%= @piece.title %>
-  <small>by <%= link_to @piece.user.name, @piece.user %></small>
+  <small>by <%= link_to @piece.user.name, profile_path(@piece.user.profile) %></small>
 </h1>
 <hr/>
 
 
 <div class="row clearfix">
-  <div class="span3">
+  <div class="span4">
     <p class="well">
       <%= @piece.description %>
     </p>
