@@ -67,11 +67,11 @@ class PiecesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_piece
-      @piece = Piece.find(params[:id])
+      @piece = Piece.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def piece_params
-      params.require(:piece).permit(:title, :image, :description, :dimensions, :views, :user_id, :price, :sold)
+      params.require(:piece).permit(:title, :image, :description, :dimensions, :views, :user_id, :price, :slug, :sold)
     end
 end

@@ -12,6 +12,6 @@ Rails.application.routes.draw do
     get '', to: 'profiles#show', :as => 'vanity_url'
   end
 
-  get ':id/:piece_id'  => "pieces#show", as: "user_piece"
+  get ':user_slug/:id'  => "pieces#show", as: "user_piece"
 
 end
