@@ -19,7 +19,7 @@
 </p>
 
 <p>
-  <%= link_to @profile.website, @profile.website, :target => "blank"  %>
+  <%= link_to @profile.website, url_with_protocol(@profile.website), :target => "blank"  %>
 </p>
 </div>
 
@@ -34,9 +34,9 @@
             <%= link_to image_tag(piece.image.url(:small), :class =>'pull-left thumbnail'), piece %>
             <span class="col-md-8" >
             <h3><%= link_to piece.title, piece %>
-            <small>by <%= link_to piece.user.name, piece.user %></small>
+            <small>by <%= link_to piece.user.name, profile_path(piece.user.profile) %></small>
             </h3>
-            <label class="label pull-left"><%= piece.views.to_i %> views</label>
+            <label class="label label-default pull-left"><%= piece.views.to_i %> views</label>
             </span>
           </li>
           <hr/>
