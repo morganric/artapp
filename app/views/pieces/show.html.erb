@@ -6,7 +6,7 @@
 
 
 <div class="row clearfix">
-  <div class="span4">
+  <div class="col-md-3">
     <p class="well">
       <%= @piece.description %>
     </p>
@@ -18,8 +18,8 @@
       <%= @piece.views.to_i %> views
     </label>        
   </div>
-  <div class="span8 pull-left">
-    <%= image_tag @piece.image.url() %>
+  <div class="col-md-9 ">
+    <%= image_tag @piece.image.url(:piece) %>
   </div>
 </div>
 

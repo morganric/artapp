@@ -1,15 +1,15 @@
 <h1>Trending Pieces</h1>
 <hr/>
 <div class="row">
-	<div class="span9">
+	<div class="col-md-9">
 		<ul >
 		    <% @pieces.each do |piece| %>
 		      <li class="clearfix">
 		        <%= link_to image_tag(piece.image.url(:small), :class =>'pull-left thumbnail'), piece %>
-		        <span class="span7" >
-		        <h2><%= link_to piece.title, piece %>
+		        <span class="col-md-8" >
+		        <h3><%= link_to piece.title, piece %>
 		        <small>by <%= link_to piece.user.name, profile_path(piece.user.profile) %></small>
-		        </h2>
+		        </h3>
 		        <label class="label pull-left"><%= piece.views.to_i %> views</label>
 		        </span>
 		      </li>
@@ -18,7 +18,7 @@
 		</ul>
 	</div>
 
-<div class="span3">
+<div class="col-md-3">
 	
 </div>
 

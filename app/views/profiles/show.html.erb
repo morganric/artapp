@@ -8,25 +8,23 @@
 
 <div class="row">
 
-<div class="span4">
+<div class="col-md-4">
 
 
 <%= image_tag @profile.image.url(:square) %>
 <br/>
 
 <p>
-  <strong>Location:</strong>
   <%= @profile.location %>
 </p>
 
 <p>
-  <strong>Website:</strong>
-  <%= link_to @profile.website %>
+  <%= link_to @profile.website, @profile.website, :target => "blank"  %>
 </p>
 </div>
 
 
-<div class="span8">
+<div class="col-md-8">
   <p class="well">
     <%= @profile.bio %>
   </p>
@@ -34,10 +32,10 @@
   <% @profile.user.pieces.each do |piece| %>
        <li class="clearfix">
             <%= link_to image_tag(piece.image.url(:small), :class =>'pull-left thumbnail'), piece %>
-            <span class="span6" >
-            <h2><%= link_to piece.title, piece %>
+            <span class="col-md-8" >
+            <h3><%= link_to piece.title, piece %>
             <small>by <%= link_to piece.user.name, piece.user %></small>
-            </h2>
+            </h3>
             <label class="label pull-left"><%= piece.views.to_i %> views</label>
             </span>
           </li>

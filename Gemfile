@@ -18,6 +18,13 @@ gem 'thin'
 gem 'upmin-admin'
 gem 'cloudinary'
 gem 'carrierwave'
+gem 'therubyracer'
+gem "less-rails"
+gem 'less-rails-bootstrap'
+gem "twitter-bootstrap-rails"
+gem 'twitter-bootswatch-rails'
+gem 'twitter-bootswatch-rails-helpers'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19]
