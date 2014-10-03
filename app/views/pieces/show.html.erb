@@ -1,6 +1,6 @@
 <h1>
   <%= @piece.title %>
-  <small>by <%= link_to @piece.user.name, profile_path(@piece.user.profile) %></small>
+  <small>by <%= link_to @piece.user.name, vanity_url_path(@piece.user.profile) %></small>
 </h1>
 <hr/>
 

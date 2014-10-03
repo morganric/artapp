@@ -7,4 +7,11 @@ Rails.application.routes.draw do
   root to: 'pieces#index'
   devise_for :users
   resources :users
+
+  scope ":id" do
+    get '', to: 'profiles#show', :as => 'vanity_url'
+  end
+
+  get ':id/:piece_id'  => "pieces#show", as: "user_piece"
+
 end
