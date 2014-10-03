@@ -1,10 +1,18 @@
 class PiecesController < ApplicationController
+  before_filter :authenticate_user!, except: [:show, :index, :tag]
   before_action :set_piece, only: [:show, :edit, :update, :destroy]
 
   # GET /pieces
   # GET /pieces.json
   def index
-    @pieces = Piece.all
+    @pieces = Piece.all.order('views DESC')
+  end
+
+  def tag
+    @pieces = Piece.tagged_with(params[:tag]).page(params[:all])
+
+    @tags = Piece.tag_counts_on(:tags)
+    render :action => 'index'
   end
 
   # GET /pieces/1
@@ -22,6 +30,7 @@ class PiecesController < ApplicationController
   # GET /pieces/1/edit
   def edit
   end
+
 
   # POST /pieces
   # POST /pieces.json
@@ -72,6 +81,6 @@ class PiecesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def piece_params
-      params.require(:piece).permit(:title, :image, :description, :dimensions, :views, :user_id, :price, :slug, :sold)
+      params.require(:piece).permit(:title, :image, :description, :tag_list, :dimensions, :views, :user_id, :price, :slug, :sold)
     end
 end

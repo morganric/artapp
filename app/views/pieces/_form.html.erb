@@ -8,12 +8,13 @@
     <br/><br/>
     <%= f.input :description %>
     <%= f.input :dimensions %>
+    <%= f.input :tag_list %>
     <%= f.input :views, as: :hidden %>
     <%= f.input :user_id, as: :hidden %>
     <%= f.input :price, as: :hidden %>
     <%= f.input :sold, as: :hidden %>
   </div>
-
+  <hr/>
   <div class="form-actions">
     <%= f.button :submit %>
   </div>

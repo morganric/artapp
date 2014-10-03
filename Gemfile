@@ -24,7 +24,10 @@ gem 'less-rails-bootstrap'
 gem "twitter-bootstrap-rails"
 gem 'twitter-bootswatch-rails'
 gem 'twitter-bootswatch-rails-helpers'
-gem 'friendly_id', '~> 5.0.0' 
+gem 'friendly_id', '~> 5.0.0'
+gem 'acts-as-taggable-on', '~> 3.4'
+gem 'debugger'
+gem "binding_of_caller" 
 
 group :development do
   gem 'better_errors'
