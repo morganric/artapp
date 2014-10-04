@@ -1,3 +1,3 @@
 class UserMailer < ActionMailer::Base
-  default from: 'morganric@gmail.com'
-end
+  default from: 'no-reply@appart@herokuapp.com'
+ end
