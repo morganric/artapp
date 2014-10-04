@@ -11,7 +11,7 @@
 <div class="col-md-4">
 
 
-<%= image_tag @profile.image.url(:square) %>
+<%= image_tag @profile.image.url(:square), :class => "img-responsive" %>
 <br/>
 
 <p>
@@ -31,7 +31,7 @@
   <ul>
   <% @profile.user.pieces.each do |piece| %>
        <li class="clearfix">
-            <%= link_to image_tag(piece.image.url(:small), :class =>'pull-left thumbnail'), piece %>
+            <%= link_to image_tag(piece.image.url(:small), :class =>'pull-left img-thumbnail img-responsive'), piece %>
             <span class="col-md-8" >
             <h3><%= link_to piece.title, user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
             <small>by <%= link_to piece.user.name, vanity_url_path(piece.user.profile) %></small>
@@ -50,6 +50,6 @@
 
 </div>
 
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+<% if current_user && current_user.admin? %>
+<%= link_to 'Edit', edit_profile_path(@profile) %> 
+<% end %>

@@ -6,7 +6,7 @@
 
 
 <div class="row clearfix">
-  <div class="col-md-3">
+  <div class="col-md-4">
     <p class="well">
       <%= @piece.description %>
     </p>
@@ -26,8 +26,8 @@
     </label> &nbsp;
     <% end %>       
   </div>
-  <div class="col-md-9 ">
-    <%= image_tag @piece.image.url(:piece) %>
+  <div class="col-md-8 ">
+    <%= image_tag @piece.image.url(:piece), :class => "img-responsive"%>
   </div>
 </div>
 
@@ -36,8 +36,9 @@
 <hr/>
 
 
-
+<% if current_user && current_user.admin? %>
 <%= link_to 'Edit', edit_piece_path(@piece) %>
+<% end %>
 
 <br/>
 <br/>
