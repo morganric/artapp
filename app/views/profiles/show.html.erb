@@ -50,6 +50,6 @@
 
 </div>
 
-<% if current_user && current_user.admin? %>
+<% if current_user == @profile.user || current_user.admin? %>
 <%= link_to 'Edit', edit_profile_path(@profile) %> 
 <% end %>
