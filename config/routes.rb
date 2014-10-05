@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resources :profiles
   resources :pieces
-    get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
+  get 'featured' => 'pieces#featured', as: "featured"
+  get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
 
   mount Upmin::Engine => '/admin'
   root to: 'pieces#index'

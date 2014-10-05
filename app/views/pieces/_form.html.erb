@@ -14,6 +14,11 @@
     <%= f.input :user_id, as: :hidden %>
     <%= f.input :price, as: :hidden %>
     <%= f.input :sold, as: :hidden %>
+    <br/>
+    <% if current_user && current_user.admin? %>
+    <%= f.input :hidden %>
+    <%= f.input :featured %>
+    <% end %>
   </div>
   <hr/>
   <div class="form-actions">

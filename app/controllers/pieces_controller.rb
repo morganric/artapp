@@ -8,6 +8,11 @@ class PiecesController < ApplicationController
     @pieces = Piece.all.order('views DESC')
   end
 
+  def featured
+    @pieces = Piece.where(:featured => true)
+    
+  end
+
   def tag
     @pieces = Piece.tagged_with(params[:tag]).page(params[:all])
 
@@ -81,6 +86,7 @@ class PiecesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def piece_params
-      params.require(:piece).permit(:title, :image, :description, :tag_list, :dimensions, :views, :user_id, :price, :slug, :sold)
+      params.require(:piece).permit(:title, :image, :description, :tag_list,
+       :dimensions, :views, :user_id, :price, :slug, :sold, :hidden, :featured)
     end
 end
