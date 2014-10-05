@@ -16,8 +16,10 @@
     <%= f.input :sold, as: :hidden %>
     <br/>
     <% if current_user && current_user.admin? %>
-    <%= f.input :hidden %>
-    <%= f.input :featured %>
+    <%= f.label :hidden %>
+    <%= f.check_box :hidden %>
+    <%= f.label :featured %>
+    <%= f.check_box :featured %>
     <% end %>
   </div>
   <hr/>
