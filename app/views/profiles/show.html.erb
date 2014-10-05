@@ -29,7 +29,7 @@
     <%= @profile.bio %>
   </p>
   <ul>
-  <% @profile.user.pieces.each do |piece| %>
+  <% @profile.user.pieces.where(:hidden => false).each do |piece| %>
        <li class="clearfix">
             <%= link_to image_tag(piece.image.url(:small), :class =>'pull-left img-thumbnail img-responsive'), piece %>
             <span class="col-md-8" >

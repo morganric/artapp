@@ -1,5 +1,5 @@
 class PiecesController < ApplicationController
-  before_filter :authenticate_user!, except: [:show, :index, :tag]
+  before_filter :authenticate_user!, except: [:show, :index, :tag, :featured]
   before_action :set_piece, only: [:show, :edit, :update, :destroy]
 
   # GET /pieces
@@ -9,7 +9,7 @@ class PiecesController < ApplicationController
   end
 
   def featured
-    @pieces = Piece.where(:featured => true)
+    @pieces = Piece.where(:hidden => false).where(:featured => true).limit(6)
     
   end
 
