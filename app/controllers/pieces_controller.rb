@@ -5,7 +5,7 @@ class PiecesController < ApplicationController
   # GET /pieces
   # GET /pieces.json
   def index
-    @pieces = Piece.all.order('views DESC')
+    @pieces = Piece.where(:hidden => false).order('views DESC')
   end
 
   def featured
@@ -14,7 +14,7 @@ class PiecesController < ApplicationController
   end
 
   def tag
-    @pieces = Piece.tagged_with(params[:tag]).page(params[:all])
+    @pieces = Piece.where(:hidden => false).tagged_with(params[:tag]).page(params[:all])
 
     @tags = Piece.tag_counts_on(:tags)
     render :action => 'index'
