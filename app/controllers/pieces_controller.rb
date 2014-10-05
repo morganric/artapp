@@ -42,6 +42,8 @@ class PiecesController < ApplicationController
   def create
     @piece = Piece.new(piece_params)
     @piece.user_id = current_user.id
+    @piece.hidden = false
+    @piece.featured = false
 
     respond_to do |format|
       if @piece.save
