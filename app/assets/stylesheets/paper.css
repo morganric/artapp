@@ -33,6 +33,25 @@ ul li {
 	margin-left: -6px;
 }
 
+.arrow-up-large {
+	width: 0px; 
+	height: 80px; 
+	border-left: 60px solid transparent;
+	border-right: 60px solid transparent;
+	border-bottom: 80px solid black;
+	margin-right: 40px;
+	padding-top: 45px;
+}
+
+.arrow-up-large i {
+	margin-top:10px;
+	margin-left: -16px;
+}
+
+.pull-center {
+	margin: 0 auto;
+}
+
 .white, .white a {
   color: #fff;
 }

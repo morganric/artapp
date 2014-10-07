@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
 
   mount Upmin::Engine => '/admin'
-  root to: 'pieces#index'
+
   devise_for :users
   resources :users
 
@@ -15,5 +15,12 @@ Rails.application.routes.draw do
 
   get ':user_slug/:id'  => "pieces#show", as: "user_piece"
 
+  authenticated :user do
+        root to: 'pieces#index', as: :authenticated_root
+    end
+
+  unauthenticated do
+    root to: "visitors#index"
+  end
 
 end
