@@ -1,8 +1,9 @@
 <h3>User</h3>
-<p>Name: <%= @user.name if @user.name %></p>
+<p>Name: <%= link_to @user.name, vanity_url_path(@user.profile) if @user.name %></p>
 <p>Email: <%#= @user.email if @user.email %></p>
 
-
+<ol>
 <% @user.pieces.each do |piece| %>
-	<%= link_to piece.title, piece %>
+	<li><%= link_to piece.title, piece %></li>
 <% end %>
+</ol>
