@@ -16,8 +16,8 @@ class PiecesController < ApplicationController
   end
 
   def tag
-    @pieces = Piece.where(:hidden => false).tagged_with(params[:tag]).page(params[:all])
-    @new_pieces = Piece.where(:hidden => false).order('created_at DESC')
+    @pieces = Piece.where(:hidden => false).tagged_with(params[:tag]).order('views DESC')
+    @new_pieces = Piece.where(:hidden => false).tagged_with(params[:tag]).order('created_at DESC')
     @pieces = Piece.where(:hidden => false).where(:featured => true).limit(6).order('created_at DESC')
     
 
