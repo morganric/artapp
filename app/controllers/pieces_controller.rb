@@ -7,6 +7,7 @@ class PiecesController < ApplicationController
   def index
     @pieces = Piece.where(:hidden => false).order('views DESC')
     @new_pieces = Piece.where(:hidden => false).order('created_at DESC')
+    @tags = Piece.tag_counts_on(:tags)
   end
 
   def featured
@@ -16,6 +17,9 @@ class PiecesController < ApplicationController
 
   def tag
     @pieces = Piece.where(:hidden => false).tagged_with(params[:tag]).page(params[:all])
+    @new_pieces = Piece.where(:hidden => false).order('created_at DESC')
+    @pieces = Piece.where(:hidden => false).where(:featured => true).limit(6).order('created_at DESC')
+    
 
     @tags = Piece.tag_counts_on(:tags)
     render :action => 'index'
