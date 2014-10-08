@@ -1,5 +1,6 @@
 class Piece < ActiveRecord::Base
 	acts_as_taggable
+	paginates_per 10
 
 	mount_uploader :image, ImageUploader
 

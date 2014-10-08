@@ -26,6 +26,7 @@ gem 'twitter-bootswatch-rails'
 gem 'twitter-bootswatch-rails-helpers'
 gem 'friendly_id', '~> 5.0.0'
 gem 'acts-as-taggable-on', '~> 3.4'
+gem 'kaminari'
 
 group :development do
   gem 'better_errors'
