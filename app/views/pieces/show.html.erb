@@ -24,7 +24,12 @@
         <i class="glyphicon glyphicon-tag white"></i>
       <%= link_to tag, tagged_pieces_path(:tag => tag) %>
     </label> &nbsp;
-    <% end %>       
+    <% end %>  
+    <br/><br/>
+    <% if current_user && current_user.admin? %>
+      <%= link_to 'Edit', edit_piece_path(@piece) %>
+    <% end %>
+         
   </div>
   <div class="col-md-8 ">
     <%= image_tag @piece.image.url(:piece), :class => "img-responsive"%>
@@ -34,11 +39,6 @@
 
 
 <hr/>
-
-
-<% if current_user && current_user.admin? %>
-<%= link_to 'Edit', edit_piece_path(@piece) %>
-<% end %>
 
 <br/>
 <br/>

@@ -6,10 +6,11 @@ class PiecesController < ApplicationController
   # GET /pieces.json
   def index
     @pieces = Piece.where(:hidden => false).order('views DESC')
+    @new_pieces = Piece.where(:hidden => false).order('created_at DESC')
   end
 
   def featured
-    @pieces = Piece.where(:hidden => false).where(:featured => true).limit(6)
+    @pieces = Piece.where(:hidden => false).where(:featured => true).limit(6).order('created_at DESC')
     
   end
 

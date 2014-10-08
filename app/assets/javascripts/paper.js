@@ -7,10 +7,10 @@
 
 
   $(document).ready(function(){
-    // $(".arrow-up i").fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000);
+    $('.alert, .notice').fadeOut(5000);
 
     window.setInterval(function(){
-  /// call your function here
-  $(".arrow-up i").fadeOut(1000).fadeIn(1000)
-}, 10000);  
+		  /// call your function here
+		  $(".arrow-up i, .arrow-up-large i").fadeOut(1000).fadeIn(1000)
+		}, 10000);  
   });

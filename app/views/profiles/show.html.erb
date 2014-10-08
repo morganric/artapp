@@ -21,13 +21,22 @@
 <p>
   <%= link_to @profile.website, url_with_protocol(@profile.website), :target => "blank"  %>
 </p>
+
+<% if current_user %>
+<% if current_user == @profile.user || current_user.admin? %>
+<%= link_to 'Edit', edit_profile_path(@profile) %> 
+<% end %>
+<% end %>
+
 </div>
 
 
 <div class="col-md-8">
+  <% if @profile.bio !=  "" %>
   <p class="well">
     <%= @profile.bio %>
   </p>
+  <% end %>
   <ul>
   <% @profile.user.pieces.where(:hidden => false).each do |piece| %>
        <li class="clearfix">
@@ -50,8 +59,3 @@
 
 </div>
 
-<% if current_user %>
-<% if current_user == @profile.user || current_user.admin? %>
-<%= link_to 'Edit', edit_profile_path(@profile) %> 
-<% end %>
-<% end %>
