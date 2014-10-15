@@ -2,7 +2,9 @@
   <header style="background-image: url('<%= @pieces.where(:featured => true).last.image.url(:banner)  %>'); color:white; margin-top:60px;" class="profile-header text-center">
   <br/>
   <%#= image_tag @profile.image.url(:profile), :class => "img-responsive img-thumbnail img-circle title pull-center" %>
-  <div class="arrow-up-large pull-center "><h3><i class="glyphicon glyphicon-eye-open white"></i></h3></div>
+  <div class="img-circle">
+	  <div class="arrow-up-large pull-center "><h3><i class="glyphicon glyphicon-eye-open white"></i></h3></div>
+  </div>
   <br/>
   </header>
 <% end %>
