@@ -5,3 +5,18 @@
   <p>A simple service for artists and art lovers to discover eachother.</p>
   <p><a class="btn btn-primary btn-lg" href="<%= new_user_registration_path %>">Learn more</a></p>
 </div>
+
+
+
+<style type="text/css">
+	
+
+	main  {
+		background-image: url('<%= @featured.last.image.url() %>');
+		background-size: cover !important;
+
+	min-height:100%;
+
+	}
+
+</style>

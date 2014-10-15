@@ -3,6 +3,13 @@
  *= require_self
  *= require paper/loader
  *= require paper/bootswatch
+ *= require 'masonry/basic'
+*= require 'masonry/centered'
+*= require 'masonry/fluid'
+*= require 'masonry/gutters'
+*= require 'masonry/infinitescroll'
+*= require 'masonry/right-to-left'
+*= require 'masonry/transitions'
 */
 
 main {
@@ -16,6 +23,10 @@ ul {
 
 ul li {
 	list-style: none;
+}
+
+.profile-header {
+	background: linear-gradient(to bottom,rgba(0,0,0,0) 40%,rgba(0,0,0,.3) 100%);
 }
 
 .arrow-up {

@@ -4,6 +4,7 @@
 //= require jquery_ujs
 //= require paper/loader
 //= require paper/bootswatch
+//= require masonry/jquery.masonry
 
 
   $(document).ready(function(){

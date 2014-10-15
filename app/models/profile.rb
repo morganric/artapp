@@ -1,5 +1,6 @@
 class Profile < ActiveRecord::Base
     mount_uploader :image, ImageUploader
+    mount_uploader :banner, ImageUploader
 
 	belongs_to :user
 

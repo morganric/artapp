@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141005141431) do
+ActiveRecord::Schema.define(version: 20141009094210) do
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 20141005141431) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.string   "twitter"
+    t.string   "banner"
   end
 
   add_index "profiles", ["slug"], name: "index_profiles_on_slug", unique: true

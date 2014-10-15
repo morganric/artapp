@@ -11,6 +11,8 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    @pieces = Piece.where(:user_id => @profile.user.id).where(:hidden => false).page params[:page]
+    @featured = Piece.where(:featured => true)
   end
 
   # GET /profiles/new
@@ -70,6 +72,7 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:display_name, :user_id, :bio, :image, :dob, :location, :slug, :website)
+      params.require(:profile).permit(:display_name, :user_id, :bio,
+      :twitter, :banner, :image, :dob, :location, :slug, :website)
     end
 end
