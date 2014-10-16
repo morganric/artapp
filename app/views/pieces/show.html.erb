@@ -1,11 +1,13 @@
 
 
 <div class="pull-right">
-  <% if UserFav.where(:user_id => current_user.id, :piece_id => @piece.id).exists? %>
+  <% unless current_user == nil %>
+  <% if  UserFav.where(:user_id => current_user.id, :piece_id => @piece.id).exists? %>
           <%= link_to raw("<i class='glyphicon glyphicon-heart-empty'></i>  Un-Favourite"), delete_user_favs_path(:user_fav => {:piece_id => @piece.id, :user_id => current_user.id}), :remote => true, class: "btn fav btn-info", :method => :delete %>
       <% else %>
         <%= link_to raw("<i class='glyphicon glyphicon-heart'></i>  Favourite"), user_favs_path(:user_fav => {:piece_id => @piece.id,:user_id => current_user.id}), :remote => true, class: "btn fav btn-info", :method => :post %>
   <% end %>
+   <% end %>
 </div>
 
 <h1>
