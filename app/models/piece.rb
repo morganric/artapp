@@ -5,6 +5,7 @@ class Piece < ActiveRecord::Base
 	mount_uploader :image, ImageUploader
 
 	validate :maximum_amount_of_tags
+	validates_uniqueness_of :title, :presence => true
 	
 	def maximum_amount_of_tags
 	number_of_tags = tag_list_cache_on("tags").uniq.length
@@ -12,6 +13,9 @@ class Piece < ActiveRecord::Base
 	end
 
 	belongs_to :user
+
+	has_many :user_favs
+    has_many :favourited_by, :through => :user_favs, :source => :user
 
 	extend FriendlyId
 	  friendly_id :title, use: :slugged

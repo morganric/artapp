@@ -21,13 +21,18 @@
 		  <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
 			<% @new_pieces.each do |piece| %>
 							       <div class="box col2">
-							        <%= link_to image_tag(piece.image.url(:square), :class =>'pull-left thumbnail'), piece %>
+							        <%= link_to image_tag(piece.image.url(:square), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
 							        <h4><%= link_to piece.title, user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
 							        <small>by <%= link_to piece.user.name, vanity_url_path(piece.user.profile) %></small>
 							        </h4>
-							        <label class="label label-default pull-left">
-							      
-								        <%= piece.views.to_i %> views</label>
+							        <label class="label label-primary pull-left">
+								       <i class="glyphicon glyphicon-eye-open "></i> <%= piece.views.to_i %> Views
+							        </label>
+
+							        <label class="label label-info pull-left">
+								       <i class="glyphicon glyphicon-heart "></i>  <%= piece.favourited_by.count %> Favs
+							        </label>
+
 							        <br/><br/>
 							        <% piece.tag_list.each do |tag| %>
 							        	<label class="label label-default" >

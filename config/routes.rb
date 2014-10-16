@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'featured' => 'pieces#featured', as: "featured"
   get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
 
+  post 'user_favs' => 'user_favs#create', :as => 'user_favs'
+  delete 'user_favs' => 'user_favs#destroy', :as => 'delete_user_favs'
+
   mount Upmin::Engine => '/admin'
 
   devise_for :users

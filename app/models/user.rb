@@ -20,4 +20,7 @@ class User < ActiveRecord::Base
 
   has_many :pieces
   has_one :profile
+
+   has_many :user_favs
+  has_many :favourites, :through => :user_favs, :source => :piece
 end

@@ -8,6 +8,11 @@
 
 
   $(document).ready(function(){
+
+  	$('.fav').on('click', function(){
+		location.reload();
+	});
+	
     $('.alert, .notice').fadeOut(5000);
 
     window.setInterval(function(){
