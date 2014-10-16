@@ -84,7 +84,7 @@
     <h2 class="panel-title"><i class="glyphicon glyphicon-star white"></i> Featured</h2>
   </div>
   <div class="panel-body">
-    <% @pieces.where(:featured => true).limit(3).reverse.each do |piece| %>
+    <% @pieces.where(:featured => true).limit(3).order('created_at DESC').each do |piece| %>
     	<%= link_to image_tag(piece.image.url(:featured), :class => "img-responsive"), user_piece_path(:user_slug => piece.user.profile.slug, :id => piece.slug) %>
     <% end %>
   </div>
