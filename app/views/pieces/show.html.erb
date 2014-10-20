@@ -1,5 +1,5 @@
-
-
+<header>
+<br/>
 <div class="pull-right">
   <% unless current_user == nil %>
   <% if  UserFav.where(:user_id => current_user.id, :piece_id => @piece.id).exists? %>
@@ -14,7 +14,7 @@
   <%= @piece.title %>
   <small>by <%= link_to @piece.user.name, vanity_url_path(@piece.user.profile) %></small>
 </h1>
-
+</header>
 
 
 <div class="row clearfix">
