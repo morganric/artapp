@@ -2,6 +2,8 @@ class Profile < ActiveRecord::Base
     mount_uploader :image, ImageUploader
     mount_uploader :banner, ImageUploader
 
+    paginates_per 10
+
 	belongs_to :user
 
 	extend FriendlyId

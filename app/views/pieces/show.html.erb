@@ -1,11 +1,13 @@
 
 
 <div class="pull-right">
-  <% if UserFav.where(:user_id => current_user.id, :piece_id => @piece.id).exists? %>
+  <% unless current_user == nil %>
+  <% if  UserFav.where(:user_id => current_user.id, :piece_id => @piece.id).exists? %>
           <%= link_to raw("<i class='glyphicon glyphicon-heart-empty'></i>  Un-Favourite"), delete_user_favs_path(:user_fav => {:piece_id => @piece.id, :user_id => current_user.id}), :remote => true, class: "btn fav btn-info", :method => :delete %>
       <% else %>
         <%= link_to raw("<i class='glyphicon glyphicon-heart'></i>  Favourite"), user_favs_path(:user_fav => {:piece_id => @piece.id,:user_id => current_user.id}), :remote => true, class: "btn fav btn-info", :method => :post %>
   <% end %>
+   <% end %>
 </div>
 
 <h1>
@@ -13,16 +15,21 @@
   <small>by <%= link_to @piece.user.name, vanity_url_path(@piece.user.profile) %></small>
 </h1>
 
-<hr/>
+
 
 <div class="row clearfix">
-  <div class="col-md-8 ">
-    <%= image_tag @piece.image.url(:piece), :class => "img-responsive"%>
+  <hr/>
+  <div class="text-center">
+  <%= image_tag @piece.image.url(), :class => "img-responsive text-center"%>
   </div>
-  <div class="col-md-4">
-    <p class="well">
+  <hr/>
+  <div class="col-md-8 ">
+       <p class="well">
       <%= @piece.description %>
     </p>
+  </div>
+  <div class="col-md-4">
+ 
     <p>
       <strong>Dimensions:</strong>
       <%= @piece.dimensions %>

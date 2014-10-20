@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_filter :authenticate_user!, except: [:show]
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :following, :followers]
 
   # GET /profiles
   # GET /profiles.json  
@@ -22,6 +22,20 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
+  end
+
+  def following
+    @title = "Following"
+    @user  = @profile.user
+    @users = @user.following
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = @profile.user
+    @users = @user.followers
+    render 'show_follow'
   end
 
   # POST /profiles
@@ -67,7 +81,7 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = Profile.find(params[:id])
+      @profile = Profile.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

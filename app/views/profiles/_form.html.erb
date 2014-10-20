@@ -3,17 +3,20 @@
 
   <div class="form-inputs">
     <%= f.input :display_name %>
-    <%= f.input :user_id, as: :hidden %>
+    <br/>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+    <br/><br/>
+
+    <%= f.label :banner %>
+    <%= f.file_field :banner %>
+    <br/><br/>
     <%= f.input :bio %>
-    <%= f.input :image %>
-    <%= f.input :banner %>
-    <%= f.input :dob %>
-    <%= f.input :location %>
-    <%= f.input :website %>
     <%= f.input :twitter %>
+    <%= f.input :location %>
+    <%= f.input :dob %>
   </div>
   <hr/>
-
   <div class="form-actions">
     <%= f.button :submit %>
   </div>

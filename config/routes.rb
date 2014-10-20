@@ -9,8 +9,21 @@ Rails.application.routes.draw do
 
   mount Upmin::Engine => '/admin'
 
+
+
   devise_for :users
   resources :users
+
+ scope ":id" do
+  # resources :profiles do
+  #   member do
+      get :following, to: "profiles#following", as: 'following_profile'
+      get :followers, to: "profiles#followers", as: 'followers_profile'
+  #   end
+  # end
+end
+
+  resources :relationships,       only: [:create, :destroy]
 
   scope ":id" do
     get '', to: 'profiles#show', :as => 'vanity_url'

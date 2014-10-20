@@ -1,4 +1,4 @@
-class PiecePolicy
+  class PiecePolicy
   attr_reader :current_user, :model
 
   def initialize(current_user, model)
@@ -19,7 +19,8 @@ class PiecePolicy
   end
 
   def update?
-    @current_user.admin? or @current_user == @piece.user
+    true
+    # @current_user.admin? or @current_user == @piece.user
   end
 
   def destroy?
