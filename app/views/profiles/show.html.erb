@@ -3,6 +3,26 @@
   <br/>
   <%= image_tag @profile.image.url(:profile), :class => "img-responsive img-thumbnail img-circle title pull-center" %>
   <br/><br/>
+
+  <%= render 'follow_form'  %>
+
+  <% @profile.user ||= current_user %>
+    <div class="stats white badge badge-default">
+      <a href="<%= following_profile_path(@profile.slug) %>">
+        <strong id="following" class="stat ">
+          <%= @profile.user.following.count %>
+        </strong>
+        following
+      </a>
+      <a href="<%= followers_profile_path(@profile.slug) %>">
+        <strong id="followers" class="stat">
+          <%= @profile.user.followers.count %>
+        </strong>
+        followers
+      </a>
+    </div>
+
+  <br/><br/>
   </header>
 <% end %>
 
@@ -147,6 +167,8 @@
     <% end %>
     <% end %>
     <br/>
+
+    
     </div>
 
 

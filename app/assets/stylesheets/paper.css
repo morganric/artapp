@@ -73,6 +73,10 @@ ul li {
   color: #fff;
 }
 
+.black, .black a {
+  color: #000;
+}
+
 
 @font-face {
   font-family: 'Glyphicons Halflings';
