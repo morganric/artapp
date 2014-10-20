@@ -6,62 +6,37 @@
   </header>
 <% end %>
 
-<!--   <h2>
-    <%#= @profile.display_name || @profile.user.name %>
-  </h2> -->
-<!-- <hr/> -->
-
 <div class="row">
 
-<div class="col-md-4">
-
-<div class="panel panel-default">
-  <div class="panel-heading"><%= @profile.display_name || @profile.user.name %></div>
-    <div class="panel-body">
-      <% if @profile.bio !=  "" %>
-      <p class="well">
-        <%= @profile.bio %>
-      </p>
-      <% end %>
-
-      <p>
-        <%= @profile.location %>
-      </p>
-
-      <p>
-        <%= link_to @profile.website, url_with_protocol(@profile.website), :target => "blank"  %>
-      </p>
-      <% if @profile.twitter != "" %>
-      <p>
-       <a href="http://twitter.com/<%= @profile.twitter %>" target="_blank">@<%= @profile.twitter %></a>
-      </p>
-      <% end %>
-    </div>
-  </div>
 
 
-<% if current_user %>
-<% if current_user == @profile.user || current_user.admin? %>
-<%= link_to 'Edit', edit_profile_path(@profile), class: "pull-left" %> 
-<% end %>
-<% end %>
-<br/>
-</div>
-
-<div class="col-md-8">
-  <ul class="nav nav-pills">
+<div class="col-md-12">
+<!--   <ul class="nav nav-pills">
     <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> New Uploads</a></li>
     <li><a href="#popular" data-toggle="tab"><i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
     <li><a href="#favs" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
   </ul>
-    <hr/>
+    <hr/> -->
+
+  <nav class="navbar navbar-static-top navbar-inverse " role="navigation">
+    <div class=" pull-center">
+    <ul class="nav navbar-nav">
+    <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> My Pieces</a></li>
+    <li><a href="#popular" data-toggle="tab"><i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
+    <li><a href="#favs" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
+    <li><a href="#about" data-toggle="tab"><i class="glyphicon glyphicon-info-sign "></i> About</a></li>
+    </ul>  
+    </div>
+  </nav>
+
+
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane fade active in" id="new">
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
       <% @pieces.order('created_at DESC').each do |piece| %>
-                     <div class="box col2">
-                      <%= link_to image_tag(piece.image.url(:square), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
-                      <h4><%= link_to piece.title, user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
+                     <div class="box ">
+                      <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
+                      <h4 class="hidden"><%= link_to piece.title, user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
                       <small>by <%= link_to piece.user.name, vanity_url_path(piece.user.profile) %></small>
                       </h4>
                       <label class="label label-default pull-left">
@@ -88,9 +63,9 @@
     <div class="tab-pane fade" id="popular">
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
       <% @pieces.order('views DESC').each do |piece| %>
-                     <div class="box col2">
-                      <%= link_to image_tag(piece.image.url(:square), :class =>'pull-left thumbnail'), piece %>
-                      <h4><%= link_to piece.title, user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
+                     <div class="box">
+                      <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), piece %>
+                      <h4 class="hidden"><%= link_to piece.title, user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
                       <small>by <%= link_to piece.user.name, vanity_url_path(piece.user.profile) %></small>
                       </h4>
                       <label class="label label-default pull-left">
@@ -115,10 +90,10 @@
 
     <div class="tab-pane fade" id="favs">
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
-      <% @profile.user.favourites.order('views DESC').each do |piece| %>
-                     <div class="box col2">
-                      <%= link_to image_tag(piece.image.url(:square), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
-                      <h4><%= link_to piece.title, user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
+      <% @profile.user.favourites.where(:hidden => false).order('views DESC').each do |piece| %>
+                     <div class="box">
+                      <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
+                      <h4 class="hidden"><%= link_to piece.title, user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
                       <small>by <%= link_to piece.user.name, vanity_url_path(piece.user.profile) %></small>
                       </h4>
                       <label class="label label-default pull-left">                   
@@ -141,11 +116,55 @@
       </div>
       </div>
 
+      <div class="tab-pane fade" id="about">
+      <div class="panel panel-default">
+        <div class="panel-heading"><%= @profile.display_name || @profile.user.name %></div>
+          <div class="panel-body">
+            <% if @profile.bio !=  "" %>
+            <p class="well">
+              <%= @profile.bio %>
+            </p>
+            <% end %>
+
+            <p>
+              <%= @profile.location %>
+            </p>
+
+            <p>
+              <%= link_to @profile.website, url_with_protocol(@profile.website), :target => "blank"  %>
+            </p>
+            <% if @profile.twitter != "" %>
+            <p>
+             <a href="http://twitter.com/<%= @profile.twitter %>" target="_blank">@<%= @profile.twitter %></a>
+            </p>
+            <% end %>
+          </div>
+        </div>
+
+    <% if current_user %>
+    <% if current_user == @profile.user || current_user.admin? %>
+    <%= link_to 'Edit', edit_profile_path(@profile), class: "pull-left" %> 
+    <% end %>
+    <% end %>
+    <br/>
+    </div>
 
 
 
 </div>
 
 
+
 </div>
 
+
+
+<style type="text/css">
+  
+  .affix {
+    top: 60px;
+width: 110%;
+margin-left: -15%;
+margin-right:15%;
+  }
+</style>

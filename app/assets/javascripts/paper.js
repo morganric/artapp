@@ -9,6 +9,8 @@
 
   $(document).ready(function(){
 
+  	
+
   	$('.fav').on('click', function(){
 		location.reload();
 	});

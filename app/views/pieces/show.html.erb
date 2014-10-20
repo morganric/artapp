@@ -15,16 +15,19 @@
   <small>by <%= link_to @piece.user.name, vanity_url_path(@piece.user.profile) %></small>
 </h1>
 
-<hr/>
+
 
 <div class="row clearfix">
+<hr/>
+  <%= image_tag @piece.image.url(), :class => "img-responsive"%>
+  <hr/>
   <div class="col-md-8 ">
-    <%= image_tag @piece.image.url(:piece), :class => "img-responsive"%>
-  </div>
-  <div class="col-md-4">
-    <p class="well">
+       <p class="well">
       <%= @piece.description %>
     </p>
+  </div>
+  <div class="col-md-4">
+ 
     <p>
       <strong>Dimensions:</strong>
       <%= @piece.dimensions %>
