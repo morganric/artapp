@@ -1,11 +1,13 @@
+<header>
+<br/>
 <% provide(:title, @title) %>
+</header>
 <div class="row">
-  <aside class="span4">
+  <aside class="col-md-4">
     <section>
     <br/>
       <%= link_to image_tag(@user.profile.image.url(:small), :class => "img-circle"), vanity_url_path(@user.profile.slug) %>
       <h2><%= link_to @user.profile.display_name || @user.name, vanity_url_path(@user.profile.slug) %></h2>
-      <hr/>
     </section>
     <section>
       <%#= render 'shared/stats' %>
@@ -16,8 +18,9 @@
       <% end %>
     </section>
   </aside>
-  <div class="span8">
+  <div class="col-md-8">
     <h3><%= @title %></h3>
+    <hr/>
     <% if @users.any? %>
       <ul class="users">
         <% @users.each do |user| %>
