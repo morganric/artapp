@@ -3,40 +3,68 @@
 <div class="pull-right">
   <% unless current_user == nil %>
   <% if  UserFav.where(:user_id => current_user.id, :piece_id => @piece.id).exists? %>
-          <%= link_to raw("<i class='glyphicon glyphicon-heart-empty'></i>  Un-Favourite"), delete_user_favs_path(:user_fav => {:piece_id => @piece.id, :user_id => current_user.id}), :remote => true, class: "btn fav btn-info", :method => :delete %>
+          <%= link_to raw("<i class='glyphicon glyphicon-heart-empty'></i>  Un-Favourite"), delete_user_favs_path(:user_fav => {:piece_id => @piece.id, :user_id => current_user.id}), :remote => true, class: "btn btn-sm fav btn-info pull-right", :method => :delete %>
       <% else %>
-        <%= link_to raw("<i class='glyphicon glyphicon-heart'></i>  Favourite"), user_favs_path(:user_fav => {:piece_id => @piece.id,:user_id => current_user.id}), :remote => true, class: "btn fav btn-info", :method => :post %>
+        <%= link_to raw("<i class='glyphicon glyphicon-heart'></i>  Favourite"), user_favs_path(:user_fav => {:piece_id => @piece.id,:user_id => current_user.id}), :remote => true, class: "btn btn-sm fav btn-info pull-right", :method => :post %>
   <% end %>
    <% end %>
-</div>
+<br/><br/>
+<p class="pull-right">
+<% if  @piece.votes_for.by_type(User).voters.include?(current_user) %>
 
+        <% if @piece.votes_for.down.by_type(User).voters.include?(current_user) %>
+          <%= link_to raw("<i class='glyphicon glyphicon-thumbs-up'></i>  Dope"), dope_path(:id => @piece.id), :remote => true, class: "btn fav btn-sm btn-success", :method => :post %>
+            
+        <% else %>
+          <%= link_to raw("<i class='glyphicon glyphicon-thumbs-down'></i>  Nope"), nope_path(:id => @piece.id), :remote => true, class: "btn btn-sm fav btn-danger", :method => :post %>
+        <% end %>
+
+  <% else %>
+    <%= link_to raw("<i class='glyphicon glyphicon-thumbs-up'></i>  Dope"), dope_path(:id => @piece.id), :remote => true, class: "btn fav btn-sm btn-success", :method => :post %>
+
+        <%= link_to raw("<i class='glyphicon glyphicon-thumbs-down'></i>  Nope"), nope_path(:id => @piece.id), :remote => true, class: "btn btn-sm fav btn-danger", :method => :post %>        
+  <% end %>
+  </p>
+</div>
 <h1>
-  <%= @piece.title %>
-  <small>by <%= link_to @piece.user.name, vanity_url_path(@piece.user.profile) %></small>
+  <%= @piece.title %><br/>
+  <small class="pull-left">by <%= link_to @piece.user.name, vanity_url_path(@piece.user.profile) %></small>
+  <span class="pull-left">
+  <%#= render 'follow_form', :html => {class:  "pull-right"} %>
+  </span>
 </h1>
+  <br/>
+  <hr/>
 </header>
 
 
 <div class="row clearfix">
-  <hr/>
   <div class="text-center">
   <%= image_tag @piece.image.url(), :class => "img-responsive text-center"%>
   </div>
   <hr/>
   <div class="col-md-8 ">
-       <p class="well">
+     <p class="well">
       <%= @piece.description %>
     </p>
-  </div>
-  <div class="col-md-4">
- 
     <p>
       <strong>Dimensions:</strong>
       <%= @piece.dimensions %>
     </p>
+  </div>
+  <div class="col-md-4">
+
+
+    <% if  @piece.get_likes.count > 0 %>
+     <label class="label label-success"><i class='glyphicon glyphicon-thumbs-up'></i> <%= @piece.get_likes.size %> Dope</label>
+    <% end %>
+
+    <% if  @piece.get_dislikes.count > 0 %>
+    <label class="label label-danger"><i class='glyphicon glyphicon-thumbs-down'></i> <%= @piece.get_dislikes.size %> Nope</label>
+    <% end %>
     <label class="label label-primary">
       <i class="glyphicon glyphicon-eye-open white"></i>
-      <%= @piece.views.to_i %> views
+      <%= @piece.views.to_i %> Views
     </label> 
     <br/>
 

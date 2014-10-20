@@ -28,7 +28,7 @@ gem 'friendly_id', '~> 5.0.0'
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'kaminari'
 gem 'masonry-rails'
-
+gem 'acts_as_votable', '~> 0.10.0'
 
 group :development do
   gem 'better_errors'

@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
   mount Upmin::Engine => '/admin'
 
-
+   post "/pieces/:id/dope" => "pieces#dope", :as => "dope", via: [:get, :post]
+  post "/pieces/:id/nope" => "pieces#nope", :as => "nope", via: [:get, :post]
 
   devise_for :users
   resources :users

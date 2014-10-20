@@ -1,6 +1,6 @@
 class PiecesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :index, :tag, :featured]
-  before_action :set_piece, only: [:show, :edit, :update, :destroy]
+  before_action :set_piece, only: [:show, :edit, :update, :destroy, :nope, :dope]
 
   # GET /pieces
   # GET /pieces.json
@@ -23,6 +23,14 @@ class PiecesController < ApplicationController
 
     @tags = Piece.tag_counts_on(:tags)
     render :action => 'index'
+  end
+
+  def dope
+    @piece.liked_by current_user
+  end
+
+  def nope
+    @piece.downvote_from current_user
   end
 
   # GET /pieces/1

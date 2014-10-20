@@ -4,7 +4,7 @@
   <%= image_tag @profile.image.url(:profile), :class => "img-responsive img-thumbnail img-circle title pull-center" %>
   <br/><br/>
 
-  <%= render 'follow_form'  %>
+  <%= render 'follow_form', :user => @profile.user   %>
 
   <% @profile.user ||= current_user %>
     <div class="stats white badge badge-default">
