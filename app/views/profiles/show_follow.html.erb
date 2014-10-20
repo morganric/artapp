@@ -24,9 +24,25 @@
     <% if @users.any? %>
       <ul class="users">
         <% @users.each do |user| %>
-          <li>
-            <%= link_to image_tag(user.profile.image.url(:thumb), :class => "img-circle"), vanity_url_path( user.profile) %>
+          <li class="clearfix">
+            <%= link_to image_tag(user.profile.image.url(:thumb), :class => "img-circle "), vanity_url_path( user.profile) %>
             <%= link_to user.profile.display_name, vanity_url_path(user.profile) %>
+              <% unless current_user == user %>
+                <div id="follow_form" class="pull-right">
+                <% if current_user.following?(user) %>
+                                  <%= form_for(current_user.active_relationships.find_by(followed_id: user.id),
+                             html: { method: :delete }) do |f| %>
+                  <%= f.submit "Unfollow", class: "btn" %>
+                <% end %>
+                <% else %>
+                  <%= form_for(current_user.active_relationships.
+                                          build(followed_id: user.id)) do |f| %>
+                  <div><%= hidden_field_tag :followed_id, user.id %></div>
+                  <%= f.submit "Follow", class: "btn btn-primary" %>
+                <% end %>
+                <% end %>
+                </div>
+              <% end %>
             <hr/>
             </li>
           <% end %>
