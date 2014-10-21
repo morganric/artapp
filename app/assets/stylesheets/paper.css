@@ -12,6 +12,7 @@
 *= require 'masonry/transitions'
 */
 
+.centered { margin: 0 auto; }
 
 
 .box {
