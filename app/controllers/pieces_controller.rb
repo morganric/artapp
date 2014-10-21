@@ -11,7 +11,7 @@ class PiecesController < ApplicationController
   end
 
   def featured
-    @pieces = Piece.where(:hidden => false).where(:featured => true).limit(6).order('created_at DESC')
+    @pieces = Piece.where(:hidden => false).where(:featured => true).order('created_at DESC').page params[:page]
     
   end
 

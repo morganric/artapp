@@ -138,7 +138,7 @@
                       <br>
                           <h1>Hello <%= @followed.profile.display_name.capitalize || @followed.name.capitalize %></h1>
                         <p>
-                          <%= link_to @follower.profile.display_name, "appart.herokuapp.com/#{vanity_url_path(@follower.profile.slug)}" %> just followed you on ArtUp.
+                          <%= link_to @follower.profile.display_name, "appart.herokuapp.com/#{vanity_url_path(@follower.profile.slug)}" %> just followed you on ArtUp.  
                         </p>
                         <p>Thanks!</p>
                         The ArtUp Team
