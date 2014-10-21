@@ -1,9 +1,11 @@
+ <% if current_user %>
 <% unless current_user == @profile.user %>
   <div id="follow_form">
-  <% if current_user.following?(@profile.user) %>
+  <% if current_user && current_user.following?(@profile.user) %>
     <%= render 'unfollow'  %>
   <% else %>
     <%= render 'follow' %>
   <% end %>
   </div>
+<% end %>
 <% end %>
