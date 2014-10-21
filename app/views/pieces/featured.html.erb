@@ -6,7 +6,7 @@
 <div class="row">
 	<div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
 			<% @pieces.limit(18).each do |piece| %>
-				<div class="box col2">
+				<div class="box col4">
                               <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
                               <h4 class="hidden"><%= link_to piece.title, user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
                               <small>by <%= link_to piece.user.name, vanity_url_path(piece.user.profile) %></small>
