@@ -9,4 +9,12 @@ class UserMailer < ActionMailer::Base
     @url  = user_piece_path(:id => @piece.slug, :user_slug => piece.user.profile.slug)
     mail(to: @owner.email, subject: 'ArtUp Favourite')
   end
+
+
+  def follower_email(followed, follower)
+    @followed = followed
+    @follower = follower
+    @url  = vanity_url_path(@follower.profile.slug)
+    mail(to: @followed.email, subject: 'New ArtUp Follower')
+  end
  end
