@@ -2,7 +2,7 @@
 
   <header style="background-image: url('<%= @profile.banner.url(:banner)  %>'); color:white; margin-top:60px;" class="profile-header text-center">
   <br/>
-  <%= image_tag @profile.image.url(:profile), :class => "img-responsive img-thumbnail img-circle title pull-center" %>
+  <%= image_tag @profile.image.url(:profile) || "http://res.cloudinary.com/artapp/image/upload/v1413470304/gntloo1fznwu9yylo1nu.png", :class => "img-responsive img-thumbnail img-circle title pull-center" %>
   <br/><br/>
 
   <%= render 'follow_form', :user => @profile.user   %>
