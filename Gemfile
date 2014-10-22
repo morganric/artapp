@@ -29,6 +29,7 @@ gem 'acts-as-taggable-on', '~> 3.4'
 gem 'kaminari'
 gem 'masonry-rails'
 gem 'acts_as_votable', '~> 0.10.0'
+gem 'high_voltage'
 
 group :development do
   gem 'better_errors'

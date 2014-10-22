@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   resources :profiles
   resources :pieces
   get 'featured' => 'pieces#featured', as: "featured"
@@ -23,6 +25,8 @@ Rails.application.routes.draw do
   #   end
   # end
 end
+
+ get 'pages/:id' => 'high_voltage/pages#show', as: 'page'
 
   resources :relationships,       only: [:create, :destroy]
 

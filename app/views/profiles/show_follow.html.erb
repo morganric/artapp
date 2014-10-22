@@ -27,6 +27,7 @@
           <li class="clearfix">
             <%= link_to image_tag(user.profile.image.url(:thumb), :class => "img-circle "), vanity_url_path( user.profile) %>
             <%= link_to user.profile.display_name, vanity_url_path(user.profile) %>
+            <% if current_user %>
               <% unless current_user == user %>
                 <div id="follow_form" class="pull-right">
                 <% if current_user.following?(user) %>
@@ -42,6 +43,7 @@
                 <% end %>
                 <% end %>
                 </div>
+              <% end %>
               <% end %>
             <hr/>
             </li>

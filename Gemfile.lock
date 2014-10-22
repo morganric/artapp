@@ -112,6 +112,7 @@ GEM
       rspec (>= 2.14, < 4.0)
     haml (4.0.5)
       tilt
+    high_voltage (2.1.0)
     hike (1.2.3)
     hitimes (1.2.2)
     hub (1.12.2)
@@ -327,6 +328,7 @@ DEPENDENCIES
   guard-bundler
   guard-rails
   guard-rspec
+  high_voltage
   hub
   jbuilder (~> 2.0)
   jquery-rails
