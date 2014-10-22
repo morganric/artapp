@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   # end
 end
 
- # get 'pages/:id' => 'high_voltage/pages#show', as: 'page'
+ get 'pages/:id' => 'high_voltage/pages#show', as: 'about'
 
   resources :relationships,       only: [:create, :destroy]
 
