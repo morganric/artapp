@@ -7,13 +7,11 @@
 </div>
 <% end %>
 
-  <nav class="navbar navbar-static-top navbar-inverse " role="navigation">
+  <nav class="navbar navbar-static-top navbar-inverse navbar-blue" role="navigation">
     <div class="">
     <ul class="nav navbar-nav">
      <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload"></i> New Pieces</a></li>
 	  <li><a href="#popular" data-toggle="tab"> <i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-tags "></i> Top Tags <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -126,4 +124,28 @@
 
 </div>
 
+<style type="text/css">
+  
+  .affix {
+    top: 60px;
+width: 110%;
+margin-left: -15%;
+margin-right:15%;
+  }
 
+  
+  .navbar .nav,
+.navbar .nav > li {
+  float:none;
+  display:inline-block;
+  *display:inline; /* ie7 fix */
+  *zoom:1; /* hasLayout ie7 trigger */
+  vertical-align: top;
+}
+
+.navbar-blue {
+  text-align:center;
+}
+
+
+</style>
