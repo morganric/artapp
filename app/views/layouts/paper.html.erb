@@ -50,16 +50,16 @@
     <%= yield(:page_javascript) if content_for?(:page_javascript) %>
     <script type="text/javascript">
 
-// $(document).ready(function(){
-//   $('#masonry-container').masonry({
-//   itemSelector: '.box',
-//   // set columnWidth a fraction of the container width
-//   columnWidth: function( containerWidth ) {
-//     return containerWidth / 6;
-//   }
-// });
+$(document).ready(function(){
+  $('#masonry-container').masonry({
+  itemSelector: '.box',
+  // set columnWidth a fraction of the container width
+  columnWidth: function( containerWidth ) {
+    return containerWidth / 6;
+  }
+});
 
-// });
+});
 
 </script>
   </body>
