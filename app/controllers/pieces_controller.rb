@@ -18,7 +18,6 @@ class PiecesController < ApplicationController
   def tag
     @pieces = Piece.where(:hidden => false).tagged_with(params[:tag]).order('views DESC').page params[:page]
     @new_pieces = Piece.where(:hidden => false).tagged_with(params[:tag]).order('created_at DESC').page params[:page]
-    @pieces = Piece.where(:hidden => false).where(:featured => true).limit(6).order('created_at DESC').page params[:page]
     
 
     @tags = Piece.tag_counts_on(:tags)

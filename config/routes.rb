@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   # end
 end
 
- get 'pages/:id' => 'high_voltage/pages#show', as: 'static'
+ get 'pages/:id' => 'visitors#index', as: 'static'
 
   resources :relationships,       only: [:create, :destroy]
 
