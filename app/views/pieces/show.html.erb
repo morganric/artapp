@@ -10,7 +10,7 @@
    <% end %>
 </p>
 <h2>
-  <%= @piece.title %><br/>
+  <%= @piece.title.capitalize %><br/>
   <small class="pull-left">by <%= link_to @piece.user.profile.display_name || @piece.user.name, vanity_url_path(@piece.user.profile) %></small>
   <span class="pull-left">
   <%#= render 'follow_form', :html => {class:  "pull-right"} %>
