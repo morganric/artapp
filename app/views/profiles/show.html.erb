@@ -50,39 +50,7 @@
       <div class="tab-pane fade active in" id="new">
       <div id="masonry-container" class="transitions-enabled centered infinite-scroll clearfix">
       <% @pieces.order('created_at DESC').each do |piece| %>
-                    <div class="box col3">
-                              <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
-                              <h4 class="hidden"><%= link_to piece.title, user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
-                              <small>by <%= link_to piece.user.name, vanity_url_path(piece.user.profile) %></small>
-                              </h4>
-                              <div class="text-center">
-                                  <label class="label label-primary">
-                                   <i class="glyphicon glyphicon-eye-open "></i> <%= piece.views.to_i %> Views
-                                  </label>
-                                  &nbsp;
-                                  <label class="label label-info">
-                                   <i class="glyphicon glyphicon-heart "></i>  <%= piece.favourited_by.count %> Favs
-                                  </label>
-                                  &nbsp;
-                                  <% if  piece.get_likes.count > 0 %>
-                                   <label class="label label-success"><i class='glyphicon glyphicon-thumbs-up'></i> <%= piece.get_likes.count %> Dope</label>
-                                   &nbsp;
-                                  <% end %>
-                                  <% if  piece.get_dislikes.count > 0 %>
-                                  <label class="label label-danger"><i class='glyphicon glyphicon-thumbs-down'></i> <%= piece.get_dislikes.count %> Nope</label>
-                                  <% end %>
-                              <br/><br/>
-                              <% if piece.tag_list != [] %>                         
-                                <% piece.tag_list[0..2].each do |tag| %>
-                                  <label class="label label-default" >
-                                    <i class="glyphicon glyphicon-tag white"></i>
-                                    <%= link_to tag, tagged_pieces_path(tag) %>
-                                  </label> &nbsp;
-                                <% end %>
-                                <br/><br/>
-                                <% end %>
-                              </div>
-                    </div>
+                    <%= render 'shared/piece', :piece => piece %>
       <% end %>
 
       </div>
@@ -92,39 +60,7 @@
     <div class="tab-pane fade" id="popular">
       <div id="masonry-container" class="transitions-enabled centered infinite-scroll clearfix">
       <% @pieces.order('views DESC').each do |piece| %>
-              <div class="box col3">
-                              <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
-                              <h4 class="hidden"><%= link_to piece.title, user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
-                              <small>by <%= link_to piece.user.name, vanity_url_path(piece.user.profile) %></small>
-                              </h4>
-                              <div class="text-center">
-                                  <label class="label label-primary">
-                                   <i class="glyphicon glyphicon-eye-open "></i> <%= piece.views.to_i %> Views
-                                  </label>
-                                  &nbsp;
-                                  <label class="label label-info">
-                                   <i class="glyphicon glyphicon-heart "></i>  <%= piece.favourited_by.count %> Favs
-                                  </label>
-                                  &nbsp;
-                                  <% if  piece.get_likes.count > 0 %>
-                                   <label class="label label-success"><i class='glyphicon glyphicon-thumbs-up'></i> <%= piece.get_likes.count %> Dope</label>
-                                   &nbsp;
-                                  <% end %>
-                                  <% if  piece.get_dislikes.count > 0 %>
-                                  <label class="label label-danger"><i class='glyphicon glyphicon-thumbs-down'></i> <%= piece.get_dislikes.count %> Nope</label>
-                                  <% end %>
-                              <br/><br/>
-                              <% if piece.tag_list != [] %>                         
-                                <% piece.tag_list[0..2].each do |tag| %>
-                                  <label class="label label-default" >
-                                    <i class="glyphicon glyphicon-tag white"></i>
-                                    <%= link_to tag, tagged_pieces_path(tag) %>
-                                  </label> &nbsp;
-                                <% end %>
-                                <br/><br/>
-                                <% end %>
-                              </div>
-                    </div>
+              <%= render 'shared/piece', :piece => piece %>
       <% end %>
 
       </div>
@@ -133,39 +69,7 @@
     <div class="tab-pane fade" id="favs">
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
       <% @profile.user.favourites.where(:hidden => false).order('views DESC').each do |piece| %>
-                     <div class="box col3">
-                              <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
-                              <h4 class="hidden"><%= link_to piece.title, user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
-                              <small>by <%= link_to piece.user.name, vanity_url_path(piece.user.profile) %></small>
-                              </h4>
-                              <div class="text-center">
-                                  <label class="label label-primary">
-                                   <i class="glyphicon glyphicon-eye-open "></i> <%= piece.views.to_i %> Views
-                                  </label>
-                                  &nbsp;
-                                  <label class="label label-info">
-                                   <i class="glyphicon glyphicon-heart "></i>  <%= piece.favourited_by.count %> Favs
-                                  </label>
-                                  &nbsp;
-                                  <% if  piece.get_likes.count > 0 %>
-                                   <label class="label label-success"><i class='glyphicon glyphicon-thumbs-up'></i> <%= piece.get_likes.count %> Dope</label>
-                                 &nbsp;
-                                  <% end %>
-                                  <% if  piece.get_dislikes.count > 0 %>
-                                  <label class="label label-danger"><i class='glyphicon glyphicon-thumbs-down'></i> <%= piece.get_dislikes.count %> Nope</label>
-                                  <% end %>
-                              <br/><br/>
-                              <% if piece.tag_list != [] %>                         
-                                <% piece.tag_list[0..2].each do |tag| %>
-                                  <label class="label label-default" >
-                                    <i class="glyphicon glyphicon-tag white"></i>
-                                    <%= link_to tag, tagged_pieces_path(tag) %>
-                                  </label> &nbsp;
-                                <% end %>
-                                <br/><br/>
-                                <% end %>
-                              </div>
-                    </div>
+                     <%= render 'shared/piece', :piece => piece %>
       <% end %>
 
       </div>

@@ -53,15 +53,15 @@
     </label> &nbsp;
     <% end %>  
     <br/><br/>
-    <div class="panel panel-default">
+    <!-- <div class="panel panel-default">
         <div class="panel-heading "><h5 class=""> Dope or Nope?</h5></div>
         <div class="panel-body">
 
-              <%= link_to raw("<i class='glyphicon glyphicon-thumbs-up'></i>  Dope (#{@piece.get_likes.size})"), dope_path(:id => @piece.id), :remote => true, class: "btn fav btn-sm btn-success", :method => :post %>
+              <%#= link_to raw("<i class='glyphicon glyphicon-thumbs-up'></i>  Dope (#{@piece.get_likes.size})"), dope_path(:id => @piece.id), :remote => true, class: "btn fav btn-sm btn-success", :method => :post %>
 
-                  <%= link_to raw("<i class='glyphicon glyphicon-thumbs-down'></i>  Nope (#{@piece.get_dislikes.size})"), nope_path(:id => @piece.id), :remote => true, class: "btn btn-sm fav btn-danger", :method => :post %>        
+                  <%#= link_to raw("<i class='glyphicon glyphicon-thumbs-down'></i>  Nope (#{@piece.get_dislikes.size})"), nope_path(:id => @piece.id), :remote => true, class: "btn btn-sm fav btn-danger", :method => :post %>        
         </div>
-        </div>
+        </div> -->
 
   <br/>
     <% unless @piece.favourited_by == [] %>
