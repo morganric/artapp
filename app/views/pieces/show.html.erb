@@ -1,3 +1,6 @@
+<% set_meta_tags :description => "All text about keywords, other keywords" %>
+<%= content_for(:title, "Art Up | #{@piece.title} by #{@piece.user.profile.display_name}")%>
+
 <div>
 <br/>
 <p class="pull-right">
@@ -10,7 +13,7 @@
    <% end %>
 </p>
 <h2>
-  <%= @piece.title.capitalize %><br/>
+  <%= truncate(@piece.title.capitalize, :length => 50) %><br/>
   <small class="pull-left">by <%= link_to @piece.user.profile.display_name || @piece.user.name, vanity_url_path(@piece.user.profile) %></small>
   <span class="pull-left">
   <%#= render 'follow_form', :html => {class:  "pull-right"} %>
