@@ -54,7 +54,7 @@
     <% end %> 
     <br/><br/>
      <p class="well">
-      <%= @piece.description %>
+      <%= auto_link(@piece.description, :html => { :target => '_blank' }) %>
     </p>
     <p>
       <strong>Dimensions:</strong>
