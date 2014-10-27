@@ -1,3 +1,12 @@
+<% set_meta(
+    :keywords => @profile.display_name,
+    :description => @profile.bio,
+    :og => {:type => "website", 
+            :description => @profile.bio
+            }
+    ) 
+%>
+
 <%= content_for :header do %>
 
   <section style="background-image: url('<%= @profile.banner.url(:banner)  %>'); color:white; margin-top:60px;" class="profile-header text-center">
@@ -76,8 +85,10 @@
       </div>
 
       <div class="tab-pane fade" id="about">
+      <div class="clearfix">
+      <div class="col-md-8" >
       <div class="panel panel-default">
-        <div class="panel-heading"><%= @profile.display_name || @profile.user.name %></div>
+        <div class="panel-heading"><h5><%= @profile.display_name || @profile.user.name %></h5></div>
           <div class="panel-body">
             <% if @profile.bio !=  "" %>
             <p class="well">
@@ -98,6 +109,20 @@
             </p>
             <% end %>
           </div>
+          </div>
+          </div>
+            <div class="col-md-4">
+             <div class="panel panel-default">
+                <div class="panel-heading "><h5 class=""><i class='glyphicon glyphicon-share-alt'></i> Share</h5></div>
+                <div class="panel-body">
+                  <%= tweet_button(via: "artupio", url: "#{vanity_url_path(@profile)}", text: "AWESOME ART!", count: "none") %>
+                  <%#= like_button(app_id) %>
+                  <%= pinit_button %>
+                  <%= google_plus_button %>
+                </div>
+                </div>
+            </div>    
+            </div>
         </div>
 
     <% if current_user %>

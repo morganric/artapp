@@ -30,7 +30,8 @@ gem 'kaminari'
 gem 'masonry-rails'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'high_voltage'
-gem 'meta-tags'
+gem "social-buttons", '~> 0.3'
+gem 'meta-tags-helpers', '~> 0.2.0'
 
 group :development do
   gem 'better_errors'
