@@ -1,4 +1,4 @@
-ENV["DOMAIN_NAME"] = "appart.herokuapp.com"
+ENV["DOMAIN_NAME"] = "artup.io"
 ENV["ADMIN_NAME"] = "admin"
 ENV["ADMIN_EMAIL"] = "user@admin.com"
 ENV["ADMIN_PASSWORD"] = "chaneme123"
