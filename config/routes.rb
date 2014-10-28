@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :profiles
   resources :pieces
+
+  get 'p/:id' => 'pieces#show', as: :short
   get 'featured' => 'pieces#featured', as: "featured"
   get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
 
