@@ -1,7 +1,7 @@
 class Piece < ActiveRecord::Base
 	acts_as_votable
 	acts_as_taggable
-	paginates_per 10
+	paginates_per 12
 
 	mount_uploader :image, ImageUploader
 
