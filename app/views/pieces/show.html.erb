@@ -1,15 +1,26 @@
 <% set_meta(
     :keywords => @piece.tag_list,
     :description => @piece.description,
-    :og => {:type => "website", 
+    :og => {:type => "website",
+            :description => @piece.description,
+            :image => @piece.image.url(:square), 
+            :title => @piece.title,
             :description => @piece.description,
             :image => {
               :url => @piece.image.url(:square)
             }
             }, 
 :twitter => {
-      :card => @piece.description,
-      :site => "@#{@piece.user.profile.twitter}"
+      :card => "photo",
+      :site => "@#{@piece.user.profile.twitter}",
+      :image => {
+              :url => @piece.image.url(:square)
+            },
+      :title => @piece.title,
+      :description => @piece.description,
+      :image =>  @piece.image.url(:square),
+      :url => user_piece_path(:id => @piece.id, :user_slug => @piece.user.profile.slug)
+            
     }
     ) 
 %>
