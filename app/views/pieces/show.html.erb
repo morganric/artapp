@@ -2,10 +2,19 @@
     :keywords => @piece.tag_list,
     :description => @piece.description,
     :og => {:type => "website", 
-            :description => @piece.description
+            :description => @piece.description,
+            :image => {
+              :url => @piece.image.url(:square)
             }
+            }, 
+:twitter => {
+      :card => @piece.description,
+      :site => "@#{@piece.user.profile.twitter}"
+    }
     ) 
 %>
+
+
 
 <div>
 <br/>
