@@ -1,6 +1,7 @@
 class PiecesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :index, :tag, :featured]
-  before_action :set_piece, only: [:show, :edit, :update, :destroy, :nope, :dope]
+  before_action :set_piece, only: [:show, :edit, :update, :destroy, :nope, :dope, :upload_email]
+  after_action :upload_email, only: :create
 
   # GET /pieces
   # GET /pieces.json
@@ -96,7 +97,24 @@ class PiecesController < ApplicationController
     end
   end
 
+
+
   private
+
+    def upload_email
+      @followers = current_user.followers
+      @followers.each do |follower|
+        UserMailer.upload_email(current_user, follower, @piece).deliver
+      end
+
+      # @admins = User.where(:role => 2)
+
+      # @admins.each do |admin|
+      #   UserMailer.admin_email(current_user, admin, @piece).deliver
+      # end
+    end
+
+
     # Use callbacks to share common setup or constraints between actions.
     def set_piece
       @piece = Piece.friendly.find(params[:id])
