@@ -14,7 +14,9 @@
 
 /**/
 
-
+.box a{
+	color: darkGrey;
+}
 
 .caret.caret-reversed {
     border-top-width: 0;
@@ -86,6 +88,11 @@ ul li {
 
 .black, .black a {
   color: #000;
+}
+
+.navbar-grey {
+  text-align:center;
+  background-color: #e1e1e1;
 }
 
 
