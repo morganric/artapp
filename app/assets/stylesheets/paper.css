@@ -90,9 +90,14 @@ ul li {
   color: #000;
 }
 
+.navbar {
+	  min-height: 0px !important;
+}
+
 .navbar-grey {
   text-align:center;
   background-color: #e1e1e1;
+
 }
 
 
