@@ -6,9 +6,7 @@
             :image => @piece.image.url(:square), 
             :title => @piece.title,
             :description => @piece.description,
-            :image => {
-              :url => @piece.image.url(:square)
-            }
+
             }, 
 :twitter => {
       :card => "photo",
@@ -95,7 +93,7 @@
       <div class="panel panel-default">
         <div class="panel-heading "><h5 class=""><i class='glyphicon glyphicon-share-alt'></i> Share</h5></div>
         <div class="panel-body">
-          <%= tweet_button(via: "artupio", url: "#{piece_url(@piece)}", text: "AWESOME ART!", count: "none") %>
+          <%= tweet_button(via: "artupio", url: "#{piece_url(@piece)}", text: "Nice #art '#{@piece.title} by #{@piece.user.profile.display_name}' :", count: "none") %>
           <%#= like_button(app_id) %>
           <%= pinit_button %>
           <%= google_plus_button %>
