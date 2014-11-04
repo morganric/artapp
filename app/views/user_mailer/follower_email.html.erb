@@ -136,7 +136,7 @@
                       <td class="mobile-padding" style="text-align:left;">
                       <br>
                       <br>
-                          <h1>Hello <%= @followed.profile.display_name.capitalize || @followed.name.capitalize %></h1>
+                          <h1>Hello <%= @followed.profile.display_name || @followed.name %></h1>
                         <p>
                           <%= link_to @follower.profile.display_name, "artup.io/#{vanity_url_path(@follower.profile.slug)}" %> just followed you on ArtUp.  
                         </p>
