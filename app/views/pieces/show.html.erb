@@ -70,6 +70,9 @@
       <%= link_to tag, tagged_pieces_path(:tag => tag) %>
     </label> &nbsp;
     <% end %> 
+    <% if @piece.sold %>
+      <label class="label label-danger white" >Sold</label>
+    <% end %>
     <br/><br/>
      <p class="well">
       <%= auto_link(@piece.description, :html => { :target => '_blank' }) %>
@@ -90,7 +93,29 @@
                   <%#= link_to raw("<i class='glyphicon glyphicon-thumbs-down'></i>  Nope (#{@piece.get_dislikes.size})"), nope_path(:id => @piece.id), :remote => true, class: "btn btn-sm fav btn-danger", :method => :post %>        
         </div>
         </div> -->
-      <div class="panel panel-default">
+
+        <% unless @piece.sold == true || @piece.price.to_i <= 0 %>
+        <div class="panel panel-primary">
+          <div class="panel-heading "><h5 class="white"><i class='white glyphicon glyphicon-shopping-cart'></i> Buy</h5></div>
+          <div class="panel-body">
+            <p>$<%= @piece.price.to_i %></p>
+              <%= form_tag charges_path do %>
+
+              <%= hidden_field_tag :amount, number_with_precision(@piece.price, :precision => 2), :class=> "form-control", :width => "50%", :min => number_with_precision(@piece.price, :precision => 2), :step => 1 %>
+
+              <%= hidden_field_tag :id, @piece.id %>
+
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= @piece.user.stripe_publishable_key || "pk_test_gTBJNFb3AicnglEhCcyoWsQ3" %>"
+                      data-description="<%= @piece.title %>" data-email="<%#= current_user.email %>"
+                      data-image="<%= @piece.image.url(:small) %>"
+                      data-amount="<%= @piece.price.to_i*100 %>"></script>
+            <% end %>
+          
+        </div>
+        </div>
+        <% end %>
+        <div class="panel panel-default">
         <div class="panel-heading "><h5 class=""><i class='glyphicon glyphicon-share-alt'></i> Share</h5></div>
         <div class="panel-body">
           <%= tweet_button(via: "artupio", url: "#{piece_url(@piece)}", text: "Nice #art '#{@piece.title} by #{@piece.user.profile.display_name}' :", count: "none") %>
@@ -103,7 +128,6 @@
         </div>
         </div>
 
-  <br/>
     <% unless @piece.favourited_by == [] %>
       <div class="panel panel-info">
         <div class="panel-heading "><h5 class="white"><i class='glyphicon glyphicon-heart'></i> Favourited By</h5></div>

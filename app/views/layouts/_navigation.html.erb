@@ -24,6 +24,9 @@
                   <li><%= link_to raw('<i class="glyphicon glyphicon-user"></i> My Profile'), vanity_url_path(current_user.profile) %> </li>
                   <li><%= link_to raw('<i class="glyphicon glyphicon-cog"></i> Edit Account'), edit_user_registration_path %></li>
               <li><%= link_to raw('<i class="glyphicon glyphicon-wrench"></i> Edit Profile'), edit_profile_path(current_user.profile) %> </li>
+              <% if current_user.stripe_secret_key == nil %>
+              <li><a href="<%= user_omniauth_authorize_path(:stripe_connect) %>" ><i class="glyphicon glyphicon-shopping-cart"></i> Connect Stripe</button></a></li>
+              <% end %>
               
                 </ul>
               </li>

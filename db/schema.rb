@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141020171511) do
+ActiveRecord::Schema.define(version: 20141104135145) do
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -126,6 +126,8 @@ ActiveRecord::Schema.define(version: 20141020171511) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
+    t.string   "stripe_secret_key"
+    t.string   "stripe_publishable_key"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

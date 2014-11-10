@@ -32,5 +32,8 @@
           <%# end %>
           <br/><br/>
           <%# end %> -->
+           <% if piece.price.to_i != nil && piece.price.to_i != 0 %>                         
+            <h6> $<%= piece.price.to_i %></h6>
+          <% end %>
         </div>
 </div>

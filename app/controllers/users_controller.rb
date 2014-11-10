@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   private
 
   def secure_params
-    params.require(:user).permit(:role, :name)
+    params.require(:user).permit(:role, :name, :stripe_publishable_key, :stripe_secret_key)
   end
 
 end
