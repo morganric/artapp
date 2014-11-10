@@ -14,11 +14,11 @@
 	  <li><a href="#popular" data-toggle="tab"> <i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-tags "></i> Top Tags <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-        	<% @tags.limit(10).each do |tag| %>
-          <li> <%= link_to raw("<i class='glyphicon glyphicon-tag'></i>  #{tag}"), tagged_pieces_path(:tag => tag.name) %></li>
-          <% end %>
-        </ul>
+        <!-- <ul class="dropdown-menu">
+        	<%# @tags.limit(10).each do |tag| %>
+          <li> <%#= link_to raw("<i class='glyphicon glyphicon-tag'></i>  #{tag}"), tagged_pieces_path(:tag => tag.name) %></li>
+          <%# end %>
+        </ul> -->
       </li>
     </ul>  
     </div>
@@ -54,7 +54,14 @@
 	  <div class="tab-pane fade" id="popular">
 	  	<div id="masonry-container" class="transitions-enabled centered 	infinite-scroll clearfix">
 			<% @pieces.each do |piece| %>
-				<%= render 'shared/piece', :piece => piece %>
+				<div class="box col2">
+						        <div class="text-center">
+						        <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %>
+						        <h4 class=""><%= link_to truncate(piece.title, :length => 12), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %><br/>
+						        <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 12) || piece.user.name, vanity_url_path(piece.user.profile), :target => "_blank" %></small>
+						        </h4>
+						        </div>
+						</div>
 			<% end %>
 
 			</div>
