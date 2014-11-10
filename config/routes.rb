@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+   get "/facebook" => 'pieces#index', :as => 'facebook', via: [:get, :post]
+  
+
   resources :profiles
   resources :pieces
 
@@ -19,10 +22,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
 
- scope ":id" do
-      get :following, to: "profiles#following", as: 'following_profile'
-      get :followers, to: "profiles#followers", as: 'followers_profile'
-end
+   scope ":id" do
+        get :following, to: "profiles#following", as: 'following_profile'
+        get :followers, to: "profiles#followers", as: 'followers_profile'
+  end
 
  get 'pages/:id' => 'visitors#index', as: 'static'
 
@@ -41,10 +44,6 @@ end
   unauthenticated do
     root to: "visitors#index"
   end
-
-
-   post "/" => 'pieces#facebook', :as => 'facebook', via: [:get, :post]
-
 
 
 end

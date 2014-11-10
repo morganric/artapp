@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :followers, :following]
-  before_action :set_profile, only: [:show, :edit, :update, :destroy, :following, :followers]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :following, :followers], :except => [:facebook]
 
   # GET /profiles
   # GET /profiles.json  

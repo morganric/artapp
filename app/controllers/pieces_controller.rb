@@ -11,11 +11,11 @@ class PiecesController < ApplicationController
     @tags = Piece.tag_counts_on(:tags)
   end
 
-  def facebook
-      @pieces = Piece.where(:hidden => false).order('views DESC').page params[:page]
-    @new_pieces = Piece.where(:hidden => false).order('created_at DESC').page params[:page]
-    @tags = Piece.tag_counts_on(:tags)
-  end
+  # def facebook
+  #     @pieces = Piece.where(:hidden => false).order('views DESC').page params[:page]
+  #   @new_pieces = Piece.where(:hidden => false).order('created_at DESC').page params[:page]
+  #   @tags = Piece.tag_counts_on(:tags)
+  # end
 
 
   def featured
