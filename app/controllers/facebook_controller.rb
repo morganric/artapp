@@ -1,5 +1,5 @@
 class FacebookController < ApplicationController
-  # layout "facebook"
+  layout "facebook"
 
   after_filter :allow_iframe
 
