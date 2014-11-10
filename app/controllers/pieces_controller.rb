@@ -1,5 +1,5 @@
 class PiecesController < ApplicationController
-  before_filter :authenticate_user!, except: [:show, :index, :tag]
+  before_filter :authenticate_user!, except: [:show, :index, :tag, :featured]
   before_action :set_piece, only: [:show, :edit, :update, :destroy, :nope, :dope, :upload_email]
   after_action :upload_email, only: :create
 

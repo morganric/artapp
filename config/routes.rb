@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  get '/facebook' => 'facebook#index', :as => 'facebook', via: [:post]
-
+  post '/facebook' => 'facebook#index', :as => 'facebook', via: [:post]
+  get 'featured' => 'pieces#featured', as: "featured"
 
   scope ":id" do
     get '', to: 'profiles#show', :as => 'vanity_url'
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
 
   get 'p/:id' => 'pieces#show', as: :short
-  get 'featured' => 'pieces#featured', as: "featured"
+
   get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
 
   post 'user_favs' => 'user_favs#create', :as => 'user_favs'
