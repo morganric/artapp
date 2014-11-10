@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
 
-   post "/facebook" => 'pieces#index', :as => 'facebook', via: [:get, :post]
-  
+  get '/facebook' => 'facebook#index', :as => 'facebook', via: [:get, :post]
+
+
+  scope ":id" do
+    get '', to: 'profiles#show', :as => 'vanity_url'
+  end
+
+  scope "/facebook/:id" do
+    get '', to: 'facebook#show', :as => 'facebook_url'
+  end
+
 
   resources :profiles
   resources :pieces
@@ -31,9 +40,6 @@ Rails.application.routes.draw do
 
   resources :relationships,       only: [:create, :destroy]
 
-  scope ":id" do
-    get '', to: 'profiles#show', :as => 'vanity_url'
-  end
 
   get ':user_slug/:id'  => "pieces#show", as: "user_piece"
 
@@ -44,6 +50,5 @@ Rails.application.routes.draw do
   unauthenticated do
     root to: "visitors#index"
   end
-
 
 end

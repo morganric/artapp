@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :followers, :following]
-  before_action :set_profile, only: [:show, :edit, :update, :destroy, :following, :followers], :except => [:facebook]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :following, :followers]
 
   # GET /profiles
   # GET /profiles.json  
@@ -81,11 +81,7 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      if params[:id] == "facebook"
-        redirect_to root_path, via: :post
-      else
-        @profile = Profile.friendly.find(params[:id])
-      end
+      @profile = Profile.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

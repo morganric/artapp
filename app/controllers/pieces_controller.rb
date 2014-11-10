@@ -108,9 +108,6 @@ class PiecesController < ApplicationController
 
   private
 
-    def allow_iframe
-      response.headers["X-Frame-Options"] = "GOFORIT"
-    end
 
     def upload_email
       @followers = current_user.followers
