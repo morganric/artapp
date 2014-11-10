@@ -3,6 +3,7 @@ class PiecesController < ApplicationController
   before_action :set_piece, only: [:show, :edit, :update, :destroy, :nope, :dope, :upload_email]
   after_action :upload_email, only: :create
 
+
   # GET /pieces
   # GET /pieces.json
   def index
@@ -100,6 +101,11 @@ class PiecesController < ApplicationController
 
 
   private
+
+
+  def allow_iframe
+    response.headers["X-Frame-Options"] = "GOFORIT"
+  end
 
     def upload_email
       @followers = current_user.followers
