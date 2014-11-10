@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
+  post '/' => 'pieces#index', :as => 'facebook'
 
   resources :profiles
   resources :pieces
+
 
   get 'p/:id' => 'pieces#show', as: :short
   get 'featured' => 'pieces#featured', as: "featured"
