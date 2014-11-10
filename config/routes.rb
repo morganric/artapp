@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get '/facebook' => 'facebook#index', :as => 'facebook', via: [:get, :post]
+  post '/facebook' => 'facebook#index', :as => 'facebook', via: [:post]
 
 
   scope ":id" do
@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   scope "/facebook/:id" do
-    get '', to: 'facebook#show', :as => 'facebook_url'
+    post '', to: 'facebook#show', :as => 'facebook_url'
   end
 
 
