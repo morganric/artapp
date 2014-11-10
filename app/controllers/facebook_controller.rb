@@ -5,6 +5,10 @@ class FacebookController < ApplicationController
 
 
     def index
+
+    @pieces = Piece.where(:hidden => false).order('views DESC').page params[:page]
+    @new_pieces = Piece.where(:hidden => false).order('created_at DESC').page params[:page]
+    @tags = Piece.tag_counts_on(:tags)
     # @params = params
     # @profiles = Profile.all
     # @facebook_pages = FacebookPage.all
