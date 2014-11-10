@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-  post "" => 'pieces#index', :as => 'facebook'
-
   resources :profiles
   resources :pieces
+
+  get "/facebook" => 'pieces#index', :as => 'facebook', via: [:get, :post]
 
 
   get 'p/:id' => 'pieces#show', as: :short
