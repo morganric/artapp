@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  post '/' => 'pieces#index', :as => 'facebook'
+  post "" => 'pieces#index', :as => 'facebook'
 
   resources :profiles
   resources :pieces
@@ -22,12 +22,8 @@ Rails.application.routes.draw do
   resources :users
 
  scope ":id" do
-  # resources :profiles do
-  #   member do
       get :following, to: "profiles#following", as: 'following_profile'
       get :followers, to: "profiles#followers", as: 'followers_profile'
-  #   end
-  # end
 end
 
  get 'pages/:id' => 'visitors#index', as: 'static'
