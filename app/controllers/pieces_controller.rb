@@ -11,6 +11,13 @@ class PiecesController < ApplicationController
     @tags = Piece.tag_counts_on(:tags)
   end
 
+  def facebook
+      @pieces = Piece.where(:hidden => false).order('views DESC').page params[:page]
+    @new_pieces = Piece.where(:hidden => false).order('created_at DESC').page params[:page]
+    @tags = Piece.tag_counts_on(:tags)
+  end
+
+
   def featured
     @pieces = Piece.where(:hidden => false).where(:featured => true).order('created_at DESC').page params[:page]
     
@@ -100,6 +107,10 @@ class PiecesController < ApplicationController
 
 
   private
+
+    def allow_iframe
+      response.headers["X-Frame-Options"] = "GOFORIT"
+    end
 
     def upload_email
       @followers = current_user.followers

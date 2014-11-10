@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   resources :profiles
   resources :pieces
 
-  get "/facebook" => 'pieces#index', :as => 'facebook', via: [:get, :post]
-
 
   get 'p/:id' => 'pieces#show', as: :short
   get 'featured' => 'pieces#featured', as: "featured"
@@ -43,5 +41,10 @@ end
   unauthenticated do
     root to: "visitors#index"
   end
+
+
+   post "/" => 'pieces#facebook', :as => 'facebook', via: [:get, :post]
+
+
 
 end
