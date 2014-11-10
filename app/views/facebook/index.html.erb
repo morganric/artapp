@@ -39,8 +39,8 @@
 			<% @new_pieces.each do |piece| %>
 						<div class="box col2">
 						        <div class="text-center">
-						        <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %> %>
-						        <h4 class=""><%= link_to truncate(piece.title, :length => 20), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %><br/>
+						        <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %>
+						        <h4 class=""><%= link_to truncate(piece.title, :length => 12), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %><br/>
 						        <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 12) || piece.user.name, vanity_url_path(piece.user.profile), :target => "_blank" %></small>
 						        </h4>
 						        </div>
