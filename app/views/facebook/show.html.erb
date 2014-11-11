@@ -16,27 +16,10 @@
 
   <%#= render 'follow_form', :user => @profile.user   %>
 
-  <% @profile.user ||= current_user %>
-    <div class="stats white badge badge-default">
-      <a href="<%= following_profile_path(@profile.slug) %>">
-        <strong id="following" class="stat ">
-          <%= @profile.user.following.count %>
-        </strong>
-        following
-      </a> | 
-      <a href="<%= followers_profile_path(@profile.slug) %>">
-        <strong id="followers" class="stat">
-          <%= @profile.user.followers.count %>
-        </strong>
-        followers
-      </a>
-    </div>
-
-  <br/><br/>
-  </div>
-<% end %>
+  <% end %>
 
 <h1 class="text-center"><%= @profile.display_name  %></h1>
+
 
 <div class="row">
 
@@ -59,7 +42,14 @@
       <div class="tab-pane fade active in" id="new">
       <div id="masonry-container" class="transitions-enabled centered infinite-scroll clearfix">
       <% @pieces.order('created_at DESC').each do |piece| %>
-                    <%= render 'shared/piece', :piece => piece %>
+               <div class="box col3">
+                    <div class="text-center">
+                    <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %>
+                    <h4 class=""><%= link_to truncate(piece.title, :length => 12), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %><br/>
+                    <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 12) || piece.user.name, vanity_url_path(piece.user.profile), :target => "_blank" %></small>
+                    </h4>
+                    </div>
+            </div>
       <% end %>
 
       </div>
@@ -69,7 +59,14 @@
     <div class="tab-pane fade" id="popular">
       <div id="masonry-container" class="transitions-enabled centered infinite-scroll clearfix">
       <% @pieces.order('views DESC').each do |piece| %>
-              <%= render 'shared/piece', :piece => piece %>
+              <div class="box col3">
+                    <div class="text-center">
+                    <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %>
+                    <h4 class=""><%= link_to truncate(piece.title, :length => 12), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %><br/>
+                    <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 12) || piece.user.name, vanity_url_path(piece.user.profile), :target => "_blank" %></small>
+                    </h4>
+                    </div>
+            </div>
       <% end %>
 
       </div>
@@ -78,7 +75,14 @@
     <div class="tab-pane fade" id="favs">
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
       <% @profile.user.favourites.where(:hidden => false).order('views DESC').each do |piece| %>
-                     <%= render 'shared/piece', :piece => piece %>
+                     <div class="box col3">
+                    <div class="text-center">
+                    <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %>
+                    <h4 class=""><%= link_to truncate(piece.title, :length => 12), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %><br/>
+                    <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 12) || piece.user.name, vanity_url_path(piece.user.profile), :target => "_blank" %></small>
+                    </h4>
+                    </div>
+            </div>
       <% end %>
 
       </div>
@@ -115,7 +119,7 @@
              <div class="panel panel-default">
                 <div class="panel-heading "><h5 class=""><i class='glyphicon glyphicon-share-alt'></i> Share</h5></div>
                 <div class="panel-body">
-                  <%= tweet_button(via: "artupio", url: "#{vanity_url_path(@profile)}", text: "AWESOME ART!", count: "none") %>
+                  <%= tweet_button(via: "artupio", url: "#{vanity_url_url(@profile)}", text: "AWESOME ART!", count: "none") %>
                   <%#= like_button(app_id) %>
                   <%= pinit_button %>
                   <%= google_plus_button %>
