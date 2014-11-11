@@ -1,11 +1,170 @@
-<div class="row clearfix">
+<% set_meta(
+    :keywords => @profile.display_name,
+    :description => @profile.bio,
+    :og => {:type => "website", 
+            :description => @profile.bio
+            }
+    ) 
+%>
+
+<%= content_for :header do %>
+
+  <section style="background-image: url('<%= @profile.banner.url(:banner)  %>'); color:white; margin-top:60px;" class="profile-header text-center">
+  <br/>
+  <%= image_tag @profile.image.url(:profile) || "http://res.cloudinary.com/artapp/image/upload/v1413470304/gntloo1fznwu9yylo1nu.png", :class => "img-responsive img-thumbnail img-circle title pull-center" %>
+  <br/><br/>
+
+  <%#= render 'follow_form', :user => @profile.user   %>
+
+  <% @profile.user ||= current_user %>
+    <div class="stats white badge badge-default">
+      <a href="<%= following_profile_path(@profile.slug) %>">
+        <strong id="following" class="stat ">
+          <%= @profile.user.following.count %>
+        </strong>
+        following
+      </a> | 
+      <a href="<%= followers_profile_path(@profile.slug) %>">
+        <strong id="followers" class="stat">
+          <%= @profile.user.followers.count %>
+        </strong>
+        followers
+      </a>
+    </div>
+
+  <br/><br/>
+  </div>
+<% end %>
+
+<h1 class="text-center"><%= @profile.display_name  %></h1>
+
+<div class="row">
+
 
 <div class="col-md-12">
-    <h1><%= image_tag(@profile.image.url, :class => "img-circle", :width => '75px') if @profile.image.url  %>
-    <%=  link_to @profile.display_name || @profile.user.name, vanity_url_path(@profile.slug),  :target => "_blank"   %></h1>
 
-  </div>
+  <nav class="navbar navbar-static-top navbar-default " role="navigation">
+    <div class=" navbar-grey">
+    <ul class="nav navbar-nav">
+    <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> My Pieces</a></li>
+    <li><a href="#popular" data-toggle="tab"><i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
+    <li><a href="#favs" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
+    <li><a href="#about" data-toggle="tab"><i class="glyphicon glyphicon-info-sign "></i> About</a></li>
+    </ul>  
+    </div>
+  </nav>
+
+
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade active in" id="new">
+      <div id="masonry-container" class="transitions-enabled centered infinite-scroll clearfix">
+      <% @pieces.order('created_at DESC').each do |piece| %>
+                    <%= render 'shared/piece', :piece => piece %>
+      <% end %>
+
+      </div>
+        <%= paginate @pieces, :html => {:class => "pagination"} %>
+        
+      </div>
+    <div class="tab-pane fade" id="popular">
+      <div id="masonry-container" class="transitions-enabled centered infinite-scroll clearfix">
+      <% @pieces.order('views DESC').each do |piece| %>
+              <%= render 'shared/piece', :piece => piece %>
+      <% end %>
+
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="favs">
+      <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
+      <% @profile.user.favourites.where(:hidden => false).order('views DESC').each do |piece| %>
+                     <%= render 'shared/piece', :piece => piece %>
+      <% end %>
+
+      </div>
+      </div>
+
+      <div class="tab-pane fade" id="about">
+      <div class="clearfix">
+      <div class="col-md-8" >
+      <div class="panel panel-default">
+        <div class="panel-heading"><h5><%= @profile.display_name || @profile.user.name %></h5></div>
+          <div class="panel-body">
+            <% if @profile.bio !=  "" %>
+            <p class="well">
+              <%= @profile.bio %>
+            </p>
+            <% end %>
+
+            <p>
+              <%= @profile.location %>
+            </p>
+
+            <p>
+              <%= link_to @profile.website, url_with_protocol(@profile.website), :target => "blank"  %>
+            </p>
+            <% if @profile.twitter != "" %>
+            <p>
+             <a href="http://twitter.com/<%= @profile.twitter %>" target="_blank">@<%= @profile.twitter %></a>
+            </p>
+            <% end %>
+          </div>
+          </div>
+          </div>
+            <div class="col-md-4">
+             <div class="panel panel-default">
+                <div class="panel-heading "><h5 class=""><i class='glyphicon glyphicon-share-alt'></i> Share</h5></div>
+                <div class="panel-body">
+                  <%= tweet_button(via: "artupio", url: "#{vanity_url_path(@profile)}", text: "AWESOME ART!", count: "none") %>
+                  <%#= like_button(app_id) %>
+                  <%= pinit_button %>
+                  <%= google_plus_button %>
+                </div>
+                </div>
+            </div>    
+            </div>
+        </div>
+
+    <% if current_user %>
+    <% if current_user == @profile.user || current_user.admin? %>
+    <%= link_to 'Edit', edit_profile_path(@profile), class: "pull-left" %> 
+    <% end %>
+    <% end %>
+    <br/>
+
+    
+    </div>
+
+
+
 </div>
-  <hr/>
+
+
+
+</div>
+
+
+
+<style type="text/css">
+  
+  .affix {
+    top: 60px;
+width: 110%;
+margin-left: -15%;
+margin-right:15%;
+  }
 
   
+  .navbar .nav,
+.navbar .nav > li {
+  float:none;
+  display:inline-block;
+  *display:inline; /* ie7 fix */
+  *zoom:1; /* hasLayout ie7 trigger */
+  vertical-align: top;
+}
+
+
+
+
+</style>
