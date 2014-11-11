@@ -1,0 +1,101 @@
+<%= content_for :header do %>
+  <div  class=" text-center">
+		<h1 class="black">
+			  <div class="arrow-up-large pull-center "><h3><i class="glyphicon glyphicon-eye-open white"></i></h3></div> ArtUp
+		</h1>
+		
+</div>
+<% end %>
+
+  <nav class="navbar navbar-static-top navbar-default " role="navigation">
+    <div class="navbar-grey">
+    <ul class="nav navbar-nav">
+     <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload"></i> New Pieces</a></li>
+	  <li><a href="#popular" data-toggle="tab"> <i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-tags "></i> Top Tags <b class="caret"></b></a>
+        <!-- <ul class="dropdown-menu">
+        	<%# @tags.limit(10).each do |tag| %>
+          <li> <%#= link_to raw("<i class='glyphicon glyphicon-tag'></i>  #{tag}"), tagged_pieces_path(:tag => tag.name) %></li>
+          <%# end %>
+        </ul> -->
+      </li>
+    </ul>  
+    </div>
+  </nav>
+
+<div class="row">
+	<div class="col-md-12">
+
+<!-- 
+	<ul class="nav nav-pills">
+	  <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload"></i> New Uploads</a></li>
+	  <li><a href="#popular" data-toggle="tab"> <i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
+	</ul>
+	  <hr/> -->
+		<div id="myTabContent" class="tab-content">
+		  <div class="tab-pane fade active in" id="new">
+		  <div id="masonry-container" class="transitions-enabled centered infinite-scroll clearfix">
+			<% @new_pieces.each do |piece| %>
+						<div class="box col2">
+						        <div class="text-center">
+						        <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %>
+						        <h4 class=""><%= link_to truncate(piece.title, :length => 12), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %><br/>
+						        <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 12) || piece.user.name, vanity_url_path(piece.user.profile), :target => "_blank" %></small>
+						        </h4>
+						        </div>
+						</div>
+			<% end %>
+
+			</div>
+				<%= paginate @pieces, :html => {:class => "pagination"} %>
+				
+		  </div>
+	  <div class="tab-pane fade" id="popular">
+	  	<div id="masonry-container" class="transitions-enabled centered 	infinite-scroll clearfix">
+			<% @pieces.each do |piece| %>
+				<div class="box col2">
+						        <div class="text-center">
+						        <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %>
+						        <h4 class=""><%= link_to truncate(piece.title, :length => 12), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %><br/>
+						        <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 12) || piece.user.name, vanity_url_path(piece.user.profile), :target => "_blank" %></small>
+						        </h4>
+						        </div>
+						</div>
+			<% end %>
+
+			</div>
+	  </div>
+
+	</div>
+		
+</div>
+
+
+</div>
+
+<style type="text/css">
+  
+  .affix {
+    top: 60px;
+width: 110%;
+margin-left: -15%;
+margin-right:15%;
+  }
+
+  
+  .navbar .nav,
+.navbar .nav > li {
+  float:none;
+  display:inline-block;
+  *display:inline; /* ie7 fix */
+  *zoom:1; /* hasLayout ie7 trigger */
+  vertical-align: top;
+}
+
+.navbar-blue {
+  text-align:center;
+}
+
+
+</style>

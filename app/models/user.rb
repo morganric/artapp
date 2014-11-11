@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, :if => :new_record?
   after_create :create_profile
 
+  validates_exclusion_of :name, :in => %w( facebook message discussions facebook tedx featured users feeds photos videos items admin oembed api facebook new popular featured favicon superuser 
+    pages partners categories category creators platforms media posts authors types providers tagged ), :message => "You don't belong here"
+
+
   def set_default_role
     self.role ||= :user
   end

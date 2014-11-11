@@ -1,8 +1,10 @@
 class PiecesController < ApplicationController
-  before_filter :authenticate_user!, except: [:show, :index, :tag]
+  before_filter :authenticate_user!, except: [:show, :index, :tag, :featured]
   before_action :set_piece, only: [:show, :edit, :update, :destroy, :nope, :dope, :upload_email]
   after_action :upload_email, only: :create
 
+
+ after_filter :allow_iframe
 
   # GET /pieces
   # GET /pieces.json
@@ -11,6 +13,13 @@ class PiecesController < ApplicationController
     @new_pieces = Piece.where(:hidden => false).order('created_at DESC').page params[:page]
     @tags = Piece.tag_counts_on(:tags)
   end
+
+  # def facebook
+  #     @pieces = Piece.where(:hidden => false).order('views DESC').page params[:page]
+  #   @new_pieces = Piece.where(:hidden => false).order('created_at DESC').page params[:page]
+  #   @tags = Piece.tag_counts_on(:tags)
+  # end
+
 
   def featured
     @pieces = Piece.where(:hidden => false).where(:featured => true).order('created_at DESC').page params[:page]
