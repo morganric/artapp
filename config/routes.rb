@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users
   mount Upmin::Engine => '/admin'
 
-  get '/facebook' => 'facebook#index', :as => 'facebook', via: [:post]
+  post '/facebook' => 'facebook#index', :as => 'facebook', via: [:post]
   get 'featured' => 'pieces#featured', as: "featured"
   get 'apps' => 'profiles#apps', :as => 'apps'
 
