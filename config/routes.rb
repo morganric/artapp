@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+  resources :users
+
   post '/facebook' => 'facebook#index', :as => 'facebook', via: [:post]
   get 'featured' => 'pieces#featured', as: "featured"
 
@@ -28,8 +31,6 @@ Rails.application.routes.draw do
    post "/pieces/:id/dope" => "pieces#dope", :as => "dope", via: [:get, :post]
   post "/pieces/:id/nope" => "pieces#nope", :as => "nope", via: [:get, :post]
 
-  devise_for :users
-  resources :users
 
    scope ":id" do
         get :following, to: "profiles#following", as: 'following_profile'
