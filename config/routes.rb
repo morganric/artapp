@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
+  mount Upmin::Engine => '/admin'
 
   post '/facebook' => 'facebook#index', :as => 'facebook', via: [:post]
   get 'featured' => 'pieces#featured', as: "featured"
@@ -26,7 +27,6 @@ Rails.application.routes.draw do
   post 'user_favs' => 'user_favs#create', :as => 'user_favs'
   delete 'user_favs' => 'user_favs#destroy', :as => 'delete_user_favs'
 
-  mount Upmin::Engine => '/admin'
 
    post "/pieces/:id/dope" => "pieces#dope", :as => "dope", via: [:get, :post]
   post "/pieces/:id/nope" => "pieces#nope", :as => "nope", via: [:get, :post]
