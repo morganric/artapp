@@ -33,7 +33,7 @@ class FacebookController < ApplicationController
       signed_request = params[:signed_request]
       @signed_request = decode_data(signed_request)
       
-      if @signed_request != [] || @signed_request["page"] != nil
+      if @signed_request != nil || @signed_request["page"] != nil
         
         @page_id = @signed_request["page"]["id"]
         @page_id = @page_id.to_s
