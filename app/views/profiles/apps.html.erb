@@ -2,6 +2,11 @@
 
 <div id="fb-root"></div>
 
+<ul>
+  <li class="well" >
+    <button id="fb-button" class="btn btn-primary"><i class="fa fa-facebook" ></i> Connect Facebook Page Tab</button>
+  </li>
+</ul>
 
 <script type="text/javascript">
 
@@ -14,12 +19,41 @@
 
     // ADD ADDITIONAL FACEBOOK CODE HERE
 
+    $('#fb-button').on('click', function(){
+              FB.ui({
+                  method: 'pagetab'
+
+                }, function(response){
+
+                    console.log(response);
+                    console.log(response.tabs_added);
+
+                    $.ajax({
+
+                        url: '/facebook_page',
+                        type: 'post', 
+                        data: {'user_id': '<% if current_user %><%= current_user.id %><% end %>', 
+                                'fb_page_id': parseInt(Object.keys(response.tabs_added)[0]), 'app_data': parseInt(Object.keys(response.tabs_added)[0])
+                              },
+                        app_data: {'fb_page_id': parseInt(Object.keys(response.tabs_added)[0])},
+
+                        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+                    }).success(function(json){
+                        //act on result.
+                        console.log("success");
+                    });
+
+                });
+
+        });
+
+
 
     function onLogin(response) {
 		  if (response.status == 'connected') {
 		    FB.api('/me?fields=first_name', function(data) {
 		      var welcomeBlock = document.getElementById('fb-welcome');
-		      welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+		      welcomeBlock.innerHTML = 'Hello ' + data.first_name + ',';
 		    });
 		  }
 		}

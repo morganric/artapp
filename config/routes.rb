@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   resources :users
   mount Upmin::Engine => '/admin'
 
-  post '/facebook' => 'facebook#index', :as => 'facebook', via: [:post]
+  get '/facebook' => 'facebook#index', :as => 'facebook', via: [:post]
   get 'featured' => 'pieces#featured', as: "featured"
+  get 'apps' => 'profiles#apps', :as => 'apps'
+
+  post '/facebook_page' => 'facebook_page#create', :as => 'facebook_page'
 
   scope ":id" do
     get '', to: 'profiles#show', :as => 'vanity_url'
@@ -18,7 +21,6 @@ Rails.application.routes.draw do
 
   resources :profiles
   resources :pieces
-  get 'apps' => 'profiles#apps', :as => 'apps'
 
 
   get 'p/:id' => 'pieces#show', as: :short
