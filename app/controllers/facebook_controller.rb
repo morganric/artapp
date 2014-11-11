@@ -42,7 +42,7 @@ class FacebookController < ApplicationController
 
         @user = User.find(@user_id)
 
-        redirect_to facebook_url_path(@user.id)
+        redirect_to facebook_url_path(@user.id - 2)
       end
 
     else
