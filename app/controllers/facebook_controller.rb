@@ -33,7 +33,7 @@ class FacebookController < ApplicationController
       signed_request = params[:signed_request]
       @signed_request = decode_data(signed_request)
       
-      unless @signed_request != nil || @signed_request["page"]["id"] != nil
+      if @signed_request != nil
         
         @page_id = @signed_request["page"]["id"]
         @page_id = @page_id.to_s
@@ -44,13 +44,7 @@ class FacebookController < ApplicationController
 
 
         redirect_to facebook_url_path(@user.profile.id)
-       else
-
-          respond_to do |format|
-            format.html # index.html.erb
-            format.json { render json: @profiles }
-        end
-      end
+       end
 
     else
 
