@@ -21,12 +21,35 @@
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
 <div id="fb-root"></div>
-
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=615925001838726&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
   </head>
   <body>
   <header>
-    <%= render 'layouts/navigation' %>
+    <%# navigation styled for Bootstrap 3.0 %>
+ <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <div class="arrow-up pull-left"><i class="glyphicon glyphicon-eye-open white"></i></div>
+      <a href="<%= root_path %>" class="navbar-brand" style="color:black; font-size:20px;" target="_blank" />ArtUp</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav pull-left ">
+        <li><%= link_to raw('<i class="glyphicon glyphicon-upload"></i> Upload'), new_piece_path, :target => "_blank" %></li>
+        <li><%= link_to raw('<i class="glyphicon glyphicon-star"></i> Featured'), featured_path, :target => "_blank" %></li>
+        <li><%= link_to raw('<i class="glyphicon glyphicon-info-sign"></i> About'), static_path('about'), :target => "_blank" %></li>
+    </ul>
+    </div>
+  </div>
+</nav>
+
+
     <%= content_for?(:header) ? yield(:header) : "" %>
   </header>
     <main role="main">
@@ -80,3 +103,4 @@
 </script>
   </body>
 </html>
+fa
