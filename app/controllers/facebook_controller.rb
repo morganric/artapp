@@ -44,7 +44,7 @@ class FacebookController < ApplicationController
 
         debugger
 
-        redirect_to facebook_url_path(@user.id)
+        redirect_to facebook_url_path(@user.profile.id)
       end
 
     else
