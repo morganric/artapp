@@ -42,9 +42,14 @@ class FacebookController < ApplicationController
 
         @user = User.find(@user_id)
 
-        debugger
 
         redirect_to facebook_url_path(@user.profile.id)
+       else
+
+          respond_to do |format|
+            format.html # index.html.erb
+            format.json { render json: @profiles }
+        end
       end
 
     else
