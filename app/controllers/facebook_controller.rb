@@ -59,6 +59,7 @@ class FacebookController < ApplicationController
   # GET /profiles/1.json
   def show
 
+    debugger
 
     @params = params
     # signed_request = params[:signed_request] 
