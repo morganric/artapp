@@ -92,7 +92,7 @@
           <div class="panel-body">
             <% if @profile.bio !=  "" %>
             <p class="well">
-              <%= @profile.bio %>
+              <%= (@profile.bio).gsub(/\n/, '<br/>').html_safe %>
             </p>
             <% end %>
 
