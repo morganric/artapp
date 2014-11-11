@@ -96,7 +96,7 @@
 
         <% unless @piece.sold == true || @piece.price.to_i <= 0 %>
         <div class="panel panel-primary">
-          <div class="panel-heading "><h5 class="white"><i class='white glyphicon glyphicon-shopping-cart'></i> Buy</h5></div>
+          <div class="panel-heading "><h5 class="white"><i class='white glyphicon glyphicon-shopping-cart'></i> Buy "<%= truncate(@piece.title, :length => 2) %>"</h5></div>
           <div class="panel-body">
             <p>$<%= @piece.price.to_i %></p>
               <%= form_tag charges_path do %>
@@ -106,7 +106,7 @@
               <%= hidden_field_tag :id, @piece.id %>
 
               <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                      data-key="<%= @piece.user.stripe_publishable_key || "pk_test_gTBJNFb3AicnglEhCcyoWsQ3" %>"
+                      data-key="<%= @piece.user.stripe_publishable_key || ENV['PUBLISHABLE_KEY'] %>"
                       data-description="<%= @piece.title %>" data-email="<%#= current_user.email %>"
                       data-image="<%= @piece.image.url(:small) %>"
                       data-amount="<%= @piece.price.to_i*100 %>"></script>

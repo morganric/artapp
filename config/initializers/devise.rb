@@ -277,7 +277,7 @@ Devise.setup do |config|
   require "omniauth"
   require "omniauth-stripe-connect"
 
-  config.omniauth :stripe_connect, ENV['STRIPE_CONNECT_CLIENT_ID'], ENV['STRIPE_SECRET'], :scope => 'read_write'
+  config.omniauth :stripe_connect, ENV['STRIPE_CONNECT_CLIENT_ID'], ENV['SECRET_KEY'], :scope => 'read_write'
   # config.omniauth :facebook, Rails.application.secrets.facebook_app_id, Rails.application.secrets.facebook_app_secret, :strategy_class => OmniAuth::Strategies::Facebook,
   #  
 

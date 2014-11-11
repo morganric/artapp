@@ -30,7 +30,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
    	@user.stripe_secret_key = auth.credentials.token
    	@user.stripe_publishable_key = auth.extra.raw_info.stripe_publishable_key
 
-
    	@user.save
    	redirect_to root_path
 
