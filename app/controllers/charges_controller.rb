@@ -9,6 +9,7 @@ def create
   @fee = @amount * 0.1
   @piece = Piece.find(params[:id])
 
+  Stripe.api_key = @piece.user.stripe_secret_key
 
   customer = Stripe::Customer.create(
     :email => params[:stripeEmail],
@@ -19,12 +20,10 @@ def create
     :customer    => customer.id,
     :amount      => @amount,
     :description => 'Rails Stripe customer',
-    :currency    => 'usd'
-    # ,
-    # :application_fee => @fee.to_i
-  }
-  # , 
-  #  @piece.user.stripe_secret_key
+    :currency    => 'usd',
+    :application_fee => @fee.to_i
+  }, 
+   @piece.user.stripe_secret_key
   )
 
   @piece.sold = true

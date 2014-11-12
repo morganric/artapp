@@ -14,10 +14,10 @@
     <%= f.input :user_id, as: :hidden %>
     <% if current_user && current_user.admin? || @piece.user.stripe_secret_key != nil %>
     <%= f.input :price %>
-    <%= f.input :sold %>
     <% end %>
     <br/>
     <% if current_user && current_user.admin? %>
+    <%= f.input :sold %>
     <%= f.label :hidden %>
     <%= f.check_box :hidden %>
     <%= f.label :featured %>

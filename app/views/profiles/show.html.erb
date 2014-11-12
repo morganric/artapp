@@ -88,7 +88,17 @@
         <div class="tab-pane fade" id="shop">
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
       <% @shop.where(:hidden => false).order('views DESC').each do |piece| %>
-                     <%= render 'shared/piece', :piece => piece %>
+                     <div class="box col3">
+        <div class="text-center">
+        <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
+        <h4 class=""><%= link_to truncate(piece.title, :length => 20), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %><br/>
+        <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 20) || piece.user.name, vanity_url_path(piece.user.profile) %></small>
+        </h4>
+           <% if piece.price.to_i != nil && piece.price.to_i != 0 %>                         
+            <h6> $<%= piece.price.to_i %></h6>
+          <% end %>
+        </div>
+</div>
       <% end %>
 
       </div>
@@ -103,6 +113,13 @@
             <% if @profile.bio !=  "" %>
             <p class="well">
               <%= @profile.bio %>
+                <br/>
+                  <% if current_user %>
+                  <% if current_user == @profile.user || current_user.admin? %>
+                  <%= link_to 'Edit', edit_profile_path(@profile), class: "pull-right" %> 
+                  <% end %>
+                  <% end %>
+                  <br/>
             </p>
             <% end %>
 
@@ -135,12 +152,7 @@
             </div>
         </div>
 
-    <% if current_user %>
-    <% if current_user == @profile.user || current_user.admin? %>
-    <%= link_to 'Edit', edit_profile_path(@profile), class: "pull-left" %> 
-    <% end %>
-    <% end %>
-    <br/>
+
 
     
     </div>
