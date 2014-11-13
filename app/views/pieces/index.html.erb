@@ -16,7 +16,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-tags "></i> Top Tags <b class="caret"></b></a>
         <ul class="dropdown-menu">
         	<% @tags.limit(10).each do |tag| %>
-          <li> <%= link_to raw("<i class='glyphicon glyphicon-tag'></i>  #{tag}"), tagged_pieces_path(:tag => tag.name) %></li>
+          <li> <%= link_to raw("<i class='glyphicon glyphicon-tag'></i>  #{tag} (#{tag.taggings_count})"), tagged_pieces_path(:tag => tag.name) %></li>
           <% end %>
         </ul>
       </li>
