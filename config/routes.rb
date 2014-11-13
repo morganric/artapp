@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :profiles
   resources :pieces
 
+  get ':user_slug/:id/embed' => 'pieces#embed', as: :embed
 
   get 'p/:id' => 'pieces#show', as: :short
 

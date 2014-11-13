@@ -1,17 +1,19 @@
 class PiecesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :index, :tag, :featured]
-  before_action :set_piece, only: [:show, :edit, :update, :destroy, :nope, :dope, :upload_email]
+  before_action :set_piece, only: [:show, :edit, :update, :destroy, :nope, :dope, :upload_email, :embed]
   after_action :upload_email, only: :create
 
 
  after_filter :allow_iframe
+
+ layout :resolve_layout
 
   # GET /pieces
   # GET /pieces.json
   def index
     @pieces = Piece.where(:hidden => false).order('views DESC').page params[:page]
     @new_pieces = Piece.where(:hidden => false).order('created_at DESC').page params[:page]
-    @tags = Piece.tag_counts_on(:tags)
+    @tags = Piece.tag_counts_on(:tags).order("taggings_count DESC")
   end
 
   # def facebook
@@ -46,6 +48,16 @@ class PiecesController < ApplicationController
   # GET /pieces/1
   # GET /pieces/1.json
   def show
+    @piece.views = @piece.views.to_i + 1
+    @piece.save
+
+    if @piece.hidden == true
+      redirect_to vanity_url_path(@piece.user.profile), notice: 'Sorry no peaking, this piece is hidden.'
+    end
+  end
+
+  def embed
+
     @piece.views = @piece.views.to_i + 1
     @piece.save
 
@@ -110,6 +122,16 @@ class PiecesController < ApplicationController
 
 
   private
+
+
+  def resolve_layout
+    case action_name
+    when "embed"
+      "embed"
+    else
+      "paper"
+    end
+  end
 
 
   def allow_iframe
