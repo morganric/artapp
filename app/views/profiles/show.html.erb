@@ -90,7 +90,7 @@
       <div class="panel panel-default">
         <div class="panel-heading"><h5><%= @profile.display_name || @profile.user.name %></h5></div>
           <div class="panel-body">
-            <% if @profile.bio !=  "" || @profile.bio !=  nil %>
+            <% if @profile.bio !=  "" && @profile.bio !=  nil %>
             <p class="well">
               <%= auto_link(@profile.bio.gsub(/\n/, '<br/>').html_safe, :html => { :target => '_blank' }) %>
             </p>
