@@ -75,6 +75,11 @@
     <br/><br/>
      <p class="well">
       <%= auto_link(@piece.description, :html => { :target => '_blank' }) %>
+      <br/>
+        <% if current_user && current_user.admin? %>
+          <%= link_to 'Edit', edit_piece_path(@piece), :class => "pull-right" %>
+        <% end %>
+      <br/>
     </p>
     <p>
       <strong>Dimensions:</strong>
@@ -94,7 +99,7 @@
         </div>
         </div> -->
 
-        <% unless @piece.sold == true || @piece.price.to_i <= 0 %>
+        <% unless @piece.sold == true || @piece.price.to_i <= 0 || @piece.user.stripe_publishable_key == nil %>
         <div class="panel panel-primary">
           <div class="panel-heading "><h5 class="white"><i class='white glyphicon glyphicon-shopping-cart'></i> Buy "<%= truncate(@piece.title, :length => 20) %>"</h5></div>
           <div class="panel-body">
@@ -119,9 +124,10 @@
         <div class="panel-heading "><h5 class=""><i class='glyphicon glyphicon-share-alt'></i> Share</h5></div>
         <div class="panel-body">
           <%= tweet_button(via: "artupio", url: "#{piece_url(@piece)}", text: "Nice #art '#{@piece.title} by #{@piece.user.profile.display_name}' :", count: "none") %>
-          <%#= like_button(app_id) %>
           <%= pinit_button %>
           <%= google_plus_button %>
+          <%= like_button(615925001838726, :layout => :button_count, :send => true) %>
+          <br/><br/>
           <input value="<%= short_url(@piece) %>" cols="100"
           />
           
@@ -140,10 +146,7 @@
     </div>
     </div>
 
-    <br/><br/>
-    <% if current_user && current_user.admin? %>
-      <%= link_to 'Edit', edit_piece_path(@piece), :class => "pull-right" %>
-    <% end %>
+    
          
   </div>
 

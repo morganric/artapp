@@ -7,9 +7,16 @@ def create
   # Amount in cents
   @amount = params[:amount].to_i * 100
   @fee = @amount * 0.1
-  @piece = Piece.find(params[:id])
 
-  Stripe.api_key = @piece.user.stripe_secret_key
+  if params[:id] != nil
+    @piece = Piece.find(params[:id])
+    Stripe.api_key = @piece.user.stripe_secret_key
+  end
+
+  if params[:profile_id] != nil
+  @profile = Profile.find(params[:profile_id])
+  Stripe.api_key = @profile.user.stripe_secret_key
+  end
 
   customer = Stripe::Customer.create(
     :email => params[:stripeEmail],
@@ -23,11 +30,13 @@ def create
     :currency    => 'usd',
     :application_fee => @fee.to_i
   }, 
-   @piece.user.stripe_secret_key
+   Stripe.api_key
   )
 
-  @piece.sold = true
-  @piece.save
+  if params[:id] != nil
+    @piece.sold = true
+    @piece.save
+  end
 
 rescue Stripe::CardError => e
   flash[:error] = e.message

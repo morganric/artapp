@@ -49,7 +49,9 @@
     <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> My Pieces</a></li>
     <li><a href="#popular" data-toggle="tab"><i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
     <li><a href="#favs" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
+    <% if  @profile.user.stripe_publishable_key != nil %>
     <li><a href="#shop" data-toggle="tab"><i class="glyphicon glyphicon-shopping-cart "></i> Shop</a></li>
+    <% end %>
     <li><a href="#about" data-toggle="tab"><i class="glyphicon glyphicon-info-sign "></i> About</a></li>
     </ul>  
     </div>
@@ -139,13 +141,38 @@
           </div>
           </div>
             <div class="col-md-4">
+
+            <% if @profile.donations %>
+              <% unless @profile.user.stripe_publishable_key == "" || @profile.user.stripe_publishable_key == nil %>
+                <div class="panel panel-primary">
+                  <div class="panel-heading "><h5 class="white"><i class='white glyphicon glyphicon-shopping-cart'></i> Donate to <%= truncate(@profile.display_name, :length => 20) %></h5></div>
+                  <div class="panel-body">
+                    <p>$10 minimum donation</p>
+                      <%= form_tag charges_path do %>
+
+                      <%= number_field_tag :amount, number_with_precision(10, :precision => 2), :class=> "form-control", :width => "50%", :min => number_with_precision(10, :precision => 2), :step => 1 %>
+                      <br/>
+                      <%= hidden_field_tag :profile_id, @profile.id %>
+
+                      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                              data-key="<%= @profile.user.stripe_publishable_key %>"
+                              data-description="<%= @profile.display_name %>" data-email="<%#= current_user.email %>"
+                              data-image="<%= @profile.image.url(:small) %>"
+                              data-amount=""></script>
+                    <% end %>
+                  <% end %>
+                </div>
+                </div>
+                <% end %>
              <div class="panel panel-default">
                 <div class="panel-heading "><h5 class=""><i class='glyphicon glyphicon-share-alt'></i> Share</h5></div>
                 <div class="panel-body">
+
                   <%= tweet_button(via: "artupio", url: "#{vanity_url_path(@profile)}", text: "AWESOME ART!", count: "none") %>
-                  <%#= like_button(app_id) %>
+
                   <%= pinit_button %>
                   <%= google_plus_button %>
+                  <%= like_button(615925001838726, :layout => :button_count, :send => true) %>
                 </div>
                 </div>
             </div>    

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104135145) do
+ActiveRecord::Schema.define(version: 20141113100258) do
+
+  create_table "facebook_pages", force: true do |t|
+    t.string   "fb_page_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "facebook_pages", ["fb_page_id", "user_id"], name: "index_facebook_pages_on_fb_page_id_and_user_id", unique: true
+  add_index "facebook_pages", ["fb_page_id"], name: "index_facebook_pages_on_fb_page_id", unique: true
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -57,6 +67,7 @@ ActiveRecord::Schema.define(version: 20141104135145) do
     t.string   "slug"
     t.string   "twitter"
     t.string   "banner"
+    t.boolean  "donations"
   end
 
   add_index "profiles", ["slug"], name: "index_profiles_on_slug", unique: true
