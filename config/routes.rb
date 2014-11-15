@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   mount Upmin::Engine => '/admin'
-
+  resources :pieces
 
   scope "/facebook/:id" do
     get '', to: 'facebook#show', :as => 'facebook_url'
@@ -17,11 +17,11 @@ Rails.application.routes.draw do
 
   post '/facebook_page' => 'facebook_page#create', :as => 'facebook_page'
 
+  
   scope ":id" do
     get '', to: 'profiles#show', :as => 'vanity_url'
   end
 
-  resources :pieces
   resources :profiles
   
 
