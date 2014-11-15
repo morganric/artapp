@@ -21,9 +21,9 @@ Rails.application.routes.draw do
     get '', to: 'profiles#show', :as => 'vanity_url'
   end
 
-
-  resources :profiles
   resources :pieces
+  resources :profiles
+  
 
   get ':user_slug/:id/embed' => 'pieces#embed', as: :embed
 
