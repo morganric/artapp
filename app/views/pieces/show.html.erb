@@ -102,13 +102,11 @@
           />
           <h6>Embed:</h6>
 
-          <textarea cols="30"
-          />
-
-          <iframe src="<%= embed_url(:id => @piece.id, :user_slug => @piece.user.profile.slug) %>" style="border:none;" height="600px"/></iframe>
+          <input cols="30" rows="5"
+          value='<iframe src="<%= embed_url(:id => @piece.id, :user_slug => @piece.user.profile.slug) %>" style="border:none;" width="600px" height="600px"/></iframe>
           <br/>
           <a href="<%= short_url(@piece) %>" target="_blank"><%= @piece.title %></a> by <a href="<%= vanity_url_url(@piece.user.profile.slug) %>" target="_blank"><%= @piece.user.profile.display_name %></a> on <a href="http://www.artup.io" target="_blank">ArtUp.io</a>
-          </textarea>
+          ' />
         </div>
         </div>
 
