@@ -1,7 +1,8 @@
 <% set_meta(
     :keywords => @profile.display_name,
     :description => @profile.bio,
-    :og => {:type => "website", 
+    :og => {:type => "website",
+            :title => "#{@profile.display_name} | ArtUp.io", 
             :description => @profile.bio,
             :image => @profile.image.url(:square)
             }
