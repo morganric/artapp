@@ -2,7 +2,8 @@
     :keywords => @profile.display_name,
     :description => @profile.bio,
     :og => {:type => "website", 
-            :description => @profile.bio
+            :description => @profile.bio,
+            :image => @profile.image.url(:square)
             }
     ) 
 %>
