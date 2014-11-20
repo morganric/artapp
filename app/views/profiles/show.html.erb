@@ -50,7 +50,7 @@
     <ul class="nav navbar-nav">
     <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> My Pieces</a></li>
     <li><a href="#popular" data-toggle="tab"><i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
-    <li><a href="#favs" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
+    <li><a href="#loves" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
     <li><a href="#about" data-toggle="tab"><i class="glyphicon glyphicon-info-sign "></i> About</a></li>
     </ul>  
     </div>
@@ -77,7 +77,7 @@
       </div>
     </div>
 
-    <div class="tab-pane fade" id="favs">
+    <div class="tab-pane fade" id="loves">
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
       <% @profile.user.favourites.where(:hidden => false).order('views DESC').each do |piece| %>
                      <%= render 'shared/piece', :piece => piece %>
@@ -117,7 +117,7 @@
                 <div class="panel-body">
                   <%= like_button(402079716609857) %>
                   <br/><br/>
-                  <%= tweet_button(via: "artupio", url: "#{vanity_url_path(@profile)}", text: "AWESOME ART!", count: "none") %>
+                  <%= tweet_button(via: "artupio", url: "#{vanity_url_path(@profile)}", text: "Nice Piece", count: "none") %>
                   
                   <%= pinit_button %>
                   <%= google_plus_button %>

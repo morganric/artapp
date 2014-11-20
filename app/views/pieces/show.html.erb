@@ -30,9 +30,9 @@
 <p class="pull-right">
   <% unless current_user == nil %>
   <% if  UserFav.where(:user_id => current_user.id, :piece_id => @piece.id).exists? %>
-          <%= link_to raw("<i class='glyphicon glyphicon-heart-empty'></i>  Un-Favourite"), delete_user_favs_path(:user_fav => {:piece_id => @piece.id, :user_id => current_user.id}), :remote => true, class: "btn btn-sm fav btn-info pull-right", :method => :delete %>
+          <%= link_to raw("<i class='glyphicon glyphicon-heart-empty'></i>  Un-Love"), delete_user_favs_path(:user_fav => {:piece_id => @piece.id, :user_id => current_user.id}), :remote => true, class: "btn btn-sm fav btn-info pull-right", :method => :delete %>
       <% else %>
-        <%= link_to raw("<i class='glyphicon glyphicon-heart'></i>  Favourite"), user_favs_path(:user_fav => {:piece_id => @piece.id,:user_id => current_user.id}), :remote => true, class: "btn btn-sm fav btn-info pull-right", :method => :post %>
+        <%= link_to raw("<i class='glyphicon glyphicon-heart'></i>  Love"), user_favs_path(:user_fav => {:piece_id => @piece.id,:user_id => current_user.id}), :remote => true, class: "btn btn-sm fav btn-info pull-right", :method => :post %>
   <% end %>
    <% end %>
 </p>
@@ -61,7 +61,7 @@
     &nbsp;
     <label class="label label-info">
       <i class="glyphicon glyphicon-heart"></i>
-      <%= @piece.favourited_by.count %> Favourites
+      <%=  pluralize(@piece.favourited_by.count, 'Love' ) %>
     </label> 
     &nbsp;
     <% @piece.tag_list.each do |tag| %>
@@ -115,7 +115,7 @@
   <br/>
     <% unless @piece.favourited_by == [] %>
       <div class="panel panel-info">
-        <div class="panel-heading "><h5 class="white"><i class='glyphicon glyphicon-heart'></i> Favourited By</h5></div>
+        <div class="panel-heading "><h5 class="white"><i class='glyphicon glyphicon-heart'></i> Loved By</h5></div>
         <div class="panel-body">
           <% @piece.favourited_by.limit(10).each do |user| %>
             <%= link_to(image_tag(user.profile.image.url(:thumb), :class => "img-circle"), vanity_url_path( :id => user.profile.slug)) %>

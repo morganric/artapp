@@ -138,7 +138,7 @@
                       <br>
                           <h1>Hello <%= @owner.profile.display_name.capitalize || @owner.name.capitalize %></h1>
                         <p>
-                          <%= link_to @user.profile.display_name, "artup.io/#{vanity_url_path(@user.profile.slug)}" %> favourited your leaf on ArtUp:
+                          <%= link_to @user.profile.display_name, "artup.io/#{vanity_url_path(@user.profile.slug)}" %> loves your piece on ArtUp:
                         </p>
                         <p>
                           <%= link_to @title, "artup.io/#{@url}" %>.
