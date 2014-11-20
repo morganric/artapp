@@ -22,6 +22,10 @@ class PiecesController < ApplicationController
   #   @tags = Piece.tag_counts_on(:tags)
   # end
 
+  def categories
+    @tags = Piece.tag_counts_on(:tags).order("taggings_count DESC")
+  end 
+
 
   def featured
     @pieces = Piece.where(:hidden => false).where(:featured => true).order('created_at DESC').page params[:page]

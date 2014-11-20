@@ -1,0 +1,11 @@
+<h1>Categories</h1>	
+
+<div col="clearfix">
+
+<% @tags.each do |tag| %>
+	<div class="col-md-4" >
+	<h2><%= link_to tag.name.capitalize, tagged_pieces_path(tag.name) %></h2>
+	<%= link_to image_tag(Piece.where(:hidden => false).tagged_with(tag).first.image.url(:mini)), tagged_pieces_path(tag.name) %>
+	</div>
+<% end %>	
+</div>

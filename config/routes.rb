@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   mount Upmin::Engine => '/admin'
+
+    get "/categories" => "pieces#categories", :as => :categories
+  get "/categories/:tag" => "pieces#category", :as => :category
+
   resources :pieces
 
   scope "/facebook/:id" do
