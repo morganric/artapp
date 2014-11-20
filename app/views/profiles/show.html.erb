@@ -100,9 +100,7 @@
 
             <p>
               <%= @profile.location %>
-            </p>
-
-            <p>
+              <br/>
               <%= link_to @profile.website, url_with_protocol(@profile.website), :target => "blank"  %>
             </p>
             <% if @profile.twitter != "" %>
