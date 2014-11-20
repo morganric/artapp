@@ -23,7 +23,7 @@ class PiecesController < ApplicationController
   # end
 
   def categories
-    @tags = Piece.tag_counts_on(:tags).order("taggings_count DESC")
+    @tags = Piece.tag_counts_on(:tags).order("taggings_count DESC").limit(6)
   end 
 
 
