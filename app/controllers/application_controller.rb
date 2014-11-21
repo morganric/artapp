@@ -9,4 +9,10 @@ class ApplicationController < ActionController::Base
   require 'rails_autolink'
 
   layout 'paper'
+
+   before_filter :set_headers
+
+  def set_headers
+    response.headers['X-XSS-Protection'] = "0"
+  end
 end

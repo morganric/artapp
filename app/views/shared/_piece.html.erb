@@ -1,6 +1,6 @@
 <div class="box col3">
         <div class="text-center">
-        <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
+        <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail img-responsive'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
         <h4 class=""><%= link_to truncate(piece.title, :length => 20), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %><br/>
         <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 20) || piece.user.name, vanity_url_path(piece.user.profile) %></small>
         </h4>
