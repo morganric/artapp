@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   get ':user_slug/:id/embed' => 'pieces#embed', as: :embed
 
+  get ':user_slug/:id/embed.js' => 'pieces#embed', as: :embed_js
+
   get 'p/:id' => 'pieces#show', as: :short
 
   get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces

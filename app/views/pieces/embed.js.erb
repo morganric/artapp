@@ -1,0 +1,10 @@
+
+
+var html = '<%= link_to cl_image_tag(@piece.image.url(:embed).split("/").last, :transformation=>[
+        {:width=>600, :height=>600,  :crop=>:fill}, {  :overlay => "tosuhfxnwvtfojrgtf23.png", 
+             :gravity => :south_west, :x => 5, :y => 5, :width => 50, :radius => 10 }]),  user_piece_url(:user_slug => @piece.user.profile.slug, :id => @piece), :target => "_blank" %>'
+
+var target = document.getElementById('artup<%= @piece.id %>');
+
+target.innerHTML = html.join('');
+target.style.display = 'block';

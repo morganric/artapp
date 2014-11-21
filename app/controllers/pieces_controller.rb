@@ -65,10 +65,14 @@ class PiecesController < ApplicationController
     @piece.views = @piece.views.to_i + 1
     @piece.save
 
-    if @piece.hidden == true
+  if @piece.hidden == true
       redirect_to vanity_url_path(@piece.user.profile), notice: 'Sorry no peaking, this piece is hidden.'
     end
   end
+
+  respond_to do |format|
+    format.js
+  end 
 
   # GET /pieces/new
   def new
