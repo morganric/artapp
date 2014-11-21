@@ -44,9 +44,9 @@
       <% @pieces.order('created_at DESC').each do |piece| %>
                <div class="box col2">
                     <div class="text-center">
-                    <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %>
-                    <h4 class=""><%= link_to truncate(piece.title, :length => 12), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %><br/>
-                    <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 12) || piece.user.name, vanity_url_path(piece.user.profile), :target => "_blank" %></small>
+                    <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), "http://www.artup.io#{user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug)}", :target => "_blank" %>
+                    <h4 class=""><%= link_to truncate(piece.title, :length => 12), "http://www.artup.io#{user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug)}", :target => "_blank" %><br/>
+                    <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 12) || piece.user.name, "http://www.artup.io#{vanity_url_path(piece.user.profile)}", :target => "_blank" %></small>
                     </h4>
                     </div>
             </div>
@@ -61,9 +61,9 @@
       <% @pieces.order('views DESC').each do |piece| %>
               <div class="box col2">
                     <div class="text-center">
-                    <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %>
-                    <h4 class=""><%= link_to truncate(piece.title, :length => 12), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %><br/>
-                    <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 12) || piece.user.name, vanity_url_path(piece.user.profile), :target => "_blank" %></small>
+                    <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), "http://www.artup.io#{user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug)}", :target => "_blank" %>
+                    <h4 class=""><%= link_to truncate(piece.title, :length => 12), "http://www.artup.io#{user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug)}", :target => "_blank" %><br/>
+                    <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 12) || piece.user.name, "http://www.artup.io#{vanity_url_path(piece.user.profile)}", :target => "_blank" %></small>
                     </h4>
                     </div>
             </div>
@@ -77,9 +77,9 @@
       <% @profile.user.favourites.where(:hidden => false).order('views DESC').each do |piece| %>
                      <div class="box col2">
                     <div class="text-center">
-                    <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %>
-                    <h4 class=""><%= link_to truncate(piece.title, :length => 12), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug), :target => "_blank" %><br/>
-                    <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 12) || piece.user.name, vanity_url_path(piece.user.profile), :target => "_blank" %></small>
+                    <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), "http://www.artup.io#{user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug)}", :target => "_blank" %>
+                    <h4 class=""><%= link_to truncate(piece.title, :length => 12), "http://www.artup.io#{user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug)}", :target => "_blank" %><br/>
+                    <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 12) || piece.user.name, "http://www.artup.io#{vanity_url_path(piece.user.profile)}", :target => "_blank" %></small>
                     </h4>
                     </div>
             </div>
@@ -131,7 +131,7 @@
 
     <% if current_user %>
     <% if current_user == @profile.user || current_user.admin? %>
-    <%= link_to 'Edit', edit_profile_path(@profile), class: "pull-left" %> 
+    <%= link_to 'Edit', "http://www.artup.io#{edit_profile_path(@profile)}", class: "pull-left" %> 
     <% end %>
     <% end %>
     <br/>
