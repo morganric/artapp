@@ -103,10 +103,10 @@
 
           <%= pinit_button %>
           <%= google_plus_button %>
-          <h6>Link:</h6>
+          <h6>Short Link:</h6>
           <input value="<%= short_url(@piece) %>" cols="100"
           />
-          <h6>Embed:</h6>
+          <h6>Embed Code:</h6>
 
           <input cols="30" rows="5"
           value='<iframe style="border:none;" src="<%= embed_url(:id => @piece.id, :user_slug => @piece.user.profile.slug) %>" width="600px" height="600px"/></iframe>
