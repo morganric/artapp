@@ -12,6 +12,7 @@
     <ul class="nav navbar-nav">
      <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload"></i> New Pieces</a></li>
 	  <li><a href="#popular" data-toggle="tab"> <i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
+	  <li><a href="#shop" data-toggle="tab"> <i class="glyphicon glyphicon-shopping-cart "></i> Shop </a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-tags "></i> Top Tags <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -27,12 +28,6 @@
 <div class="row">
 	<div class="col-md-12">
 
-<!-- 
-	<ul class="nav nav-pills">
-	  <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload"></i> New Uploads</a></li>
-	  <li><a href="#popular" data-toggle="tab"> <i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
-	</ul>
-	  <hr/> -->
 		<div id="myTabContent" class="tab-content">
 		  <div class="tab-pane fade active in" id="new">
 		  <div id="masonry-container" class="transitions-enabled centered infinite-scroll clearfix">
@@ -48,6 +43,27 @@
 	  	<div id="masonry-container" class="transitions-enabled centered 	infinite-scroll clearfix">
 			<% @pieces.each do |piece| %>
 				<%= render 'shared/piece', :piece => piece %>
+			<% end %>
+
+			</div>
+	  </div>
+	  <div class="tab-pane fade" id="shop">
+	  	<div id="masonry-container" class="transitions-enabled centered 	infinite-scroll clearfix">
+			<% @for_sale.each do |piece| %>
+				<div class="box col3">
+        <div class="text-center">
+        <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
+        <h4 class=""><%= link_to truncate(piece.title, :length => 20), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %><br/>
+        <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 20) || piece.user.name, vanity_url_path(piece.user.profile) %></small>
+        </h4>
+        <!-- <button class="btn btn-sm btn-default">
+        <small><span class="caret caret-reversed"></span> Up</small>
+        </button> -->
+
+        <button class="btn white btn-primary"><%= link_to "Buy $#{ piece.price}", "#{piece_path(piece)}#buy", :class => " white" %></button>
+        <br/><br/>
+        </div>
+</div>
 			<% end %>
 
 			</div>

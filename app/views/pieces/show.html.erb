@@ -100,7 +100,7 @@
         </div> -->
 
         <% unless @piece.sold == true || @piece.price.to_i <= 0 || @piece.user.stripe_publishable_key == nil %>
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" id="buy">
           <div class="panel-heading "><h5 class="white"><i class='white glyphicon glyphicon-shopping-cart'></i> Buy "<%= truncate(@piece.title, :length => 20) %>"</h5></div>
           <div class="panel-body">
             <p>$<%= @piece.price.to_i %></p>

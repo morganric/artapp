@@ -10,6 +10,7 @@ class PiecesController < ApplicationController
     @pieces = Piece.where(:hidden => false).order('views DESC').page params[:page]
     @new_pieces = Piece.where(:hidden => false).order('created_at DESC').page params[:page]
     @tags = Piece.tag_counts_on(:tags)
+    @for_sale = Piece.where(:hidden => false).where(:sold => false).where("price > ?", 10).order('views DESC').page params[:page]
   end
 
   def featured
