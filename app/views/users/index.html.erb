@@ -12,6 +12,7 @@
             </tr>
           <% end %>
         </tbody>
+        <%= paginate @users, :html => {:class => "pagination"} %>
       </table>
     </div>
   </div>
