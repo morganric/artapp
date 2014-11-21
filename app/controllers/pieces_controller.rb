@@ -65,14 +65,40 @@ class PiecesController < ApplicationController
     @piece.views = @piece.views.to_i + 1
     @piece.save
 
-  if @piece.hidden == true
-      redirect_to vanity_url_path(@piece.user.profile), notice: 'Sorry no peaking, this piece is hidden.'
-    end
+    if @piece.hidden == true
+        redirect_to vanity_url_path(@piece.user.profile), notice: 'Sorry no peaking, this piece is hidden.'
+      end
+    
+    respond_to do |format|
+      format.js
+    end 
   end
 
-  respond_to do |format|
-    format.js
-  end 
+   def oembed
+        # get project ID
+        url = params[:url].split("/")
+        piece_id = url[4]
+
+        @project = @piece = Piece.friendly.find(piece_id)
+        html = render_to_string :partial => "pieces/oembed", :formats => [:html], :locals => { :piece => @piece }
+
+        oembed_response = {}
+        # here's the problem:
+        oembed_response["type"] = "rich"
+        oembed_response["version"] = "1.0"
+        oembed_response["title"] = @piece.title
+        oembed_response["html"] = html
+
+        respond_to do | format |
+            if(@piece)
+                format.html { render :text => "Test" }
+                format.json { render json: oembed_response, status: :ok }
+                format.xml { render xml: oembed_response, status: :ok }
+            else
+                # error
+            end
+        end
+    end
 
   # GET /pieces/new
   def new

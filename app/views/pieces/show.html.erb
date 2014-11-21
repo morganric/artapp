@@ -23,6 +23,11 @@
     ) 
 %>
 
+<% content_for(:head) do %>
+  <link rel="alternate" type="application/json+oembed"
+    href="<%= root_url %>oembed?url=<%= piece_url(@piece) %>&format=json"
+    title="Bacon Lollys oEmbed Profile" />
+<% end %>
 
 
 <div>
