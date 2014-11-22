@@ -3,14 +3,19 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
+  resources :pieces
   mount Upmin::Engine => '/admin'
+
+  get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
+  get 'pages/:id' => 'visitors#index', as: 'static'
 
   get "/categories" => "pieces#categories", :as => :categories
   get "/categories/:tag" => "pieces#category", :as => :category
   get "oembed" => "pieces#oembed", constraints: { format: 'json' }, :as => :oembed
 
+   get ':user_slug/:id'  => "pieces#show", as: :user_piece
+   get 'p/:id', to: redirect(':user_slug/:id' ), as: :short
 
-  resources :pieces
 
   scope "/facebook/:id" do
     get '', to: 'facebook#show', :as => 'facebook_url'
@@ -33,12 +38,9 @@ Rails.application.routes.draw do
   
 
   get ':user_slug/:id/embed' => 'pieces#embed', as: :embed
-
   get ':user_slug/:id/embed.js' => 'pieces#embed', as: :embed_js
 
-  get 'p/:id' => 'pieces#show', as: :short
-
-  get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
+  
 
   post 'user_favs' => 'user_favs#create', :as => 'user_favs'
   delete 'user_favs' => 'user_favs#destroy', :as => 'delete_user_favs'
@@ -53,12 +55,9 @@ Rails.application.routes.draw do
         get :followers, to: "profiles#followers", as: 'followers_profile'
   end
 
- get 'pages/:id' => 'visitors#index', as: 'static'
 
   resources :relationships,       only: [:create, :destroy]
 
-
-  get ':user_slug/:id'  => "pieces#show", as: "user_piece"
 
   authenticated :user do
         root to: 'pieces#index', as: :authenticated_root
