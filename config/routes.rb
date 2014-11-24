@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   resources :pieces
   mount Upmin::Engine => '/admin'
 
+  scope "/facebook/:id" do
+    get '', to: 'facebook#show', :as => 'facebook_url'
+  end
+
   get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
   get 'pages/:id' => 'visitors#index', as: 'static'
 
@@ -16,10 +20,6 @@ Rails.application.routes.draw do
    get ':user_slug/:id'  => "pieces#show", as: :user_piece
    get 'p/:id', to: redirect(':user_slug/:id' ), as: :short
 
-
-  scope "/facebook/:id" do
-    get '', to: 'facebook#show', :as => 'facebook_url'
-  end
 
   post '/facebook' => 'facebook#index', :as => 'facebook_post', via: [:post]
   get '/facebook' => 'facebook#index', :as => 'facebook_get', via: [:get]
