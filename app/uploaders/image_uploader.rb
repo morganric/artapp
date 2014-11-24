@@ -66,7 +66,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
    version :piece do
-    process :resize_to_fill => [750]
+    process :resize_to_fit => [650, 800]
   end
 
    version :banner do
