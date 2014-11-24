@@ -29,9 +29,9 @@
   <nav class="navbar navbar-static-top navbar-default " role="navigation">
     <div class=" navbar-grey">
     <ul class="nav navbar-nav">
-    <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> My Pieces</a></li>
+    <li ><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> My Pieces</a></li>
     <li><a href="#popular" data-toggle="tab"><i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
-    <li><a href="#favs" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
+    <li class="active"><a href="#favs" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
     <li><a href="#about" data-toggle="tab"><i class="glyphicon glyphicon-info-sign "></i> About</a></li>
     </ul>  
     </div>
@@ -39,7 +39,7 @@
 
 
     <div id="myTabContent" class="tab-content">
-      <div class="tab-pane fade active in" id="new">
+      <div class="tab-pane fade  in" id="new">
       <div id="masonry-container" class="transitions-enabled centered infinite-scroll clearfix">
       <% @pieces.order('created_at DESC').each do |piece| %>
                <div class="box col2">
@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    <div class="tab-pane fade" id="favs">
+    <div class="tab-pane fade active" id="favs">
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
       <% @profile.user.favourites.where(:hidden => false).order('views DESC').each do |piece| %>
                      <div class="box col2">
