@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
+  resources :pieces
+
+
 
   mount Upmin::Engine => '/admin'
 
@@ -10,8 +13,11 @@ Rails.application.routes.draw do
     get '', to: 'facebook#show', :as => 'facebook_url'
   end
 
-    resources :pieces
-  
+     scope ":id" do
+        get :following, to: "profiles#following", as: 'following_profile'
+        get :followers, to: "profiles#followers", as: 'followers_profile'
+  end
+
   get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
   get 'pages/:id' => 'visitors#index', as: 'static'
 
@@ -52,10 +58,6 @@ Rails.application.routes.draw do
   post "/pieces/:id/nope" => "pieces#nope", :as => "nope", via: [:get, :post]
 
 
-   scope ":id" do
-        get :following, to: "profiles#following", as: 'following_profile'
-        get :followers, to: "profiles#followers", as: 'followers_profile'
-  end
 
 
   resources :relationships,       only: [:create, :destroy]
