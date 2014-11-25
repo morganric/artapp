@@ -3,13 +3,15 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
-  resources :pieces
+
   mount Upmin::Engine => '/admin'
 
   scope "/facebook/:id" do
     get '', to: 'facebook#show', :as => 'facebook_url'
   end
 
+    resources :pieces
+  
   get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
   get 'pages/:id' => 'visitors#index', as: 'static'
 
