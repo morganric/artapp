@@ -9,9 +9,9 @@ class CollectionPiecesController < ApplicationController
 
 		respond_to do |format|
 	      if @collection_piece.save
-	        format.js #{ redirect_to :back, notice: 'Collection was successfully created.' }
+	        format.html { redirect_to :back, notice: 'Collection was successfully created.' }
 	      else
-	        format.js #{ redirect_to :back, notice: 'Collection was not successfully created.' }
+	        format.html { redirect_to :back, notice: 'Collection was not successfully created.' }
 	      end
 	    end
 	end

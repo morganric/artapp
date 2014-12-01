@@ -1,6 +1,5 @@
 class UserFavsController < ApplicationController
 
-	# include LeafsHelper
 
 	after_action :fav_email, only: :create
 	# after_action :fav_action, only: :create
@@ -11,9 +10,9 @@ class UserFavsController < ApplicationController
 
 		respond_to do |format|
 	      if @user_fav.save
-	        format.js { redirect_to :back, notice: 'Fav was successfully created.' }
+	        format.js { redirect_to :back, as: :html, notice: 'Fav was successfully created.' }
 	      else
-	        format.js { redirect_to :back, notice: 'Fav was not successfully created.' }
+	        format.js { redirect_to :back, as: :html, notice: 'Fav was not successfully created.' }
 	      end
 	    end
 	end
@@ -35,10 +34,6 @@ class UserFavsController < ApplicationController
 		UserMailer.favourite_email(@profile.user, @piece).deliver
 	end
 
-	# def fav_action
-	# 	Activity.create!(:user_id => current_user.id, 
-	# 		:other_id => user_fav_params[:user_id], :leaf_id => user_fav_params[:leaf_id], :action => "Favourited")
-	# end
 
   private
 

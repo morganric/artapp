@@ -129,6 +129,7 @@
             <%= link_to(image_tag(user.profile.image.url(:thumb), :class => "img-circle"), vanity_url_path( :id => user.profile.slug)) %>
           <% end %>
         </div>
+        </div>
     <% end %>
 
     <% unless @piece.collections == [] %>
@@ -139,9 +140,10 @@
             <%= link_to(image_tag(collection.user.profile.image.url(:thumb), :class => "img-circle"),  collection ) %>
           <% end %>
         </div>
+        </div>
     <% end %>
 
-    </div>
+
     </div>
     </div>
 

@@ -50,12 +50,8 @@ Rails.application.routes.draw do
     get '', to: 'collections#show', :as => 'user_collection'
   end
 
-  
-
   get ':user_slug/:id/embed' => 'pieces#embed', as: :embed
   get ':user_slug/:id/embed.js' => 'pieces#embed', as: :embed_js
-
-  
 
   post 'user_favs' => 'user_favs#create', :as => 'user_favs'
   delete 'user_favs' => 'user_favs#destroy', :as => 'delete_user_favs'
