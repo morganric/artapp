@@ -97,7 +97,7 @@
         <hr/>
         <% @profile.user.collections.each do |collection| %>
             <div class="col-md-4" >
-                       <h2><%= link_to collection.title.capitalize, user_collection_path(:id => collection.id, :slug => @profile.slug) %></h2>
+                       <h2><%= link_to collection.title.titleize, user_collection_path(:id => collection.id, :slug => @profile.slug) %></h2>
                        <% if collection.pieces.count > 0 %>
                        <%= link_to image_tag(collection.pieces.first.image.url(:mini)), user_collection_path(:id => collection.id, :slug => @profile.slug) %>
                        <% else %>

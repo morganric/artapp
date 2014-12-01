@@ -3,7 +3,7 @@
 <%= link_to 'Edit', edit_collection_path(@collection), :class => "pull-right" %>
 
 <h1>
-  <%= @collection.title.capitalize %><br/>
+  <%= @collection.title.titleize %><br/>
   <small> by <%= link_to @collection.user.profile.display_name, vanity_url_path(@collection.user.profile)	 %> </small>
 </h1>
 
