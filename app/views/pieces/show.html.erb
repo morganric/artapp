@@ -137,7 +137,7 @@
         <div class="panel-heading "><h5 class="white"><i class='glyphicon glyphicon-th-large'></i> Collected By</h5></div>
         <div class="panel-body">
           <% @piece.collections.limit(10).each do |collection| %>
-            <%= link_to(image_tag(collection.user.profile.image.url(:thumb), :class => "img-circle"),  collection ) %>
+            <%= link_to(image_tag(collection.user.profile.image.url(:thumb), :class => "img-circle"),  user_collection_path(:id => collection.id, :slug => collection.user.profile.slug) ) %>
           <% end %>
         </div>
         </div>
