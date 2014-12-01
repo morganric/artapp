@@ -1,0 +1,16 @@
+<% unless current_user == nil %>
+  <div class="btn-group pull-right">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    Collect
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <% current_user.collections.each do |collection| %>
+    	<% unless  CollectionPiece.where(:collection_id => collection.id, :piece_id => @piece.id).exists? %>
+    	<li><%= link_to raw("<i class='glyphicon glyphicon-plus'></i>  #{collection.title}"), collection_pieces_path(:collection_piece => {:piece_id => @piece.id, :collection_id => collection.id}), :remote => true, class: "", :method => :post %></li>
+    	<% end %>
+    <% end %>
+    		<li><%= link_to raw("<i class='glyphicon glyphicon-th-large'></i>  New Collection"), new_collection_path, :class => "" %></li>
+  </ul>
+</div>
+<% end %>

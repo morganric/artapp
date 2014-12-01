@@ -19,7 +19,6 @@ class UserFavsController < ApplicationController
 	end
 
 	def destroy
-		debugger
 		@user_fav = UserFav.where(user_fav_params)
 		respond_to do |format|
 	      if @user_fav.first.destroy

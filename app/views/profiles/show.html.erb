@@ -52,6 +52,10 @@
     <li><a href="#popular" data-toggle="tab"><i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
     <li><a href="#loves" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
     <li><a href="#about" data-toggle="tab"><i class="glyphicon glyphicon-info-sign "></i> About</a></li>
+    <% if @profile.user.collections.count > 0 %>
+    <li><a href="#collections" data-toggle="tab"><i class="glyphicon glyphicon-th-large "></i> Collections</a></li>
+    <% end %>
+
     </ul>  
     </div>
   </nav>
@@ -86,6 +90,26 @@
       </div>
       </div>
 
+      <div class="tab-pane fade" id="collections">
+      <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
+      <% if current_user == @profile.user %>
+        <%= link_to 'New Collection', new_collection_path, :class => "btn-default btn text-centered" %>
+        <hr/>
+        <% @profile.user.collections.each do |collection| %>
+            <div class="col-md-4" >
+                       <h2><%= link_to collection.title.capitalize, user_collection_path(:id => collection.id, :slug => @profile.slug) %></h2>
+                       <% if collection.pieces.count > 0 %>
+                       <%= link_to image_tag(collection.pieces.first.image.url(:mini)), user_collection_path(:id => collection.id, :slug => @profile.slug) %>
+                       <% else %>
+                        <%= link_to image_tag("http://res.cloudinary.com/artapp/image/upload/v1413470304/gntloo1fznwu9yylo1nu.png"), user_collection_path(:id => collection.id, :slug => @profile.slug) %>
+                       <% end %>
+            </div>
+        <% end %>
+      <% end %>
+
+      </div>
+      </div>
+
       <div class="tab-pane fade" id="about">
       <div class="clearfix">
       <div class="col-md-8" >
@@ -95,6 +119,13 @@
             <% if @profile.bio !=  "" && @profile.bio !=  nil %>
             <p class="well">
               <%= auto_link(@profile.bio.gsub(/\n/, '<br/>').html_safe, :html => { :target => '_blank' }) %>
+                <br/>
+                <% if current_user %>
+                <% if current_user == @profile.user || current_user.admin? %>
+                <%= link_to 'Edit', edit_profile_path(@profile), class: "pull-left" %> 
+                <% end %>
+                <% end %>
+                <br/>
             </p>
             <% end %>
 
@@ -126,13 +157,6 @@
             </div>    
             </div>
         </div>
-
-    <% if current_user %>
-    <% if current_user == @profile.user || current_user.admin? %>
-    <%= link_to 'Edit', edit_profile_path(@profile), class: "pull-left" %> 
-    <% end %>
-    <% end %>
-    <br/>
 
     
     </div>

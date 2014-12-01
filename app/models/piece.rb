@@ -18,6 +18,9 @@ class Piece < ActiveRecord::Base
 	has_many :user_favs
     has_many :favourited_by, :through => :user_favs, :source => :user
 
+    has_many :collection_pieces
+	has_many :collections, :through => :collection_pieces, :source => :collection
+
 	extend FriendlyId
 	  friendly_id :title, use: :slugged
 

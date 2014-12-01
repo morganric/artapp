@@ -1,0 +1,13 @@
+<%= simple_form_for(@collection) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :user_id, :vlaue => current_user.id, as: :hidden %>
+    <%= f.input :slug, as: :hidden %>
+  </div>
+<br/>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

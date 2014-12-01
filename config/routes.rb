@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
 
+  resources :collections
+
   devise_for :users
   resources :users
   resources :pieces
-
+  resources :profiles
 
 
   mount Upmin::Engine => '/admin'
@@ -13,10 +15,12 @@ Rails.application.routes.draw do
     get '', to: 'facebook#show', :as => 'facebook_url'
   end
 
-     scope ":id" do
-        get :following, to: "profiles#following", as: 'following_profile'
-        get :followers, to: "profiles#followers", as: 'followers_profile'
+ scope ":id" do
+    get :following, to: "profiles#following", as: 'following_profile'
+    get :followers, to: "profiles#followers", as: 'followers_profile'
   end
+
+  
 
   get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
   get 'pages/:id' => 'visitors#index', as: 'static'
@@ -42,7 +46,10 @@ Rails.application.routes.draw do
     get '', to: 'profiles#show', :as => 'vanity_url'
   end
 
-  resources :profiles
+  scope ":slug/collections/:id" do
+    get '', to: 'collections#show', :as => 'user_collection'
+  end
+
   
 
   get ':user_slug/:id/embed' => 'pieces#embed', as: :embed
@@ -53,8 +60,9 @@ Rails.application.routes.draw do
   post 'user_favs' => 'user_favs#create', :as => 'user_favs'
   delete 'user_favs' => 'user_favs#destroy', :as => 'delete_user_favs'
 
+  post 'collection_pieces' => 'collection_pieces#create', :as => 'collection_pieces'
 
-   post "/pieces/:id/dope" => "pieces#dope", :as => "dope", via: [:get, :post]
+  post "/pieces/:id/dope" => "pieces#dope", :as => "dope", via: [:get, :post]
   post "/pieces/:id/nope" => "pieces#nope", :as => "nope", via: [:get, :post]
 
 
