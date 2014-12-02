@@ -107,15 +107,21 @@
           <%= pinit_button %>
           <%= google_plus_button %>
           <h6>Short Link:</h6>
-          <input value="<%= short_url(@piece.id) %>" cols="100"
+          <input value="<%= short_url(@piece.id) %>" cols="100" id="short_link"
           />
+          <button class='my_clip_button btn btn-primary btn-sm clip_board' data-clipboard-target='short_link' data-clipboard-text='jfrkfjrj' id='embed_button' title='Click me to copy to clipboard.'>
+          <b>Copy To Clipboard</b>
+        </button>
           <h6>Embed Code:</h6>
 
-          <input cols="30" rows="5"
+          <input cols="30" rows="5" id="embed_code"
           value='<iframe style="border:none;" src="<%= embed_url(:id => @piece.id, :user_slug => @piece.user.profile.slug) %>" width="600px" height="600px"/></iframe>
           <br/>
           <a href="<%= user_piece_url(:id => @piece.slug, :user_slug => @piece.user.profile.slug ) %>" target="_blank"><%= @piece.title %></a> by <a href="<%= vanity_url_url(@piece.user.profile.slug) %>" target="_blank"><%= @piece.user.profile.display_name %></a> on <a href="http://www.artup.io" target="_blank">artup.io</a>
           ' />
+          <button class='my_clip_button btn btn-primary btn-sm clip_board' data-clipboard-target='embed_code' data-clipboard-text='jfrkfjrj' id='embed_button' title='Click me to copy to clipboard.'>
+          <b>Copy To Clipboard</b>
+        </button>
     
         </div>
         </div>
@@ -143,7 +149,6 @@
         </div>
     <% end %>
 
-
     </div>
     </div>
 
@@ -163,6 +168,4 @@
 
 <br/>
 <br/>
-
-
 

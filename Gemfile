@@ -34,6 +34,7 @@ gem "social-buttons", '~> 0.3'
 gem 'meta-tags-helpers', '~> 0.2.0'
 gem "rails_autolink"
 gem 'secure_headers'
+gem 'zeroclipboard-rails'
 
 group :development do
   gem 'better_errors'

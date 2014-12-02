@@ -5,11 +5,17 @@
 //= require paper/loader
 //= require paper/bootswatch
 //= require masonry/jquery.masonry
-
+//= require zeroclipboard
 
   $(document).ready(function(){
 
-  	
+  	var clip = new ZeroClipboard($(".clip_board"))
+
+    $("#clear-test").on("click", function(){
+      $("#fe_text").val("Copy me!");
+      $("#testarea").val("");
+    });
+
 
   	$('.fav').on('click', function(){
 		location.reload();
