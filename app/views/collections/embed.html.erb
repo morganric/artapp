@@ -12,7 +12,7 @@
     <div class="item active">
       <img src="<%= @collection.pieces.first.image.url(:collection) %>" alt="">
       <div class="carousel-caption">
-        <h2 class="white"><%= link_to truncate(@collection.pieces.first.title.titleize, :length => 20), piece, :target => "_blank" %></h2>
+        <h2 class="white"><%= link_to truncate(@collection.pieces.first.title.titleize, :length => 20), @collection.pieces.first, :target => "_blank" %></h2>
       </div>
     </div>
     <% @collection.pieces[1..@collection.pieces.count].each_with_index do |piece, index| %>
