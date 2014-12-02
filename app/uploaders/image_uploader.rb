@@ -71,6 +71,9 @@ class ImageUploader < CarrierWave::Uploader::Base
 
    version :collection do
     process :resize_to_fill => [1500, 600]
+    cloudinary_transformation :transformation =>[
+        {:width=>1500, :height=>600,  :crop=>:fill}, {  :overlay => "tosuhfxnwvtfojrgtf23.png", 
+              :gravity => :south_west, :x => 5, :y => 5, :width => 100, :radius => 10 }]
   end
 
    version :banner do
