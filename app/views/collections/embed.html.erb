@@ -2,7 +2,7 @@
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <% @collection.pieces[1..@collection.pieces.count].each_with_index do |piece, index| %>
+    <% @collection.pieces[1..@collection.pieces.count].reverse.each_with_index do |piece, index| %>
       <li data-target="#carousel-example-generic" data-slide-to="<%= index %>"></li>
     <% end %>
   </ol>
@@ -15,7 +15,7 @@
         <h2 class="white"><%= link_to truncate(@collection.pieces.first.title.titleize, :length => 20), @collection.pieces.first, :target => "_blank" %></h2>
       </div>
     </div>
-    <% @collection.pieces[1..@collection.pieces.count].each_with_index do |piece, index| %>
+    <% @collection.pieces[1..@collection.pieces.count].reverse.each_with_index do |piece, index| %>
        <div class="item">
       <img src="<%= piece.image.url(:collection) %>" alt="blah">
       <div class="carousel-caption">
