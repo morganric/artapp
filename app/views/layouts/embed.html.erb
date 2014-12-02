@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <cfheader name="X-XSS-Protection" value="0">
+
     <meta charset="utf-8">
     <meta http-equiv="X-XSS-Protection" content="0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -20,7 +20,7 @@
 
     <%= yield(:page_stylesheet) if content_for?(:page_stylesheet) %>
 
-
+    <cfheader name="X-XSS-Protection" value="0">
 
   </head>
   <body>
