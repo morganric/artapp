@@ -1,5 +1,9 @@
 class CollectionsController < ApplicationController
-  before_action :set_collection, only: [:show, :edit, :update, :destroy]
+  before_action :set_collection, only: [:show, :edit, :update, :destroy, :embed]
+
+   after_filter :allow_iframe
+
+ layout :resolve_layout
 
   # GET /collections
   # GET /collections.json
@@ -11,6 +15,9 @@ class CollectionsController < ApplicationController
   # GET /collections/1
   # GET /collections/1.json
   def show
+  end
+
+  def embed
   end
 
   # GET /collections/new
@@ -64,6 +71,22 @@ class CollectionsController < ApplicationController
   end
 
   private
+
+  def resolve_layout
+    case action_name
+    when "embed"
+      "embed"
+    else
+      "paper"
+    end
+  end
+
+
+  def allow_iframe
+    response.headers["X-Frame-Options"] = "GOFORIT"
+  end
+
+
     # Use callbacks to share common setup or constraints between actions.
     def set_collection
       @collection = Collection.friendly.find(params[:id])

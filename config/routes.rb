@@ -50,6 +50,8 @@ Rails.application.routes.draw do
     get '', to: 'collections#show', :as => 'user_collection'
   end
 
+  get ':user_slug/collections/:id/embed' => 'collections#embed', as: :collection_embed
+
   get ':user_slug/:id/embed' => 'pieces#embed', as: :embed
   get ':user_slug/:id/embed.js' => 'pieces#embed', as: :embed_js
 

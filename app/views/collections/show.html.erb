@@ -1,6 +1,9 @@
 
 
-<%= link_to 'Edit', edit_collection_path(@collection), :class => "pull-right" %>
+<button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">
+  Embed Collection
+</button>
+
 
 <h1>
   <%= @collection.title.titleize %><br/>
@@ -11,3 +14,37 @@
 <% @collection.pieces.each do |piece| %>
 	<%= render 'shared/piece', :piece => piece %>
 <% end %>
+
+<hr/>
+
+        <!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Embed Code</h4>
+      </div>
+      <div class="modal-body">
+          <textarea cols="50" rows="10" id="embed_code"
+         > <iframe style="border:none;" src="<%= collection_embed_url(:id => @collection.id, :user_slug => @collection.user.profile.slug) %>" width="600px" height="250px"/></iframe>
+          <br/>
+          <a href="<%= user_collection_url(:id => @collection.id, :user_slug => @collection.user.profile.slug ) %>" target="_blank"><%= @collection.title.titleize %></a> by <a href="<%= vanity_url_url(@collection.user.profile.slug) %>" target="_blank"><%= @collection.user.profile.display_name %></a> on <a href="http://www.artup.io" target="_blank">artup.io</a>
+         </textarea>
+          
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button class='my_clip_button btn btn-primary btn-sm clip_board' data-clipboard-target='embed_code' data-clipboard-text='jfrkfjrj' id='embed_button' title='Click me to copy to clipboard.'>
+          <b>Copy To Clipboard</b>
+        </button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/>
+<%= link_to 'Edit', edit_collection_path(@collection), :class => "pull-right" %>
