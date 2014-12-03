@@ -14,6 +14,9 @@
 <br/><br/>
 <p class="well">
 <%= @collection.description %>
+<br/>
+<%= link_to 'Edit', edit_collection_path(@collection), :class => "pull-right" %>
+<br/>
 </p>
 
 
@@ -53,5 +56,3 @@
   </div>
 </div>
 
-<br/>
-<%= link_to 'Edit', edit_collection_path(@collection), :class => "pull-right" %>
