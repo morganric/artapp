@@ -62,15 +62,23 @@
         <hr/>
     &copy; ArtUp <%= Date.today.strftime("%Y") %>
     <br/><br/>
-      <ul class="nav">
-      <li style="">
+    <div class='text-center col-md-6 col-md-offset-3 clearfix'>
+      <ul class="nav nav-pills nav-justified">
+      <li><a href="http://www.artupio.tumblr.com" target="_blank" />Blog</a></li>
+      <li><%= link_to raw('<i class="glyphicon glyphicon-star"></i> Featured'), featured_path %></li>
+<li><%= link_to raw('<i class="glyphicon glyphicon-th"></i> Categories'), categories_path %></li>
+<li><%= link_to raw('<i class="glyphicon glyphicon-info-sign"></i> About'), static_path('about') %></li>
+      </ul>
+      </div>
+      <br/><br/>
+      <ul>
+        <li style="">
               <a href="https://twitter.com/artupio" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow</a>
           </li>
           <li style="margin-top:17px;">
           <div class="fb-like" data-href="https://facebook.com/891873480824467" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
           </li>
       </ul>
-
       <br/>
     </footer>
     <!-- Javascripts
@@ -102,13 +110,5 @@
   ga('send', 'pageview');
 
 </script>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=402079716609857&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>
