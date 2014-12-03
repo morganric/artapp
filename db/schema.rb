@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141127124211) do
+ActiveRecord::Schema.define(version: 20141203151146) do
 
   create_table "collection_pieces", force: true do |t|
     t.integer  "piece_id"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20141127124211) do
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "views",       default: 0
+    t.text     "description"
   end
 
   add_index "collections", ["user_id", "title"], name: "index_collections_on_user_id_and_title", unique: true

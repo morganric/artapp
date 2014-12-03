@@ -15,9 +15,13 @@ class CollectionsController < ApplicationController
   # GET /collections/1
   # GET /collections/1.json
   def show
+    @collection.views = @collection.views + 1
+    @collection.save
   end
 
   def embed
+    @collection.views = @collection.views + 1
+    @collection.save
   end
 
   # GET /collections/new
@@ -94,6 +98,6 @@ class CollectionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def collection_params
-      params.require(:collection).permit(:title, :user_id, :slug)
+      params.require(:collection).permit(:title, :user_id, :slug, :views, :description)
     end
 end

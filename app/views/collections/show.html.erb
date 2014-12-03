@@ -10,6 +10,13 @@
   <small> by <%= link_to @collection.user.profile.display_name, vanity_url_path(@collection.user.profile)	 %> </small>
 </h1>
 
+<label class="label label-primary"><i class="glyphicon glyphicon-eye-open white"></i> <%= pluralize(@collection.views, 'view') %> </label>
+<br/><br/>
+<p class="well">
+<%= @collection.description %>
+</p>
+
+
 
 <% @collection.pieces.each do |piece| %>
 	<%= render 'shared/piece', :piece => piece %>
@@ -27,7 +34,7 @@
         <h4 class="modal-title" id="myModalLabel">Embed Code</h4>
       </div>
       <div class="modal-body">
-          <textarea cols="75" rows="5" id="embed_code"
+          <textarea cols="55" rows="5" id="embed_code"
          > <iframe style="border:none;" src="<%= collection_embed_url(:id => @collection.id, :user_slug => @collection.user.profile.slug) %>" width="600px" height="250px"/></iframe>
           <br/>
           <a href="<%= user_collection_url(:id => @collection.id, :user_slug => @collection.user.profile.slug ) %>" target="_blank"><%= @collection.title.titleize %></a> by <a href="<%= vanity_url_url(@collection.user.profile.slug) %>" target="_blank"><%= @collection.user.profile.display_name %></a> on <a href="http://www.artup.io" target="_blank">artup.io</a>
