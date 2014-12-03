@@ -14,7 +14,7 @@
       <div class="carousel-caption">
         <h2 class="white"><%= link_to truncate(@collection.pieces.last.title.titleize, :length => 20), @collection.pieces.last, :target => "_blank" %>
         <br/>
-         <small>by <%= link_to truncate(@collection.pieces.last.user.profile.display_name.titleize|| @collection.pieces.last.user.name.titleize, :length => 20), vanity_url_path(@collection.pieces.last.user.profile.slug), :target => "_blank" %></small></h2>
+         <small>by <%= link_to truncate(@collection.pieces.last.user.name.titleize, :length => 20), vanity_url_path(@collection.pieces.last.user.profile.slug), :target => "_blank" %></small></h2>
       </div>
     </div>
     <% @collection.pieces.reverse[1..@collection.pieces.count].each_with_index do |piece, index| %>
@@ -23,7 +23,7 @@
       <div class="carousel-caption">
         <h2 class="white"><%= link_to truncate(piece.title, :length => 20), piece, :target => "_blank" %>
         <br/>
-        <small>by <%= link_to truncate(piece.user.profile.display_name.titleize || piece.user.name.titleize, :length => 20), vanity_url_path(piece.user.profile.slug), :target => "_blank" %></small>
+        <small>by <%= link_to truncate(piece.user.name.titleize, :length => 20), vanity_url_path(piece.user.profile.slug), :target => "_blank" %></small>
         </h2>
       </div>
     </div>
