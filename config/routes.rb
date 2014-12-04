@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
 
 
+  devise_for :users, :controllers => { :invitations => 'users/invitations' }
   resources :collections
-
-  devise_for :users
-  resources :users
   resources :pieces
   resources :profiles
+     resources :users
 
 
   mount Upmin::Engine => '/admin'

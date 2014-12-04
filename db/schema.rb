@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141203151146) do
+
+ActiveRecord::Schema.define(version: 20141204165138) do
 
   create_table "collection_pieces", force: true do |t|
     t.integer  "piece_id"
