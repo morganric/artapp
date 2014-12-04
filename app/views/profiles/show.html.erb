@@ -20,13 +20,13 @@
 
   <% @profile.user ||= current_user %>
     <div class="stats white badge badge-default">
-      <a href="<%= following_profile_path(@profile.slug) %>">
+      <a href="<%= following_profile_path(@profile.slug || @profile.id) %>">
         <strong id="following" class="stat ">
           <%= @profile.user.following.count %>
         </strong>
         following
       </a> | 
-      <a href="<%= followers_profile_path(@profile.slug) %>">
+      <a href="<%= followers_profile_path(@profile.slug || @profile.id) %>">
         <strong id="followers" class="stat">
           <%= @profile.user.followers.count %>
         </strong>
