@@ -6,6 +6,7 @@
 //= require paper/bootswatch
 //= require masonry/jquery.masonry
 //= require zeroclipboard
+//= require jquery.zoom
 
   $(document).ready(function(){
 
@@ -16,10 +17,9 @@
       $("#testarea").val("");
     });
 
-
-  	$('.fav').on('click', function(){
-		location.reload();
-	});
+    	$('.fav').on('click', function(){
+  		location.reload();
+  	});
 	
     $('.alert, .notice').fadeOut(5000);
 
@@ -28,3 +28,15 @@
 		  $(".arrow-up i, .arrow-up-large i").fadeOut(1000).fadeIn(1000)
 		}, 10000);  
   });
+
+
+  $(document).ready(function(){
+  $('img#piece')
+    .wrap('<span style="display:inline-block"></span>')
+    .css('display', 'block')
+    .parent()
+    .zoom();
+});
+
+/////////////
+
