@@ -149,7 +149,7 @@
                   <%= like_button(402079716609857) %>
                   <br/><br/>
                   <%= tweet_button(via: "artupio", url: "#{vanity_url_path(@profile)}", text: "Checkout @#{@profile.twitter
-                  } #{@profile.user.name} on @artupio", count: "none") %>
+                  } #{@profile.user.name} on @artupio #{vanity_url_url(@profile.slug)}", count: "none") %>
                   
                   <%= pinit_button %>
                   <%= google_plus_button %>
