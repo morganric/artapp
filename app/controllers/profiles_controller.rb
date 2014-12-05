@@ -1,6 +1,8 @@
 class ProfilesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :followers, :following]
-  before_action :set_profile, only: [:show, :edit, :update, :destroy, :following, :followers]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :following, :followers, :embed]
+
+   layout :resolve_layout
 
   # GET /profiles
   # GET /profiles.json  
@@ -11,6 +13,11 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    @pieces = Piece.where(:user_id => @profile.user.id).where(:hidden => false).page params[:page]
+    @featured = Piece.where(:featured => true)
+  end
+
+  def embed
     @pieces = Piece.where(:user_id => @profile.user.id).where(:hidden => false).page params[:page]
     @featured = Piece.where(:featured => true)
   end
@@ -80,6 +87,16 @@ class ProfilesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+     def resolve_layout
+    case action_name
+    when "embed", "player"
+      "embed"
+    else
+      "paper"
+    end
+  end
+
     def set_profile
       @profile = Profile.find(params[:id])
     end
