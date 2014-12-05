@@ -19,11 +19,7 @@ Rails.application.routes.draw do
     get :followers, to: "profiles#followers", as: 'followers_profile'
   end
 
-    scope ":id" do
-    get '', to: 'profiles#show', :as => 'vanity_url'
-    get '/embed' => 'profiles#embed', as: :profile_embed
-  end
-  
+ get ':id/embed' => 'profiles#embed', as: :profile_embed
 
   get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
   get 'pages/:id' => 'visitors#index', as: 'static'
@@ -44,6 +40,11 @@ Rails.application.routes.draw do
 
   post '/facebook_page' => 'facebook_page#create', :as => 'facebook_page'
 
+  scope ":id" do
+    get '', to: 'profiles#show', :as => 'vanity_url'
+    
+  end
+  
 
   scope ":slug/collections/:id" do
     get '', to: 'collections#show', :as => 'user_collection'

@@ -11,6 +11,14 @@ class ProfilePolicy
   end
 
   def show?
+    true
+  end
+
+   def embed?
+    true
+  end
+
+   def edit?
     @current_user.admin? or @current_user == @user
   end
 
