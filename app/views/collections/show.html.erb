@@ -11,21 +11,22 @@
 :twitter => {
       :card => "player",
       :site => "@#{@collection.user.profile.twitter}" || "@artupio",
-      :image => {
-              :url => @collection.pieces.last.image.url(:embed)
-            },
+      # :image => {
+      #         :url => @collection.pieces.last.image.url(:embed)
+      #       },
+        :image => {
+    ''      => "http://example.com/1.png",
+    :width  => 100,
+    :height => 100,
+  },
       :title => @collection.title,
       :description => @collection.description,
-      :image =>  @collection.pieces.last.image.url(:embed),
       :url => user_collection_path(:id => @collection.id, :user_slug => @collection.user.profile.slug),
       :player => {
-          :_  => "https://artupio.herokuapp.com#{collection_player_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}",
+          ''  => "https://artupio.herokuapp.com#{collection_player_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}",
           :height => "400px",
-          :width => "750px"
-          
-      }
-
-            
+          :width => "750px"          
+      }            
     }
     ) 
 %>
