@@ -1,5 +1,5 @@
 class CollectionsController < ApplicationController
-  before_action :set_collection, only: [:show, :edit, :update, :destroy, :embed]
+  before_action :set_collection, only: [:show, :edit, :update, :destroy, :embed, :player]
 
    after_filter :allow_iframe
 
@@ -22,6 +22,10 @@ class CollectionsController < ApplicationController
   def embed
     @collection.views = @collection.views + 1
     @collection.save
+  end
+
+  def player
+
   end
 
   # GET /collections/new
@@ -78,7 +82,7 @@ class CollectionsController < ApplicationController
 
   def resolve_layout
     case action_name
-    when "embed"
+    when "embed", "player"
       "embed"
     else
       "paper"

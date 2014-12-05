@@ -1,4 +1,28 @@
+<% set_meta(
+    # :keywords => @collection.tag_list,
+    :description => @collection.description,
+    :og => {:type => "website",
+            :description => @collection.description,
+            :image => @collection.pieces.last.image.url(:embed), 
+            :title => @collection.title,
+            :description => @collection.description,
 
+            }, 
+:twitter => {
+      :card => "player",
+      :site => "@#{@collection.user.profile.twitter}" || "@artupio",
+      :image => {
+              :url => @collection.pieces.last.image.url(:embed)
+            },
+      :title => @collection.title,
+      :description => @collection.description,
+      :image =>  @collection.pieces.last.image.url(:embed),
+      :url => user_collection_path(:id => @collection.id, :user_slug => @collection.user.profile.slug),
+      :player => "https://artupio.herokuapp.com#{collection_player_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}"
+            
+    }
+    ) 
+%>
 
 <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">
   Embed Collection
