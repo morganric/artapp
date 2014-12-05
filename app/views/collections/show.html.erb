@@ -19,9 +19,10 @@
       :image =>  @collection.pieces.last.image.url(:embed),
       :url => user_collection_path(:id => @collection.id, :user_slug => @collection.user.profile.slug),
       :player => {
+          :_  => "https://artupio.herokuapp.com#{collection_player_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}",
           :height => "400px",
-          :width => "750px",
-          '' => "https://artupio.herokuapp.com#{collection_player_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}"
+          :width => "750px"
+          
       }
 
             
