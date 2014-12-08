@@ -1,12 +1,12 @@
 class ChargesController < ApplicationController
 
-	def new
+def new
 end
 
 def create
   # Amount in cents
   @amount = params[:amount].to_i * 100
-  @fee = @amount * 0.1
+  @fee = @amount * 0.0
 
   if params[:id] != nil
     @piece = Piece.find(params[:id])
@@ -38,8 +38,24 @@ def create
     @piece.save
   end
 
-rescue Stripe::CardError => e
-  flash[:error] = e.message
-  redirect_to charges_path
-end
+  @order = Order.new()
+  @order.email = params[:stripeEmail] || current_user.email
+  @order.piece_id = params[:id]
+  @order.amount = @amount / 100
+
+  if current_user 
+    @order.user_id = current_user.id
+  end
+
+  @order.save
+
+  UserMailer.order_email(@order.email, @piece).deliver
+  UserMailer.sale_email(@piece, @order.email).deliver
+      
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to charges_path
+  end
+
+
 end

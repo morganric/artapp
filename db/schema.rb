@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113100258) do
+ActiveRecord::Schema.define(version: 20141208160314) do
+
+  create_table "collection_pieces", force: true do |t|
+    t.integer  "piece_id"
+    t.integer  "collection_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "collection_pieces", ["collection_id", "piece_id"], name: "index_collection_pieces_on_collection_id_and_piece_id", unique: true
+
+  create_table "collections", force: true do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "views",       default: 0
+    t.text     "description"
+  end
+
+  add_index "collections", ["user_id", "title"], name: "index_collections_on_user_id_and_title", unique: true
 
   create_table "facebook_pages", force: true do |t|
     t.string   "fb_page_id"
@@ -35,6 +56,15 @@ ActiveRecord::Schema.define(version: 20141113100258) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "orders", force: true do |t|
+    t.integer  "piece_id"
+    t.float    "amount"
+    t.integer  "user_id"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pieces", force: true do |t|
     t.string   "title"
@@ -68,6 +98,7 @@ ActiveRecord::Schema.define(version: 20141113100258) do
     t.string   "twitter"
     t.string   "banner"
     t.boolean  "donations"
+    t.boolean  "notifications", default: true
   end
 
   add_index "profiles", ["slug"], name: "index_profiles_on_slug", unique: true

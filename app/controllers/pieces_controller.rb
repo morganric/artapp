@@ -107,7 +107,7 @@ class PiecesController < ApplicationController
       @followers = current_user.followers
       @followers.each do |follower|
         UserMailer.upload_email(current_user, follower, @piece).deliver
-      end
+    end
 
       # @admins = User.where(:role => 2)
 

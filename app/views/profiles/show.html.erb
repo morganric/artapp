@@ -90,17 +90,20 @@
         <div class="tab-pane fade" id="shop">
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
       <% @shop.where(:hidden => false).order('views DESC').each do |piece| %>
-                     <div class="box col3">
+                <div class="box col3">
         <div class="text-center">
         <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
         <h4 class=""><%= link_to truncate(piece.title, :length => 20), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %><br/>
         <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 20) || piece.user.name, vanity_url_path(piece.user.profile) %></small>
         </h4>
-           <% if piece.price.to_i != nil && piece.price.to_i != 0 %>                         
-            <h6> $<%= piece.price.to_i %></h6>
-          <% end %>
+        <!-- <button class="btn btn-sm btn-default">
+        <small><span class="caret caret-reversed"></span> Up</small>
+        </button> -->
+
+        <button class="btn white btn-primary"><%= link_to "Buy $#{ piece.price}", "#{piece_path(piece)}#buy", :class => " white" %></button>
+        <br/><br/>
         </div>
-</div>
+        </div>
       <% end %>
 
       </div>
