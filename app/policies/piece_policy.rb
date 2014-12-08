@@ -14,7 +14,7 @@
     true
   end
 
-   def categories?
+  def categories?
     true
   end
 
