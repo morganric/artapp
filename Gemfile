@@ -35,12 +35,10 @@ gem 'meta-tags-helpers', '~> 0.2.0'
 gem "rails_autolink"
 gem 'secure_headers'
 gem 'zeroclipboard-rails'
-
 gem 'stripe'
 gem 'paper_trail', '~> 3.0.6'
 gem 'omniauth-stripe-connect'
 gem 'omniauth'
-gem 'debugger'
 gem 'oauth2'
 
 
