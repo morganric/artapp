@@ -51,6 +51,9 @@
     <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> My Pieces</a></li>
     <li><a href="#popular" data-toggle="tab"><i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
     <li><a href="#loves" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
+    <% if  @profile.user.stripe_publishable_key != nil %>
+    <li><a href="#shop" data-toggle="tab"><i class="glyphicon glyphicon-shopping-cart "></i> Shop</a></li>
+    <% end %>
     <li><a href="#about" data-toggle="tab"><i class="glyphicon glyphicon-info-sign "></i> About</a></li>
     <% if @profile.user.collections.count > 0 %>
     <li><a href="#collections" data-toggle="tab"><i class="glyphicon glyphicon-th-large "></i> Collections</a></li>
@@ -90,6 +93,7 @@
       </div>
       </div>
 
+
       <div class="tab-pane fade" id="collections">
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
       <% if current_user == @profile.user %>
@@ -105,6 +109,23 @@
                        <% end %>
             </div>
         <% end %>
+        <div class="tab-pane fade" id="shop">
+      <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
+      <% @shop.where(:hidden => false).order('views DESC').each do |piece| %>
+                <div class="box col3">
+        <div class="text-center">
+        <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
+        <h4 class=""><%= link_to truncate(piece.title, :length => 20), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %><br/>
+        <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 20) || piece.user.name, vanity_url_path(piece.user.profile) %></small>
+        </h4>
+        <!-- <button class="btn btn-sm btn-default">
+        <small><span class="caret caret-reversed"></span> Up</small>
+        </button> -->
+
+        <button class="btn white btn-primary"><%= link_to "Buy $#{ piece.price}", "#{piece_path(piece)}#buy", :class => " white" %></button>
+        <br/><br/>
+        </div>
+        </div>
       <% end %>
 
       </div>
@@ -143,15 +164,40 @@
           </div>
           </div>
             <div class="col-md-4">
+
+            <% if @profile.donations %>
+              <% unless @profile.user.stripe_publishable_key == "" || @profile.user.stripe_publishable_key == nil %>
+                <div class="panel panel-primary">
+                  <div class="panel-heading "><h5 class="white"><i class='white glyphicon glyphicon-shopping-cart'></i> Donate to <%= truncate(@profile.display_name, :length => 20) %></h5></div>
+                  <div class="panel-body">
+                    <p>$10 minimum donation</p>
+                      <%= form_tag charges_path do %>
+
+                      <%= number_field_tag :amount, number_with_precision(10, :precision => 2), :class=> "form-control", :width => "50%", :min => number_with_precision(10, :precision => 2), :step => 1 %>
+                      <br/>
+                      <%= hidden_field_tag :profile_id, @profile.id %>
+
+                      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                              data-key="<%= @profile.user.stripe_publishable_key %>"
+                              data-description="<%= @profile.display_name %>" data-email="<%#= current_user.email %>"
+                              data-image="<%= @profile.image.url(:small) %>"
+                              data-amount=""></script>
+                    <% end %>
+                  <% end %>
+                </div>
+                </div>
+                <% end %>
              <div class="panel panel-default">
                 <div class="panel-heading "><h5 class=""><i class='glyphicon glyphicon-share-alt'></i> Share</h5></div>
                 <div class="panel-body">
+
                   <%= like_button(402079716609857) %>
                   <br/><br/>
                   <%= tweet_button(via: "artupio", url: "#{vanity_url_path(@profile)}", text: "Nice Piece", count: "none") %>
                   
                   <%= pinit_button %>
                   <%= google_plus_button %>
+                  <%= like_button(615925001838726, :layout => :button_count, :send => true) %>
                 </div>
                 </div>
             </div>    

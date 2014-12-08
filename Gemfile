@@ -35,6 +35,14 @@ gem 'meta-tags-helpers', '~> 0.2.0'
 gem "rails_autolink"
 gem 'secure_headers'
 
+gem 'stripe'
+gem 'paper_trail', '~> 3.0.6'
+gem 'omniauth-stripe-connect'
+gem 'omniauth'
+gem 'debugger'
+gem 'oauth2'
+
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19]

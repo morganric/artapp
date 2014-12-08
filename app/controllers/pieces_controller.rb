@@ -11,10 +11,14 @@ class PiecesController < ApplicationController
   # GET /pieces
   # GET /pieces.json
   def index
+
     @now = Date.today - 28
     @pieces = Piece.where(:hidden => false).where('created_at > ?', @now ).order('views DESC').page params[:page]
     @new_pieces = Piece.where(:hidden => false).order('created_at DESC').page params[:page]
     @tags = Piece.tag_counts_on(:tags).order("taggings_count DESC")
+
+    @for_sale = Piece.where(:hidden => false).where(:sold => false).where("price > ?", 10).order('views DESC').page params[:page]
+
   end
 
   # def facebook
@@ -177,7 +181,7 @@ class PiecesController < ApplicationController
       @followers = current_user.followers
       @followers.each do |follower|
         UserMailer.upload_email(current_user, follower, @piece).deliver
-      end
+    end
 
       # @admins = User.where(:role => 2)
 
