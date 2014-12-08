@@ -14,6 +14,10 @@
     true
   end
 
+   def categories?
+    true
+  end
+
   def edit?
     @current_user.admin? or @current_user == @piece.user
   end
