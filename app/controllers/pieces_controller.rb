@@ -40,7 +40,7 @@ class PiecesController < ApplicationController
   def tag
     @pieces = Piece.where(:hidden => false).tagged_with(params[:tag]).order('views DESC').page params[:page]
     @new_pieces = Piece.where(:hidden => false).tagged_with(params[:tag]).order('created_at DESC').page params[:page]
-    
+    @for_sale = Piece.where(:hidden => false).tagged_with(params[:tag]).where(:sold => false).where("price > ?", 10).order('views DESC').page params[:page]
 
     @tags = Piece.tag_counts_on(:tags)
     render :action => 'index'
