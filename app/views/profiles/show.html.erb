@@ -18,7 +18,8 @@
 
   <%= render 'follow_form', :user => @profile.user   %>
 
-  <% @profile.user ||= current_user %>
+
+  <% if @profile.user ||= current_user %>
     <div class="stats white badge badge-default">
       <a href="<%= following_profile_path(@profile.slug || @profile.id) %>">
         <strong id="following" class="stat ">
@@ -34,11 +35,13 @@
       </a>
     </div>
 
-  <br/><br/>
-  </div>
+    <br/><br/>
+    </div>
+  <% end %>
 <% end %>
 
 <h1 class="text-center"><%= @profile.display_name  %></h1>
+
 
 <div class="row">
 
@@ -52,11 +55,11 @@
     <li><a href="#popular" data-toggle="tab"><i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
     <li><a href="#loves" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
     <% if  @profile.user.stripe_publishable_key != nil %>
-    <li><a href="#shop" data-toggle="tab"><i class="glyphicon glyphicon-shopping-cart "></i> Shop</a></li>
+      <li><a href="#shop" data-toggle="tab"><i class="glyphicon glyphicon-shopping-cart "></i> Shop</a></li>
     <% end %>
     <li><a href="#about" data-toggle="tab"><i class="glyphicon glyphicon-info-sign "></i> About</a></li>
     <% if @profile.user.collections.count > 0 %>
-    <li><a href="#collections" data-toggle="tab"><i class="glyphicon glyphicon-th-large "></i> Collections</a></li>
+      <li><a href="#collections" data-toggle="tab"><i class="glyphicon glyphicon-th-large "></i> Collections</a></li>
     <% end %>
 
     </ul>  
@@ -98,8 +101,9 @@
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
       <% if current_user == @profile.user %>
         <%= link_to 'New Collection', new_collection_path, :class => "btn-default btn text-centered" %>
+       <% end %>
         <hr/>
-        <% @profile.user.collections.each do |collection| %>
+          <% @profile.user.collections.each do |collection| %>
             <div class="col-md-4" >
                        <h2><%= link_to collection.title.capitalize, user_collection_path(:id => collection.id, :slug => @profile.slug) %></h2>
                        <% if collection.pieces.count > 0 %>
@@ -109,26 +113,27 @@
                        <% end %>
             </div>
         <% end %>
-        <div class="tab-pane fade" id="shop">
+</div></div>
+
+      <div class="tab-pane fade" id="shop">
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
-      <% @shop.where(:hidden => false).order('views DESC').each do |piece| %>
-                <div class="box col3">
-        <div class="text-center">
-        <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
-        <h4 class=""><%= link_to truncate(piece.title, :length => 20), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %><br/>
-        <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 20) || piece.user.name, vanity_url_path(piece.user.profile) %></small>
-        </h4>
-        <!-- <button class="btn btn-sm btn-default">
-        <small><span class="caret caret-reversed"></span> Up</small>
-        </button> -->
+          <% @shop.where(:hidden => false).order('views DESC').each do |piece| %>
+                    <div class="box col3">
+                      <div class="text-center">
+                      <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
+                      <h4 class=""><%= link_to truncate(piece.title, :length => 20), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %><br/>
+                      <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 20) || piece.user.name, vanity_url_path(piece.user.profile) %></small>
+                      </h4>
+                      <!-- <button class="btn btn-sm btn-default">
+                      <small><span class="caret caret-reversed"></span> Up</small>
+                      </button> -->
 
-        <button class="btn white btn-primary"><%= link_to "Buy $#{ piece.price}", "#{piece_path(piece)}#buy", :class => " white" %></button>
-        <br/><br/>
+                      <button class="btn white btn-primary"><%= link_to "Buy $#{ piece.price}", "#{piece_path(piece)}#buy", :class => " white" %></button>
+                      <br/><br/>
+                      </div>
+                    </div>
+          <% end %>
         </div>
-        </div>
-      <% end %>
-
-      </div>
       </div>
 
       <div class="tab-pane fade" id="about">
@@ -138,16 +143,16 @@
         <div class="panel-heading"><h5><%= @profile.display_name || @profile.user.name %></h5></div>
           <div class="panel-body">
             <% if @profile.bio !=  "" && @profile.bio !=  nil %>
-            <p class="well">
-              <%= auto_link(@profile.bio.gsub(/\n/, '<br/>').html_safe, :html => { :target => '_blank' }) %>
-                <br/>
-                <% if current_user %>
-                <% if current_user == @profile.user || current_user.admin? %>
-                <%= link_to 'Edit', edit_profile_path(@profile), class: "pull-left" %> 
-                <% end %>
-                <% end %>
-                <br/>
-            </p>
+              <p class="well">
+                <%= auto_link(@profile.bio.gsub(/\n/, '<br/>').html_safe, :html => { :target => '_blank' }) %>
+                  <br/>
+                  <% if current_user %>
+                    <% if current_user == @profile.user || current_user.admin? %>
+                    <%= link_to 'Edit', edit_profile_path(@profile), class: "pull-left" %> 
+                    <% end %>
+                  <% end %>
+                  <br/>
+              </p>
             <% end %>
 
             <p>
@@ -156,9 +161,9 @@
               <%= link_to @profile.website, url_with_protocol(@profile.website), :target => "blank"  %>
             </p>
             <% if @profile.twitter != "" %>
-            <p>
-             <a href="http://twitter.com/<%= @profile.twitter %>" target="_blank">@<%= @profile.twitter %></a>
-            </p>
+              <p>
+                 <a href="http://twitter.com/<%= @profile.twitter %>" target="_blank">@<%= @profile.twitter %></a>
+              </p>
             <% end %>
           </div>
           </div>
@@ -183,10 +188,10 @@
                               data-image="<%= @profile.image.url(:small) %>"
                               data-amount=""></script>
                     <% end %>
-                  <% end %>
+                  </div>
                 </div>
-                </div>
-                <% end %>
+              <% end %>
+            <% end %>
              <div class="panel panel-default">
                 <div class="panel-heading "><h5 class=""><i class='glyphicon glyphicon-share-alt'></i> Share</h5></div>
                 <div class="panel-body">
@@ -194,7 +199,6 @@
                   <%= like_button(402079716609857) %>
                   <br/><br/>
                   <%= tweet_button(via: "artupio", url: "#{vanity_url_path(@profile)}", text: "Nice Piece", count: "none") %>
-                  
                   <%= pinit_button %>
                   <%= google_plus_button %>
                   <%= like_button(615925001838726, :layout => :button_count, :send => true) %>
@@ -207,10 +211,7 @@
     
     </div>
 
-
-
 </div>
-
 
 
 </div>
@@ -240,3 +241,4 @@ margin-right:15%;
 
 
 </style>
+
