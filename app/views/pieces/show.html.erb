@@ -54,7 +54,6 @@
   <hr/>
 </div>
 
-
 <div class="clearfix">
   <div class="text-center">
   <%= image_tag @piece.image.url(), :class => "img-responsive pull-center", :id => "piece" %>
@@ -78,14 +77,23 @@
       <%= link_to tag, tagged_pieces_path(:tag => tag) %>
     </label> &nbsp;
     <% end %> 
+    <% if @piece.sold %>
+      <label class="label label-danger white" >Sold</label>
+    <% end %>
     <br/><br/>
      <p class="well">
       <%= auto_link(@piece.description, :html => { :target => '_blank' }) %>
+      <br/>
+        <% if current_user && current_user.admin? %>
+          <%= link_to 'Edit', edit_piece_path(@piece), :class => "pull-right" %>
+        <% end %>
+      <br/>
     </p>
     <p>
       <strong>Dimensions:</strong>
       <%= @piece.dimensions %>
     </p>
+
   </div>
   <div class="col-md-4">
    
@@ -98,13 +106,34 @@
                   <%#= link_to raw("<i class='glyphicon glyphicon-thumbs-down'></i>  Nope (#{@piece.get_dislikes.size})"), nope_path(:id => @piece.id), :remote => true, class: "btn btn-sm fav btn-danger", :method => :post %>        
         </div>
         </div> -->
-      <div class="panel panel-default">
+
+        <% unless @piece.sold == true || @piece.price.to_i <= 0 || @piece.user.stripe_publishable_key == nil %>
+        <div class="panel panel-primary" id="buy">
+          <div class="panel-heading "><h5 class="white"><i class='white glyphicon glyphicon-shopping-cart'></i> Buy "<%= truncate(@piece.title, :length => 20) %>"</h5></div>
+          <div class="panel-body">
+            <p>$<%= @piece.price.to_i %></p>
+              <%= form_tag charges_path do %>
+
+              <%= hidden_field_tag :amount, number_with_precision(@piece.price, :precision => 2), :class=> "form-control", :width => "50%", :min => number_with_precision(@piece.price, :precision => 2), :step => 1 %>
+
+              <%= hidden_field_tag :id, @piece.id %>
+
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= @piece.user.stripe_publishable_key %>"
+                      data-description="<%= @piece.title %>" data-email="<%#= current_user.email %>"
+                      data-image="<%= @piece.image.url(:small) %>"
+                      data-amount="<%= @piece.price.to_i*100 %>"></script>
+            <% end %>
+          
+        </div>
+        </div>
+        <% end %>
+        <div class="panel panel-default">
         <div class="panel-heading "><h5 class=""><i class='glyphicon glyphicon-share-alt'></i> Share</h5></div>
         <div class="panel-body">
           <%= like_button(402079716609857, :send => true) %>
           <br/><br/>
           <%= tweet_button(via: "artupio", url: "#{piece_url(@piece)}", text: "Nice #art '#{@piece.title} by #{@piece.user.profile.display_name}' :", count: "none") %>
-
           <%= pinit_button %>
           <%= google_plus_button %>
           <h6>Short Link:</h6>
@@ -113,6 +142,7 @@
           <button class='my_clip_button btn btn-primary btn-sm clip_board' data-clipboard-target='short_link' data-clipboard-text='jfrkfjrj' id='embed_button' title='Click me to copy to clipboard.'>
           <b>Copy To Clipboard</b>
         </button>
+          <br/><br/>
           <h6>Embed Code:</h6>
 
           <input cols="30" rows="5" id="embed_code"
@@ -127,7 +157,6 @@
         </div>
         </div>
 
-  <br/>
     <% unless @piece.favourited_by == [] %>
       <div class="panel panel-info">
         <div class="panel-heading "><h5 class="white"><i class='glyphicon glyphicon-heart'></i> Loved By</h5></div>
@@ -154,10 +183,7 @@
     </div>
 
 
-    <br/><br/>
-    <% if current_user && current_user.admin? %>
-      <%= link_to 'Edit', edit_piece_path(@piece), :class => "pull-right" %>
-    <% end %>
+    
          
   </div>
 

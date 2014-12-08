@@ -1,8 +1,9 @@
 class ProfilesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :followers, :following]
-  before_action :set_profile, only: [:show, :edit, :update, :destroy, :following, :followers, :embed]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :following, :followers, :embed, :shop]
 
-   layout :resolve_layout
+  layout :resolve_layout
+
 
   # GET /profiles
   # GET /profiles.json  
@@ -15,6 +16,7 @@ class ProfilesController < ApplicationController
   def show
     @pieces = Piece.where(:user_id => @profile.user.id).where(:hidden => false).page params[:page]
     @featured = Piece.where(:featured => true)
+    @shop = @pieces.where(:sold => false ).where('price > ?', 0)
   end
 
   def embed
@@ -104,6 +106,6 @@ class ProfilesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
       params.require(:profile).permit(:display_name, :user_id, :bio,
-      :twitter, :banner, :image, :dob, :location, :slug, :website, :notifications)
+      :twitter, :banner, :image, :dob, :location, :slug, :website, :notifications, :donations)
     end
 end

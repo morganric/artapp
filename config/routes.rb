@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
-
-  devise_for :users, :controllers => { :invitations => 'users/invitations' }
+  devise_for :users, :controllers => { :invitations => 'users/invitations', :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :collections
-  resources :pieces
+
+  resources :charges
   resources :profiles
+  resources :pieces
      resources :users
 
 
@@ -64,6 +65,7 @@ Rails.application.routes.draw do
 
   post "/pieces/:id/dope" => "pieces#dope", :as => "dope", via: [:get, :post]
   post "/pieces/:id/nope" => "pieces#nope", :as => "nope", via: [:get, :post]
+
 
 
 
