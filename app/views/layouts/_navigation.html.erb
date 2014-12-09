@@ -17,8 +17,9 @@
         <%= render 'layouts/navigation_links' %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li ><%= link_to raw('<button class="btn btn-success btn-sm"><i class="glyphicon glyphicon-envelope"></i> Invite a friend </button>'), new_user_invitation_path %> </li>
         <% if user_signed_in? %>
+        <li ><%= link_to raw('<button class="btn btn-success btn-sm"><i class="glyphicon glyphicon-envelope"></i> Invite a friend </button>'), new_user_invitation_path %> </li>
+        
             <li class="dropdown ">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
