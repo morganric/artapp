@@ -20,7 +20,7 @@ class ProfilesController < ApplicationController
   end
 
   def embed
-    @pieces = Piece.where(:user_id => @profile.user.id).where(:hidden => false).order('created_at ASC')
+    @pieces = Piece.where(:user_id => @profile.user.id).where(:hidden => false).order('created_at DESC')
     @featured = Piece.where(:featured => true)
   end
 
