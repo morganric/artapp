@@ -2,7 +2,7 @@
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <% @pieces.reverse[1..@pieces.count].each_with_index do |piece, index| %>
+    <% @pieces[1..@pieces.count].each_with_index do |piece, index| %>
       <li data-target="#carousel-example-generic" data-slide-to="<%= index %>"></li>
     <% end %>
   </ol>
@@ -10,14 +10,14 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="<%= @profile.user.pieces.last.image.url(:collection) %>" alt="">
+      <img src="<%= @pieces.first.image.url(:collection) %>" alt="">
       <div class="carousel-caption">
         <h2 class="white"><%= link_to truncate(@pieces.first.title.titleize, :length => 20), @pieces.last, :target => "_blank" %>
         <br/>
          <small>by <%= link_to truncate(@pieces.first.user.name.titleize, :length => 20), vanity_url_path(@pieces.first.user.profile.slug), :target => "_blank" %></small></h2>
       </div>
     </div>
-    <% @pieces.reverse[1..@pieces.count].each_with_index do |piece, index| %>
+    <% @pieces[1..@pieces.count].each_with_index do |piece, index| %>
        <div class="item">
       <img src="<%= piece.image.url(:collection) %>" alt="blah">
       <div class="carousel-caption">
