@@ -15,13 +15,13 @@
       #         :url => @collection.pieces.last.image.url(:embed)
       #       },
         :image => {
-    :url      => "http://example.com/1.png",
+    :url      => @collection.pieces.last.image.url(:embed),
     :width  => 100,
     :height => 100,
   },
       :title => @collection.title,
       :description => @collection.description,
-      :url => user_collection_url(:id => @collection.id, :user_slug => @collection.user.profile.slug),
+      :url => "https://artupio.herokuapp.com#{user_collection_path(:id => @collection.id, :user_id => @collection.user.profile.slug)}",
       :player => {
         :height => "400px",
         :width => "750px"
