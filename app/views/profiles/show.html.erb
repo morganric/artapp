@@ -145,16 +145,16 @@
             <% if @profile.bio !=  "" && @profile.bio !=  nil %>
               <p class="well">
                 <%= auto_link(@profile.bio.gsub(/\n/, '<br/>').html_safe, :html => { :target => '_blank' }) %>
-                  <br/>
+                  
+              </p>
+            <% end %>
+            <br/>
                   <% if current_user %>
                     <% if current_user == @profile.user || current_user.admin? %>
                     <%= link_to 'Edit', edit_profile_path(@profile), class: "pull-left" %> 
                     <% end %>
                   <% end %>
                   <br/>
-              </p>
-            <% end %>
-
             <p>
               <%= @profile.location %>
               <br/>
