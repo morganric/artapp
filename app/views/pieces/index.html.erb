@@ -10,9 +10,8 @@
   <nav class="navbar navbar-static-top navbar-default " role="navigation">
     <div class="navbar-grey">
     <ul class="nav navbar-nav">
-    <li class="active"><a href="#popular" data-toggle="tab"> <i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
-     <li ><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload"></i> New Pieces</a></li>
-	  
+     <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload"></i> New Pieces</a></li>
+	  <li><a href="#popular" data-toggle="tab"> <i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
 	  <li><a href="#shop" data-toggle="tab"> <i class="glyphicon glyphicon-shopping-cart "></i> Shop </a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-tags "></i> Top Tags <b class="caret"></b></a>
@@ -30,7 +29,7 @@
 	<div class="col-md-12">
 
 		<div id="myTabContent" class="tab-content">
-		  <div class="tab-pane fade " id="new">
+		  <div class="tab-pane fade active in" id="new">
 		  <div  class="transitions-enabled centered infinite-scroll clearfix">
 			<% @new_pieces.each do |piece| %>
 						<%= render 'shared/piece', :piece => piece %>
@@ -40,7 +39,7 @@
 				<%= paginate @pieces, :html => {:class => "pagination"} %>
 				
 		  </div>
-	  <div class="tab-pane fade active in" id="popular">
+	  <div class="tab-pane fade" id="popular">
 	  	<div id="masonry-container" class="transitions-enabled centered 	infinite-scroll clearfix">
 			<% @pieces.each do |piece| %>
 				<%= render 'shared/piece', :piece => piece %>
