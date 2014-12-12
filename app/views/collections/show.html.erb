@@ -3,7 +3,7 @@
     :description => @collection.description,
     :og => {:type => "website",
             :description => @collection.description,
-            :image => @collection.pieces.last.image.url(:embed) || "http://res.cloudinary.com/artapp/image/upload/v1413470304/gntloo1fznwu9yylo1nu.png" , 
+            :image => "http://res.cloudinary.com/artapp/image/upload/v1413470304/gntloo1fznwu9yylo1nu.png" || @collection.pieces.last.image.url(:embed)  , 
             :title => @collection.title,
             :description => @collection.description,
 
@@ -14,7 +14,7 @@
       :title => @collection.title,
       :description => @collection.description,
       :image => {
-        :url => @collection.pieces.last.image.url(:embed) || "http://res.cloudinary.com/artapp/image/upload/v1413470304/gntloo1fznwu9yylo1nu.png",
+        :url =>  "http://res.cloudinary.com/artapp/image/upload/v1413470304/gntloo1fznwu9yylo1nu.png" || @collection.pieces.last.image.url(:embed) ,
     :width  => 100,
     :height => 100,
   },
