@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+   scope ":id" do
+    get :following, to: "profiles#following", as: 'following_profile'
+    get :followers, to: "profiles#followers", as: 'followers_profile'
+  end
+
+
   devise_for :users, :controllers => { :invitations => 'users/invitations', :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :collections
 
@@ -15,11 +21,6 @@ Rails.application.routes.draw do
     get '', to: 'facebook#show', :as => 'facebook_url'
   end
 
- scope ":id" do
-    get :following, to: "profiles#following", as: 'following_profile'
-    get :followers, to: "profiles#followers", as: 'followers_profile'
-  end
-
  get ':id/embed' => 'profiles#embed', as: :profile_embed
 
   get "/tagged/:tag" => "pieces#tag", :as => :tagged_pieces
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
    get ':user_slug/:id'  => "pieces#show", as: :user_piece
    get 'p/:id', to: redirect(':user_slug/:id' ), as: :short
 
+  post '/message' => 'profiles#message', :as => 'message'
 
   post '/facebook' => 'facebook#index', :as => 'facebook_post', via: [:post]
   get '/facebook' => 'facebook#index', :as => 'facebook_get', via: [:get]

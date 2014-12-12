@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, :if => :new_record?
   after_create :create_profile
   paginates_per 10
+  acts_as_messageable
 
   validates_exclusion_of :name, :in => %w( facebook message discussions facebook tedx featured users feeds photos videos items admin oembed api facebook new popular featured favicon superuser 
     pages partners categories category creators platforms media posts authors types providers tagged ), :message => "You don't belong here"
@@ -31,6 +32,15 @@ class User < ActiveRecord::Base
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def mailboxer_email(object)
+  #Check if an email should be sent for that object
+  #if true
+  return self.email.to_s
+  #if false
+  #return nil
+
   end
 
 

@@ -40,7 +40,7 @@ gem 'paper_trail', '~> 3.0.6'
 gem 'omniauth-stripe-connect'
 gem 'omniauth'
 gem 'oauth2'
-
+gem 'mailboxer'
 
 group :development do
   gem 'better_errors'

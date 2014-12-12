@@ -17,7 +17,32 @@ class ProfilesController < ApplicationController
     @pieces = Piece.where(:user_id => @profile.user.id).where(:hidden => false).page params[:page]
     @featured = Piece.where(:featured => true)
     @shop = @pieces.where(:sold => false ).where('price > ?', 0)
+    @conversations = @profile.user.mailbox.inbox
+    @receipts = []
+
+    @conversations.limit(6).each do |convo|
+      @receipts << convo.receipts_for(@profile.user)
+    end
+    return @receipts 
+
   end
+
+
+   def message
+
+    @user = User.find(params[:user_id])
+    if @user.profile.inbox == true
+         current_user.send_message(@user, params[:body], params[:subject])
+    end
+ 
+    
+    respond_to do |format|
+      format.html { redirect_to vanity_url_path(@user.profile.slug), notice: 'Sent.' }  
+      format.js { redirect_to vanity_url_path(@user.profile.slug), notice: 'Sent.' }
+    end
+
+  end
+
 
   def embed
     @pieces = Piece.where(:user_id => @profile.user.id).where(:hidden => false).order('created_at DESC')
@@ -106,6 +131,6 @@ class ProfilesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
       params.require(:profile).permit(:display_name, :user_id, :bio,
-      :twitter, :banner, :image, :dob, :location, :slug, :website, :notifications, :donations)
+      :twitter, :banner, :image, :dob, :location, :slug, :website, :notifications, :donations, :inbox)
     end
 end

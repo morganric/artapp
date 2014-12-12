@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h2>Hello!</h2>
+    <h3>You have a new artup.io profile message: <%= @subject %></h3>
+
+    <blockquote>
+      <p>
+        <%= raw truncate(@message.body, :length => 20) %>
+      </p>
+    </blockquote>
+    <p>
+      Visit <%= link_to root_url, root_url %> and go to your inbox for more...
+    </p>
+    Thanks,
+    Team ArtUp
+  </body>
+</html>
