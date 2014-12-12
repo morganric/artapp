@@ -20,7 +20,7 @@
   },
       :title => @collection.title,
       :description => @collection.description,
-      :url => "https://artupio.herokuapp.com#{user_collection_path(:id => @collection.id, :user_id => @collection.user.profile.slug)}",
+      :url => "https://artupio.herokuapp.com#{user_collection_path(:id => @collection.id, :slug => @collection.user.profile.slug)}",
       :player => {
         :height => "400px",
         :width => "750px"
@@ -32,7 +32,7 @@
 
 <% content_for(:head) do %>
 
-<meta property="twitter:player" content="<%= "https://artupio.herokuapp.com#{collection_player_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}" %>" >
+<meta property="twitter:player" content="<%= "https://artupio.herokuapp.com#{collection_player_path(:id => @collection.id, :slug => @collection.user.profile.slug)}" %>" >
 
 <% end %>
 
