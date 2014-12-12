@@ -18,7 +18,7 @@ class PiecesController < ApplicationController
     @tags = Piece.tag_counts_on(:tags).order("taggings_count DESC")
 
     @for_sale = Piece.where(:hidden => false).where(:sold => false).where("price > ?", 10).order('views DESC').page params[:page]
-    @collections = Collection.all
+    @collections = Collection.all.order('created_at DESC')
   end
 
   # def facebook
