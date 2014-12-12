@@ -76,7 +76,7 @@
           <textarea cols="55" rows="5" id="embed_code"
          > <iframe style="border:none;" src="<%= collection_embed_url(:id => @collection.id, :slug => @collection.user.profile.slug, :user_slug => @collection.user.profile.slug) %>" width="600px" height="350px"/></iframe>
           <br/>
-          <a href="<%= user_collection_url(:id => @collection.id, :user_slug => @collection.user.profile.slug ) %>" target="_blank"><%= @collection.title.titleize %></a> by <a href="<%= vanity_url_url(@collection.user.profile.slug) %>" target="_blank"><%= @collection.user.profile.display_name %></a> on <a href="http://www.artup.io" target="_blank">artup.io</a>
+          <a href="<%= user_collection_url(:id => @collection.id, :user_slug => @collection.user.profile.slug, :slug => @collection.user.profile.slug ) %>" target="_blank"><%= @collection.title.titleize %></a> by <a href="<%= vanity_url_url(@collection.user.profile.slug) %>" target="_blank"><%= @collection.user.profile.display_name %></a> on <a href="http://www.artup.io" target="_blank">artup.io</a>
          </textarea>
           
 
