@@ -144,12 +144,7 @@
           <%= tweet_button(via: "artupio", url: "#{piece_url(@piece)}", text: "Nice #art '#{@piece.title} by #{@piece.user.profile.display_name}' :", count: "none") %>
           <%= pinit_button %>
           <%= google_plus_button %>
-          <h6>Short Link:</h6>
-          <input value="<%= short_url(@piece.id) %>" cols="100" id="short_link"
-          />
-          <button class='my_clip_button btn btn-primary btn-sm clip_board' data-clipboard-target='short_link' data-clipboard-text='jfrkfjrj' id='embed_button' title='Click me to copy to clipboard.'>
-          <b>Copy To Clipboard</b>
-        </button>
+
           <br/><br/>
           <h6>Embed Code:</h6>
 
