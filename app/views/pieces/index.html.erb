@@ -53,7 +53,7 @@
       <% @collections.each do |collection| %>
 
         <div class="col-md-4" >
-                       <h3><%= link_to collection.title.titleize, user_collection_path(:id => collection.id, :slug => collection.user.profile.slug) %></h3>
+                       <h3><%= link_to truncate(collection.title.titleize,:length => 20), user_collection_path(:id => collection.id, :slug => collection.user.profile.slug) %></h3>
                        <% if collection.pieces.count > 0 %>
                        <%= link_to image_tag(collection.pieces.first.image.url(:mini)), user_collection_path(:id => collection.id, :slug => collection.user.profile.slug) %>
                        <% else %>

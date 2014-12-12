@@ -10,6 +10,11 @@ class UserPolicy
     @current_user.admin?
   end
 
+  def invitation?
+    true
+  end
+
+
   def show?
     @current_user.admin? 
   end

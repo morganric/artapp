@@ -1,10 +1,11 @@
 class Users::InvitationsController < Devise::InvitationsController
 
-  # prepend_before_filter :authenticate_inviter!, :only => [:new, :create]
+  prepend_before_filter :authenticate_inviter!, :only => [:new, :create]
   prepend_before_filter :has_invitations_left?, :only => [:create]
   prepend_before_filter :require_no_authentication, :only => [:edit, :update, :destroy]
   prepend_before_filter :resource_from_invitation_token, :only => [:edit, :destroy]
   helper_method :after_sign_in_path_for
+
 
   # GET /resource/invitation/new
   def new
