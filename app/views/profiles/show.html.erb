@@ -9,6 +9,26 @@
     ) 
 %>
 
+<% content_for(:head) do %>
+  <!-- <link rel="alternate" type="application/json+oembed"
+    href="<%= root_url %>oembed?url=<%= piece_url(@piece) %>&format=json"
+    title="Bacon Lollys oEmbed Profile" /> -->
+
+
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+  <meta name="twitter:card" content="player">
+  <meta name="twitter:site" content="@artupio">
+  <meta name="twitter:title" content="<%= @profile.title %>">
+  <meta name="twitter:description" content="<%= @profile.description %>">
+  <meta name="twitter:image" content="<%= @profile.image.url(:embed) %>">
+  <meta property="twitter:player" content="<%= "https://artupio.herokuapp.com#{profile_embed_path(:id => @profile.id)}" %>" >
+  <meta name="twitter:player:width" content="480">
+  <meta name="twitter:player:height" content="270">
+  <meta property="twitter:player:stream" content="<%= "https://artupio.herokuapp.com#{profile_embed_path(:id => @profile.id)}" %>" >
+  <meta name="twitter:player:stream:content_type" content="video/mp4">
+<% end %>
+
+
 <%= content_for :header do %>
 
   <section style="background-image: url('<%= @profile.banner.url(:banner)  %>'); color:white; margin-top:60px;" class="profile-header text-center">
