@@ -7,34 +7,43 @@
             :title => @collection.title,
             :description => @collection.description,
 
-            }, 
-:twitter => {
-      :card => "player",
-      :site => "@#{@collection.user.profile.twitter}" || "@artupio",
-      :title => @collection.title,
-      :description => @collection.description,
-      :image => {
-        :url =>  "http://res.cloudinary.com/artapp/image/upload/v1413470304/gntloo1fznwu9yylo1nu.png" || @collection.pieces.last.image.url(:embed) ,
-    :width  => 100,
-    :height => 100,
-  },
-      :title => @collection.title,
-      :description => @collection.description,
-      :url => "https://artupio.herokuapp.com#{user_collection_path(:id => @collection.id, :slug => @collection.user.profile.slug)}",
-      :player => {
-        :height => "400px",
-        :width => "750px"
-      }     
+            }
+            # , 
+# :twitter => {
+#       :card => "player",
+#       :site => "@#{@collection.user.profile.twitter}" || "@artupio",
+#       :title => @collection.title,
+#       :description => @collection.description,
+#       :image => {
+#         :url =>  "http://res.cloudinary.com/artapp/image/upload/v1413470304/gntloo1fznwu9yylo1nu.png" || @collection.pieces.last.image.url(:embed) ,
+#     :width  => 100,
+#     :height => 100,
+#   },
+#       :title => @collection.title,
+#       :description => @collection.description,
+#       :url => "https://artupio.herokuapp.com#{user_collection_path(:id => @collection.id, :slug => @collection.user.profile.slug)}",
+#       :player => {
+#         :height => "400px",
+#         :width => "750px"
+#       }     
            
-    }
+#     }
     ) 
 %>
 
 <% content_for(:head) do %>
 
-<meta property="twitter:player" content="<%= "https://artupio.herokuapp.com#{collection_embed_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}" %>" >
-
-<meta property="twitter:player:stream" content="<%= "https://artupio.herokuapp.com#{collection_embed_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}" %>" >
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+  <meta name="twitter:card" content="player">
+  <meta name="twitter:site" content="@rchoi">
+  <meta name="twitter:title" content="Sample Player Card">
+  <meta name="twitter:description" content="This is a sample video. When you implement, make sure all links are secure.">
+  <meta name="twitter:image" content="https://yoursite.com/example.png">
+  <meta property="twitter:player" content="<%= "https://artupio.herokuapp.com#{collection_embed_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}" %>" >
+  <meta name="twitter:player:width" content="480">
+  <meta name="twitter:player:height" content="480">
+  <meta property="twitter:player:stream" content="<%= "https://artupio.herokuapp.com#{collection_embed_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}" %>" >
+  <meta name="twitter:player:stream:content_type" content="video/mp4">
 
 <% end %>
 
