@@ -32,7 +32,7 @@
 
 <% content_for(:head) do %>
 
-<meta property="twitter:player" content="<%= "https://artupio.herokuapp.com#{collection_player_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}" %>" >
+<meta property="twitter:player" content="<%= "https://artupio.herokuapp.com#{collection_embed_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}" %>" >
 
 <% end %>
 
