@@ -11,15 +11,15 @@
 
 <% content_for(:head) do %>
   <!-- <link rel="alternate" type="application/json+oembed"
-    href="<%= root_url %>oembed?url=<%= piece_url(@piece) %>&format=json"
+    href="<%= root_url %>oembed?url=<%= vanity_url_url(@profile) %>&format=json"
     title="Bacon Lollys oEmbed Profile" /> -->
 
 
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
   <meta name="twitter:card" content="player">
   <meta name="twitter:site" content="@artupio">
-  <meta name="twitter:title" content="<%= @profile.title %>">
-  <meta name="twitter:description" content="<%= @profile.description %>">
+  <meta name="twitter:title" content="<%= @profile.display_name %>">
+  <meta name="twitter:description" content="<%= @profile.bio %>">
   <meta name="twitter:image" content="<%= @profile.image.url(:embed) %>">
   <meta property="twitter:player" content="<%= "https://artupio.herokuapp.com#{profile_embed_path(:id => @profile.id)}" %>" >
   <meta name="twitter:player:width" content="480">
