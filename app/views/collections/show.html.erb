@@ -35,13 +35,13 @@
 
 <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
   <meta name="twitter:card" content="player">
-  <meta name="twitter:site" content="@rchoi">
-  <meta name="twitter:title" content="Sample Player Card">
-  <meta name="twitter:description" content="This is a sample video. When you implement, make sure all links are secure.">
-  <meta name="twitter:image" content="https://yoursite.com/example.png">
+  <meta name="twitter:site" content="@artupio">
+  <meta name="twitter:title" content="<%= @collection.title %>">
+  <meta name="twitter:description" content="<%= @collection.description %>">
+  <meta name="twitter:image" content="<%= @collection.pieces.firstimage.url(:embed) %>">
   <meta property="twitter:player" content="<%= "https://artupio.herokuapp.com#{collection_embed_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}" %>" >
   <meta name="twitter:player:width" content="480">
-  <meta name="twitter:player:height" content="480">
+  <meta name="twitter:player:height" content="270">
   <meta property="twitter:player:stream" content="<%= "https://artupio.herokuapp.com#{collection_embed_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}" %>" >
   <meta name="twitter:player:stream:content_type" content="video/mp4">
 
