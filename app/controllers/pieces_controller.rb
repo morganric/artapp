@@ -12,7 +12,7 @@ class PiecesController < ApplicationController
   # GET /pieces.json
   def index
 
-    @now = Date.today - 28
+    @now = Date.today - 56
     @pieces = Piece.where(:hidden => false).where('created_at > ?', @now ).order('views DESC').page params[:page]
     @new_pieces = Piece.where(:hidden => false).order('created_at DESC').page params[:page]
     @tags = Piece.tag_counts_on(:tags).order("taggings_count DESC")
