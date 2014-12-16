@@ -22,6 +22,11 @@ class CollectionsController < ApplicationController
   def embed
     @collection.views = @collection.views + 1
     @collection.save
+
+    @collection.pieces.each do |piece|
+      piece.views = piece.views.to_i + 1
+      piece.save
+    end
   end
 
   def player
