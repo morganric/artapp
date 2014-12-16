@@ -1,0 +1,72 @@
+<%= content_for :header do %>
+<br/>
+	<div class="text-center">
+		<h1>Tagged: <%= params[:tag].capitalize %></h1>
+	</div>
+	<br/>
+<% end %>
+
+  <nav class="navbar navbar-static-top navbar-default " role="navigation">
+    <div class="navbar-grey">
+    <ul class="nav navbar-nav">
+     <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload"></i> New Pieces</a></li>
+	  <li><a href="#popular" data-toggle="tab"> <i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
+    </ul>  
+    </div>
+  </nav>
+
+<div class="row">
+	<div class="col-md-12">
+
+		<div id="myTabContent" class="tab-content">
+		  <div class="tab-pane fade active in" id="new">
+		  <div  class="transitions-enabled centered infinite-scroll clearfix">
+			<% @new_pieces.each do |piece| %>
+						<%= render 'shared/piece', :piece => piece %>
+			<% end %>
+
+			</div>
+				<%= paginate @pieces, :html => {:class => "pagination"} %>
+				
+		  </div>
+	  <div class="tab-pane fade" id="popular">
+	  	<div id="masonry-container" class="transitions-enabled centered 	infinite-scroll clearfix">
+			<% @pieces.each do |piece| %>
+				<%= render 'shared/piece', :piece => piece %>
+			<% end %>
+
+			</div>
+	  </div>
+
+	</div>
+		
+</div>
+
+
+</div>
+
+<style type="text/css">
+  
+  .affix {
+    top: 60px;
+width: 110%;
+margin-left: -15%;
+margin-right:15%;
+  }
+
+  
+  .navbar .nav,
+.navbar .nav > li {
+  float:none;
+  display:inline-block;
+  *display:inline; /* ie7 fix */
+  *zoom:1; /* hasLayout ie7 trigger */
+  vertical-align: top;
+}
+
+.navbar-blue {
+  text-align:center;
+}
+
+
+</style>
