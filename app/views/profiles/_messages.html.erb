@@ -1,8 +1,12 @@
 <% if @profile.notifications %>
-<div class="panel">
-          <%= form_tag("/message", method: "post", remote: true, :class => "well") do |f| %>
+<div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Leave a message below...</h3>
+      </div>
+        <div class="panel-body">
+          <%= form_tag("/message", method: "post", remote: true ) do |f| %>
             <%= hidden_field_tag :subject, "Subject" %>
-            <%= text_area_tag :body, nil, rows: 3, cols: 75 %>
+            <%= text_area_tag :body, nil, rows: 3, cols: 75, :style => "border:1px lightgrey solid;" %>
 
             <br/>
             <%= hidden_field_tag(:user_id, @profile.user.id) %>
@@ -11,6 +15,7 @@
             <%= submit_tag("Post", :class => "pull-right btn btn-primary", :id => "post") %>
             <br/>
         <% end %>
+      </div>
 </div>
 <ul>
   <% @receipts.each do |r| %>
