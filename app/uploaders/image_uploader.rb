@@ -47,9 +47,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :embed do
-    process :resize_to_fit => [600, 600]
+    process :resize_to_fit => [500, 500]
     cloudinary_transformation :transformation =>[
-        {:width=>600, :height=>600,  :crop=>:fill}, {  :overlay => "tosuhfxnwvtfojrgtf23.png", 
+        {:width=>500, :height=>500,  :crop=>:fill}, {  :overlay => "tosuhfxnwvtfojrgtf23.png", 
              :gravity => :south_west, :x => 5, :y => 5, :width => 50, :radius => 10 }]
   end
 

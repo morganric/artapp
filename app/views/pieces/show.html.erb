@@ -158,19 +158,11 @@
           <%= tweet_button(via: "artupio", url: "#{piece_url(@piece)}", text: "Nice #art '#{@piece.title} by #{@piece.user.profile.display_name}' :", count: "none") %>
           <%= pinit_button %>
           <%= google_plus_button %>
-
-          <br/><br/>
-          <h6>Embed Code:</h6>
-
-          <input cols="30" rows="5" id="embed_code"
-          value='<iframe style="border:none;" src="<%= embed_url(:id => @piece.id, :user_slug => @piece.user.profile.slug) %>" width="600px" height="600px"/></iframe>
           <br/>
-          <a href="<%= user_piece_url(:id => @piece.slug, :user_slug => @piece.user.profile.slug ) %>" target="_blank"><%= @piece.title %></a> by <a href="<%= vanity_url_url(@piece.user.profile.slug) %>" target="_blank"><%= @piece.user.profile.display_name %></a> on <a href="http://www.artup.io" target="_blank">artup.io</a>
-          ' />
-          <button class='my_clip_button btn btn-primary btn-sm clip_board' data-clipboard-target='embed_code' data-clipboard-text='jfrkfjrj' id='embed_button' title='Click me to copy to clipboard.'>
-          <b>Copy To Clipboard</b>
-        </button>
-    
+          <button type="button" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#myModal">
+            <i class='glyphicon glyphicon-flash'></i> Embed Code
+          </button>
+
         </div>
         </div>
 
@@ -213,5 +205,34 @@
 <br/>
 <br/>
 
-<!-- <script src="https://raw.githubusercontent.com/jackmoore/zoom/master/jquery.zoom.js"></script> -->
+
+       <!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Embed Code Preview</h4>
+      </div>
+      <div class="modal-body">
+        <iframe style="border:none;" src="<%= embed_url(:id => @piece.id, :slug => @piece.user.profile.slug, :user_slug => @piece.user.profile.slug) %>" width="500px" height="500px"/></iframe>
+
+          <textarea cols="55" rows="3" id="embed_code"
+         > <iframe style="border:none;" src="<%= embed_url(:id => @piece.id, :slug => @piece.user.profile.slug, :user_slug => @piece.user.profile.slug) %>" width="600px" height="600px"/></iframe>
+          <br/>
+          <a href="<%= user_piece_url(:id => @piece.id, :user_slug => @piece.user.profile.slug, :slug => @piece.user.profile.slug ) %>" target="_blank"><%= @piece.title.titleize %></a> by <a href="<%= vanity_url_url(@piece.user.profile.slug) %>" target="_blank"><%= @piece.user.profile.display_name %></a> on <a href="http://www.artup.io" target="_blank">artup.io</a>
+         </textarea>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button class='my_clip_button btn btn-primary btn-sm clip_board' data-clipboard-target='embed_code' data-clipboard-text='jfrkfjrj' id='embed_button' title='Click me to copy to clipboard.'>
+          <b>Copy To Clipboard</b>
+        </button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
