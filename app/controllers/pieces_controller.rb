@@ -50,6 +50,12 @@ class PiecesController < ApplicationController
   def tag_embed
     @pieces = Piece.where(:hidden => false).tagged_with(params[:tag]).order('views DESC').page params[:page]
     @tag = params[:tag]
+
+     @pieces.each do |piece|
+      piece.views = piece.views.to_i + 1
+      piece.save
+    end
+    
   end
 
   def dope

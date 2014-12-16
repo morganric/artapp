@@ -49,6 +49,12 @@ class ProfilesController < ApplicationController
   def embed
     @pieces = Piece.where(:user_id => @profile.user.id).where(:hidden => false).order('created_at DESC')
     @featured = Piece.where(:featured => true)
+
+    @pieces.each do |piece|
+      piece.views = piece.views.to_i + 1
+      piece.save
+    end
+    
   end
 
   # GET /profiles/new
