@@ -2,6 +2,8 @@ class ProfilesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :followers, :following]
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :following, :followers, :embed, :shop]
 
+ after_filter :allow_iframe
+
   layout :resolve_layout
 
 
@@ -123,6 +125,12 @@ class ProfilesController < ApplicationController
       "paper"
     end
   end
+
+  
+  def allow_iframe
+    response.headers["X-Frame-Options"] = "GOFORIT"
+  end
+
 
     def set_profile
       @profile = Profile.find(params[:id])
