@@ -1,3 +1,22 @@
+<% content_for(:head) do %>
+<!--   <link rel="alternate" type="application/json+oembed"
+    href="<%= root_url %>oembed?url=<%#= tag_pieces_url(:tag => @tag) %>&format=json"
+    title="Bacon Lollys oEmbed Profile" /> -->
+
+
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+  <meta name="twitter:card" content="player">
+  <meta name="twitter:site" content="@artupio">
+  <meta name="twitter:title" content="<%= @tag %>">
+  <meta name="twitter:description" content="<%= @tag %>">
+  <meta name="twitter:image" content="<%= @pieces.first.image.url(:embed) %>">
+  <meta property="twitter:player" content="<%= "https://artupio.herokuapp.com#{tag_embed_path(:id => @tag)}" %>" >
+  <meta name="twitter:player:width" content="480">
+  <meta name="twitter:player:height" content="270">
+  <meta property="twitter:player:stream" content="<%= "https://artupio.herokuapp.com#{tag_embed_path(:id => @tag)}" %>" %>" >
+  <meta name="twitter:player:stream:content_type" content="video/mp4">
+<% end %>
+
 <%= content_for :header do %>
 <br/>
 	<div class="text-center">

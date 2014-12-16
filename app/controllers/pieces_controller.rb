@@ -44,9 +44,11 @@ class PiecesController < ApplicationController
     @collections = Collection.all.order('views DESC')
     @tags = Piece.tag_counts_on(:tags)
     # render :action => 'index'
+  end
 
-
-    
+  def tag_embed
+    @pieces = Piece.where(:hidden => false).tagged_with(params[:tag]).order('views DESC').page params[:page]
+    @tag = params[:tag]
   end
 
   def dope
@@ -169,7 +171,7 @@ class PiecesController < ApplicationController
 
   def resolve_layout
     case action_name
-    when "embed"
+    when "embed", "tag_embed"
       "embed"
     else
       "paper"

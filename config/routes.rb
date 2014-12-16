@@ -24,6 +24,9 @@ Rails.application.routes.draw do
  get ':id/embed' => 'profiles#embed', as: :profile_embed
 
   get "/tag/:tag" => "pieces#tag", :as => :tagged_pieces
+  get "/tag/:tag/embed" => "pieces#tag_embed", :as => :tag_embed
+
+
   get "/tagged/:tag" => "pieces#tag", :as => :tag_pieces
   get 'pages/:id' => 'visitors#index', as: 'static'
 
