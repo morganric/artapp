@@ -12,18 +12,18 @@
     <div class="item active">
       <img src="<%= @collection.pieces.last.image.url(:collection) %>" alt="">
       <div class="carousel-caption">
-        <h2 class="white"><%= link_to truncate(@collection.pieces.last.title.titleize, :length => 20), @collection.pieces.last, :target => "_blank" %>
+        <h2 class="white"><%= link_to truncate(@collection.pieces.last.title.titleize, :length => 20), "http://artup.io#{user_piece_path(:id => @collection.pieces.last.slug, :user_slug => @collection.pieces.last.user.profile.slug)}", :target => "_blank" %>
         <br/>
-         <small>by <%= link_to truncate(@collection.pieces.last.user.name.titleize, :length => 20), vanity_url_path(@collection.pieces.last.user.profile.slug), :target => "_blank" %></small></h2>
+         <small>by <%= link_to truncate(@collection.pieces.last.user.name.titleize, :length => 20), "http://artup.io#{vanity_url_path(@collection.pieces.last.user.profile.slug)}", :target => "_blank" %></small></h2>
       </div>
     </div>
     <% @collection.pieces.reverse[1..@collection.pieces.count].each_with_index do |piece, index| %>
        <div class="item">
       <img src="<%= piece.image.url(:collection) %>" alt="blah">
       <div class="carousel-caption">
-        <h2 class="white"><%= link_to truncate(piece.title, :length => 20), piece, :target => "_blank" %>
+        <h2 class="white"><%= link_to truncate(piece.title, :length => 20), "http://artup.io#{user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug)}", :target => "_blank" %>
         <br/>
-        <small>by <%= link_to truncate(piece.user.name.titleize, :length => 20), vanity_url_path(piece.user.profile.slug), :target => "_blank" %></small>
+        <small>by <%= link_to truncate(piece.user.name.titleize, :length => 20), "http://artup.io#{vanity_url_path(piece.user.profile.slug)}", :target => "_blank" %></small>
         </h2>
       </div>
     </div>
