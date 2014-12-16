@@ -6,7 +6,7 @@
 	<% if Piece.where(:hidden => false).tagged_with(tag).last != nil %>
 		<div class="col-md-4" >
 			<h2><%= link_to tag.name.capitalize, tagged_pieces_path(tag.name) %></h2>
-			<%= link_to image_tag(Piece.where(:hidden => false).tagged_with(tag).last.image.url(:mini)), tagged_pieces_path(tag.name) %>
+			<%= link_to image_tag(Piece.where(:hidden => false).tagged_with(tag).sample.image.url(:mini)), tagged_pieces_path(tag.name) %>
 			</div>
 	<% end %>
 <% end %>	
