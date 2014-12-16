@@ -12,7 +12,7 @@
     <%= f.input :tag_list %>
     <%= f.input :views, as: :hidden %>
     <%= f.input :user_id, as: :hidden %>
-    <% if current_user && current_user.admin? || @piece.user.stripe_secret_key != nil %>
+    <% if current_user && current_user.admin? || current_user.stripe_secret_key != nil %>
     <%= f.input :price %>
     <% end %>
     <br/>
