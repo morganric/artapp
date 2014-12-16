@@ -7,8 +7,8 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
   <meta name="twitter:card" content="player">
   <meta name="twitter:site" content="@artupio">
-  <meta name="twitter:title" content="<%= @tag %>">
-  <meta name="twitter:description" content="<%= @tag %>">
+  <meta name="twitter:title" content="<%= params[:tag].capitalize %>">
+  <meta name="twitter:description" content="<%= params[:tag].capitalize %>">
   <meta name="twitter:image" content="<%= @pieces.first.image.url(:embed) %>">
   <meta property="twitter:player" content="<%= "https://artupio.herokuapp.com#{tag_embed_path(:id => @tag)}" %>" >
   <meta name="twitter:player:width" content="480">

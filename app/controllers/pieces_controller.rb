@@ -43,6 +43,7 @@ class PiecesController < ApplicationController
     @for_sale = Piece.where(:hidden => false).tagged_with(params[:tag]).where(:sold => false).where("price > ?", 10).order('views DESC').page params[:page]
     @collections = Collection.all.order('views DESC')
     @tags = Piece.tag_counts_on(:tags)
+    @tag = params[:tag]
     # render :action => 'index'
   end
 
