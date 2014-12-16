@@ -21,7 +21,7 @@
   <% @receipts.each do |r| %>
     <li class="well" >
     
-    <%= r.first.message.body %><hr/>
+    <%=  auto_link(r.first.message.body.gsub(/\n/, '<br/>').html_safe, :html => { :target => '_blank' }) %><hr/>
     <%= link_to image_tag(r.first.message.sender.profile.image.url(:thumb),
      :class => "img-circle"), vanity_url_path(r.first.message.sender.profile.slug) %>
     <%= link_to r.first.message.sender.name, vanity_url_path(r.first.message.sender.profile.slug) %>
