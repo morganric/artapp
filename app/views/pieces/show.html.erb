@@ -219,7 +219,7 @@
         <iframe style="border:none;" src="<%= embed_url(:id => @piece.id, :slug => @piece.user.profile.slug, :user_slug => @piece.user.profile.slug) %>" width="500px" height="500px"/></iframe>
 
           <textarea cols="55" rows="3" id="embed_code"
-         > <iframe style="border:none;" src="<%= embed_url(:id => @piece.id, :slug => @piece.user.profile.slug, :user_slug => @piece.user.profile.slug) %>" width="600px" height="600px"/></iframe>
+         > <iframe style="border:none;" src="<%= embed_url(:id => @piece.id, :slug => @piece.user.profile.slug, :user_slug => @piece.user.profile.slug) %>" width="500px" height="500px"/></iframe>
           <br/>
           <a href="<%= user_piece_url(:id => @piece.id, :user_slug => @piece.user.profile.slug, :slug => @piece.user.profile.slug ) %>" target="_blank"><%= @piece.title.titleize %></a> by <a href="<%= vanity_url_url(@piece.user.profile.slug) %>" target="_blank"><%= @piece.user.profile.display_name %></a> on <a href="http://www.artup.io" target="_blank">artup.io</a>
          </textarea>
