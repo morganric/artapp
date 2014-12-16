@@ -12,7 +12,9 @@
     <ul class="nav navbar-nav">
      <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload"></i> New Pieces</a></li>
 	  <li><a href="#popular" data-toggle="tab"> <i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
+    <% if @for_sale.length > 0 %> 
 	  <li><a href="#shop" data-toggle="tab"> <i class="glyphicon glyphicon-shopping-cart "></i> Shop </a></li>
+    <% end %>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-tags "></i> Top Tags <b class="caret"></b></a>
         <ul class="dropdown-menu">
