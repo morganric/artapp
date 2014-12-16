@@ -98,7 +98,7 @@
      <p class="well">
       <%= auto_link(@piece.description, :html => { :target => '_blank' }) %>
       <br/>
-        <% if current_user && current_user.admin? %>
+        <% if current_user && current_user.admin? || current_user == @piece.user %>
           <%= link_to 'Edit', edit_piece_path(@piece), :class => "pull-right" %>
         <% end %>
       <br/>
