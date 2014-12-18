@@ -20,6 +20,7 @@ class CollectionsController < ApplicationController
   end
 
   def embed
+    @collection.pieces.limit(12)
     @collection.views = @collection.views + 1
     @collection.save
 
