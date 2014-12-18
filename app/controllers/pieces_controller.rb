@@ -48,7 +48,7 @@ class PiecesController < ApplicationController
   end
 
   def tag_embed
-    @pieces = Piece.where(:hidden => false).tagged_with(params[:tag]).order('views DESC').page params[:page]
+    @pieces = Piece.where(:hidden => false).tagged_with(params[:tag]).order('views DESC').limit(12)
     @tag = params[:tag]
 
      @pieces.each do |piece|

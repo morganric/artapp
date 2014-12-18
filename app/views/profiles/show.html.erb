@@ -238,6 +238,11 @@
                   
                   <%= pinit_button %>
                   <%= google_plus_button %>
+
+                    <button type="button" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#myModal">
+            <i class='glyphicon glyphicon-flash'></i> Embed Code
+          </button>
+
                  
                 </div>
                 </div>
@@ -252,6 +257,38 @@
 
 
 </div>
+
+
+       <!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Embed Code Preview</h4>
+      </div>
+      <div class="modal-body">
+        <iframe style="border:none;" src="<%= profile_embed_url(:id => @profile.id, :slug => @profile.slug) %>" width="500px" height="00px"/></iframe>
+
+          <textarea cols="55" rows="3" id="embed_code"
+         > <iframe style="border:none;" src="<%= profile_embed_url(:id => @profile.id, :slug => @profile.slug) %>" width="500px" height="300px"/></iframe>
+          <br/>
+          <a href="<%= vanity_url_url(@profile.slug) %>" target="_blank"><%= @profile.display_name || @profile.user.name %></a> on <a href="http://www.artup.io" target="_blank">artup.io</a>
+         </textarea>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button class='my_clip_button btn btn-primary btn-sm clip_board' data-clipboard-target='embed_code' data-clipboard-text='jfrkfjrj' id='embed_button' title='Click me to copy to clipboard.'>
+          <b>Copy To Clipboard</b>
+        </button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 

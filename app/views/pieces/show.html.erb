@@ -180,7 +180,7 @@
         <div class="panel-body">
           <%= like_button(402079716609857, :send => true) %>
           <br/><br/>
-          <%= tweet_button(via: "artupio", url: "#{piece_url(@piece)}", text: "Nice #art '#{@piece.title} by #{@piece.user.profile.display_name}' :", count: "none") %>
+          <%= tweet_button(via: "artupio", url: "#{piece_url(@piece)}", text: "Nice #piece of #art - '#{@piece.title} by #{@piece.user.profile.display_name}' :", count: "none") %>
           <%= pinit_button %>
           <%= google_plus_button %>
           <br/>
