@@ -74,7 +74,7 @@
 
     <div class="tab-pane fade active in" id="favs">
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
-      <% @profile.user.favourites.where(:hidden => false).("created_at DESC").each do |piece| %>
+      <% @profile.user.favourites.where(:hidden => false).order("created_at DESC").each do |piece| %>
                      <div class="box col2">
                     <div class="text-center">
                     <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), "http://www.artup.io#{user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug)}", :target => "_blank" %>
