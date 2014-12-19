@@ -4,6 +4,8 @@
         <h4 class=""><%= link_to truncate(piece.title.titleize, :length => 20), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %><br/>
         <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 20) || piece.user.name, vanity_url_path(piece.user.profile) %></small>
         </h4>
+
+
         <!-- <button class="btn btn-sm btn-default">
         <small><span class="caret caret-reversed"></span> Up</small>
         </button> -->
