@@ -80,6 +80,13 @@
       <%= @piece.views.to_i %> Views
     </label> 
     &nbsp;
+    <% if @piece.featured %>
+     <label class="label label-success">
+      <i class="glyphicon glyphicon-star"></i>
+      <%= link_to 'Featured', featured_path, :class => "white" %> 
+    </label> 
+    &nbsp;
+    <% end %>
     <label class="label label-info">
       <i class="glyphicon glyphicon-heart"></i>
       <%=  pluralize(@piece.favourited_by.count, 'Love' ) %>
