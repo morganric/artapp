@@ -87,7 +87,7 @@ ul li {
 }
 
 .white, .white a {
-  color: #fff;
+  color: #fff !important;
 }
 
 .black, .black a {
