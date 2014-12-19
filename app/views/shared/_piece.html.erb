@@ -5,8 +5,6 @@
         <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 20) || piece.user.name, vanity_url_path(piece.user.profile) %></small>
         </h4>
         <h6>
-        <% if current_user %>
-
         <!-- <button class="btn btn-sm btn-default">
         <small><span class="caret caret-reversed"></span> Up</small>
         </button> -->
@@ -15,7 +13,6 @@
             </label>
             &nbsp;
 
-        <% end %>
 <!--             <label class="label label-info">
              <i class="glyphicon glyphicon-heart "></i>  <%= piece.favourited_by.count %> Favs
             </label>
