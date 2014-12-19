@@ -46,7 +46,7 @@
 	  	<div id="masonry-container" class="transitions-enabled centered 	infinite-scroll clearfix">
 			<% @pieces.each_with_index do |piece, index| %>
 				<%= render 'shared/piece', :piece => piece %>
-        <badge class="badge pull-left" style="position:relative; left:-290px; margin-right: -10px;"><%= index + 1 %></badge>
+        <badge class="badge pull-left" style="position:relative; left:-290px; margin: -5px 0px 0px -10px;"><%= index + 1 %></badge>
 			<% end %>
 
 			</div>
