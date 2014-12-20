@@ -34,7 +34,7 @@
 		<div id="myTabContent" class="tab-content">
 		  <div class="tab-pane fade " id="new">
 		  <div  class="transitions-enabled centered infinite-scroll clearfix">
-			<% @new_pieces.each do |piece| %>
+			<% @new_pieces.each_with_index do |piece, index| %>
 						<%= render 'shared/piece', :piece => piece %>
 			<% end %>
 
@@ -46,7 +46,7 @@
 	  	<div id="masonry-container" class="transitions-enabled centered 	infinite-scroll clearfix">
 			<% @pieces.each_with_index do |piece, index| %>
 				<%= render 'shared/piece', :piece => piece %>
-        <span class="badge" style="position:relative; right:255px; margin: 0px 5px 10px -35px; float:left;"><%= index + 1 %></span>
+               <span class="badge" style="position:relative; right:255px; margin: 0px 5px 10px -35px; padding:3px; float:left;"><%=  (index + 1).ordinalize %></span>
 			<% end %>
 
 			</div>
