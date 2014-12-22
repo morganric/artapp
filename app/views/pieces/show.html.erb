@@ -116,7 +116,7 @@
     </p>
 
      <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
+  <!-- <ul class="nav nav-tabs" role="tablist">
   <li role="presentation" class="active"><a href="#comments" aria-controls="home" role="tab" data-toggle="tab">Disqus</a></li>
     <li role="presentation" class=""><a href="#fb" aria-controls="home" role="tab" data-toggle="tab">Facebook Comments</a></li>
   </ul>
@@ -127,7 +127,7 @@
   <div class="tab-content">
 
     <div role="tabpanel" class="tab-pane " id="fb">
-      <div class="fb-comments" data-width="750" data-href="<%= user_piece_url(:id => @piece.id, :user_slug => @piece.user.profile.slug) %>" data-numposts="5" data-colorscheme="light"></div>
+      <div class="fb-comments" data-width="750" data-href="<%#= user_piece_url(:id => @piece.id, :user_slug => @piece.user.profile.slug) %>" data-numposts="5" data-colorscheme="light"></div>
     </div>
     <div role="tabpanel" class="tab-pane active" id="comments">
           <div id="disqus_thread"></div>
@@ -146,7 +146,7 @@
     
       
     </div>
-  </div>
+  </div> -->
 
   </div>
   <div class="col-md-4">
