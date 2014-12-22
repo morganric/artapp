@@ -68,7 +68,7 @@
 
 
 
-<% @collection.pieces.order('created_at DESC')each do |piece| %>
+<% @collection.pieces.order('created_at DESC').each do |piece| %>
 	<%= render 'shared/piece', :piece => piece %>
 <% end %>
 
