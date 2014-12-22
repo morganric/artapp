@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get "oembed" => "pieces#oembed", constraints: { format: 'json' }, :as => :oembed
 
    get ':user_slug/:id'  => "pieces#show", as: :user_piece
+    get ':user_slug/:id/loved_by'  => "pieces#loved_by", as: :loved_by
    get 'p/:id', to: redirect(':user_slug/:id' ), as: :short
 
   post '/message' => 'profiles#message', :as => 'message'

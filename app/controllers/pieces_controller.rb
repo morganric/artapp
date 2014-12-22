@@ -1,6 +1,6 @@
 class PiecesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :index, :tag, :featured, :categories, :tag_embed]
-  before_action :set_piece, only: [:show, :edit, :update, :destroy, :nope, :dope, :upload_email, :embed]
+  before_action :set_piece, only: [:show, :edit, :update, :destroy, :nope, :dope, :upload_email, :embed, :loved_by]
   after_action :upload_email, only: :create
 
 
@@ -75,6 +75,9 @@ class PiecesController < ApplicationController
     if @piece.hidden == true
       redirect_to vanity_url_path(@piece.user.profile), notice: 'Sorry no peaking, this piece is hidden.'
     end
+  end
+
+  def loved_by
   end
 
   def embed

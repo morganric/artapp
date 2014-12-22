@@ -87,11 +87,13 @@
     </label> 
     &nbsp;
     <% end %>
-    <label class="label label-info">
+    <% if @piece.favourited_by != [] %>
+    <label class="label label-info white">
       <i class="glyphicon glyphicon-heart"></i>
-      <%=  pluralize(@piece.favourited_by.count, 'Love' ) %>
+      <%= link_to pluralize(@piece.favourited_by.count, 'Love'), loved_by_path(id: @piece.slug, user_slug: @piece.user.profile.slug) %>
     </label> 
     &nbsp;
+    <% end %>
     <% @piece.tag_list.each do |tag| %>
       <label class="label label-default">
         <i class="glyphicon glyphicon-tag white"></i>
@@ -200,7 +202,7 @@
 
     <% unless @piece.favourited_by == [] %>
       <div class="panel panel-info">
-        <div class="panel-heading "><h5 class="white"><i class='glyphicon glyphicon-heart'></i> Loved By</h5></div>
+        <div class="panel-heading "><h5 class="white"><i class='glyphicon glyphicon-heart'></i> <%= link_to 'Loved By', loved_by_path(id: @piece.slug, user_slug: @piece.user.profile.slug) %></h5></div>
         <div class="panel-body">
           <% @piece.favourited_by.limit(10).each do |user| %>
             <%= link_to(image_tag(user.profile.image.url(:thumb), :class => "img-circle"), vanity_url_path( :id => user.profile.slug)) %>
