@@ -71,7 +71,7 @@
     <div class=" navbar-grey">
     <ul class="nav navbar-nav">
     <% if @profile.user.pieces.where(:hidden => false).count == 0 %>
-      <li class=""><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> My Pieces </a></li>
+      <li class=""><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> Latest Pieces </a></li>
     <% else %>
       <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> My Pieces (<%= @profile.user.pieces.where(:hidden => false).count %>)</a></li>
     <% end %>
