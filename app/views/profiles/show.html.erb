@@ -71,9 +71,18 @@
   <nav class="navbar navbar-static-top navbar-default " role="navigation">
     <div class=" navbar-grey">
     <ul class="nav navbar-nav">
-    <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> My Pieces</a></li>
+    <% if @profile.user.pieces != nil %>
+      <li class=""><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> My Pieces</a></li>
+    <% else %>
+      <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> My Pieces</a></li>
+    <% end %>
     <li><a href="#popular" data-toggle="tab"><i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
-    <li><a href="#loves" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
+    <% if @profile.user.pieces != nil %>
+    <li class="" ><a href="#loves" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
+    <% else %>
+    <li class="active" ><a href="#loves" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
+    <% end %>
+
     <% if  @profile.user.stripe_publishable_key != nil %>
       <li><a href="#shop" data-toggle="tab"><i class="glyphicon glyphicon-shopping-cart "></i> Shop</a></li>
     <% end %>
@@ -90,7 +99,12 @@
 
 
     <div id="myTabContent" class="tab-content">
+
+    <% if @profile.user.pieces != nil %>
       <div class="tab-pane fade active in" id="new">
+    <% else %>
+      <div class="tab-pane fade" id="new">
+    <% end %> 
       <div id="masonry-container" class="transitions-enabled centered infinite-scroll clearfix">
       <% @pieces.order('created_at DESC').each do |piece| %>
                     <%= render 'shared/piece', :piece => piece %>
@@ -98,8 +112,9 @@
 
       </div>
         <%= paginate @pieces, :html => {:class => "pagination"} %>
-        
       </div>
+
+
     <div class="tab-pane fade" id="popular">
       <div id="masonry-container" class="transitions-enabled centered infinite-scroll clearfix">
       <% @pieces.order('views DESC').each do |piece| %>
@@ -109,7 +124,12 @@
       </div>
     </div>
 
+    <% if @profile.user.pieces != nil %>
     <div class="tab-pane fade" id="loves">
+    <% else %>  
+      <div class="tab-pane fade active in" id="loves">
+    <% end %>
+
       <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
       <% @profile.user.favourites.where(:hidden => false).order('created_at DESC').each do |piece| %>
                      <%= render 'shared/piece', :piece => piece %>
