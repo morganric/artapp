@@ -38,7 +38,7 @@
   <meta name="twitter:site" content="@artupio">
   <meta name="twitter:title" content="<%= @collection.title %>">
   <meta name="twitter:description" content="<%= @collection.description %>">
-  <meta name="twitter:image" content="<%= @collection.pieces.first.image.url(:embed) %>">
+  <meta name="twitter:image" content="<%= @collection.user.profile.image.url(:embed) %>">
   <meta property="twitter:player" content="<%= "https://artupio.herokuapp.com#{collection_embed_path(:id => @collection.id, :user_slug => @collection.user.profile.slug)}" %>" >
   <meta name="twitter:player:width" content="480">
   <meta name="twitter:player:height" content="270">
