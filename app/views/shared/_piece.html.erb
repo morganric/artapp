@@ -17,6 +17,7 @@
              <i class="glyphicon glyphicon-eye-open "></i> <%= piece.views.to_i %> Views
             </label>
             &nbsp; -->
+                        <!-- <br/><br/> -->
 
 <!--             <label class="label label-info">
              <i class="glyphicon glyphicon-heart "></i>  <%= piece.favourited_by.count %> Favs
@@ -29,7 +30,6 @@
             <%# if  piece.get_dislikes.count > 0 %>
             <label class="label label-danger"><i class='glyphicon glyphicon-thumbs-down'></i> <%= piece.get_dislikes.count %> Nope</label>
             <%# end %> -->
-            <br/><br/>
             <% if piece.tag_list != [] %>                         
               <% piece.tag_list[0..2].each do |tag| %>
                 <label class="label label-default" >
