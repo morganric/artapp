@@ -41,6 +41,7 @@ gem 'omniauth-stripe-connect'
 gem 'omniauth'
 gem 'oauth2'
 gem 'mailboxer'
+gem "twitter"
 
 group :development do
   gem 'better_errors'
