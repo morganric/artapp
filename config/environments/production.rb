@@ -5,6 +5,9 @@ ENV["ADMIN_PASSWORD"] = "chaneme123"
 ENV["MANDRILL_USERNAME"] = 'morganric+artup@gmail.com'
 ENV["MANDRILL_APIKEY"] = 'M3G7MmfWxDBYTxnRArXrYg'
 
+ENV['STRIPE_CONNECT_CLIENT_ID'] = "ca_533sxNm2Y3L982oAOxuRQasaamfkbdpF"
+ENV['SECRET_KEY'] = "sk_live_wjn75Dh4jTGkOiPAO0fgr4r1"
+ENV['PUBLISHABLE_KEY'] = "pk_live_GqiTPUQ3fMyhoOra8b3KV7bY"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
