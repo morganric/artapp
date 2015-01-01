@@ -56,6 +56,10 @@ GEM
       mime-types (>= 1.16)
     celluloid (0.16.0)
       timers (~> 4.0.0)
+    chatterbot (0.7.0)
+      launchy (>= 2.1.2)
+      oauth
+      twitter (>= 4.4.0)
     childprocess (0.5.3)
       ffi (~> 1.0, >= 1.0.11)
     cloudinary (1.0.77)
@@ -184,6 +188,7 @@ GEM
     netrc (0.7.7)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
+    oauth (0.4.7)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -389,6 +394,7 @@ DEPENDENCIES
   bootstrap-sass (~> 2.3.2.2)
   capybara
   carrierwave
+  chatterbot
   cloudinary
   coffee-rails (~> 4.0.0)
   database_cleaner

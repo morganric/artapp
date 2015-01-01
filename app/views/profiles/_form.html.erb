@@ -14,10 +14,20 @@
     <%= f.file_field :banner %>
     <br/><br/>
     <%= f.input :bio %>
-    <%= f.input :twitter %>
+    <%= f.label :twitter %>
+     <div class="input-group">
+      <div class="input-group-addon">@</div>
+        <input class="string optional" id="profile_twitter" name="profile[twitter]" type="text" value="">
+        <%#= f.input :twitter %>
+      </div>
+    </div>
+    <br/>
     <%= f.input :location %>
+    <br/>
     <%= f.input :website %>
+    <br/>
     <%= f.input :dob %>
+    <br/>
     <%= f.input :notifications %>
     <%= f.input :inbox %>
     <%= f.input :donations %>
