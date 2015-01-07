@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'search' => 'search#index', as: 'search', via: [:get, :post]
+  post 'search' => 'search#index', as: 'search_post', via: [:get, :post]
+
    scope ":id" do
     get :following, to: "profiles#following", as: 'following_profile'
     get :followers, to: "profiles#followers", as: 'followers_profile'
   end
+
 
 
   devise_for :users, :controllers => { :invitations => 'users/invitations', :omniauth_callbacks => "users/omniauth_callbacks" }
