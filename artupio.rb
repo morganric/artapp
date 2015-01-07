@@ -48,6 +48,7 @@ exclude "hi", "spammer", "junk"
 #   reply "Yes #USER#, you are very kind to say that!", tweet
 # end
 
+<<<<<<< HEAD
 loop do
 
 client.search('#art -rt', :result_type => 'recent').take(3).each do |tweet|
@@ -60,6 +61,20 @@ end
 
 sleep 60.minutes
 end
+
+# loop do
+
+# client.search('#art -rt', :result_type => 'recent').take(3).each do |tweet|
+# 	puts tweet.text
+
+# 	if tweet.created_at > client.home_timeline.first.created_at
+# 		client.retweet(tweet.id)
+# 	end
+# end
+
+# sleep 60.minutes
+# end
+
 
 
 # loop do
