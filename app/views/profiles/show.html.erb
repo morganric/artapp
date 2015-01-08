@@ -92,6 +92,12 @@
     <% if @profile.inbox == true %>
       <li><a href="#messages" data-toggle="tab"><i class="glyphicon glyphicon-envelope "></i> Messages</a></li>
     <% end %>
+      <li>
+      <button type="button" class="btn btn-primary btn-sm navbar-btn" data-toggle="modal" data-target="#myModal">
+            <i class='glyphicon glyphicon-flash'></i> Embed Code
+          </button>
+
+      </li>
     </ul>  
     </div>
   </nav>
@@ -258,11 +264,7 @@
                   <%= pinit_button %>
                   <%= google_plus_button %>
 
-                    <button type="button" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#myModal">
-            <i class='glyphicon glyphicon-flash'></i> Embed Code
-          </button>
 
-                 
                 </div>
                 </div>
             </div>    
