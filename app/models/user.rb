@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   after_create :create_profile
   paginates_per 10
   acts_as_messageable
+  validates :name, presence: true
+validates :name, uniqueness: true
 
   validates_exclusion_of :name, :in => %w( facebook message discussions facebook tedx featured users feeds photos videos items admin oembed api facebook new popular featured favicon superuser 
     pages partners categories category creators platforms media posts authors types providers tagged ), :message => "You don't belong here"
