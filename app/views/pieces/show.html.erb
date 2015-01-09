@@ -44,7 +44,7 @@
 
 <div>
 <br/>
-<div class="pull-right">
+<div class="pull-right clearfix">
   <div class="pull-right" style="margin-left:5px;">
   <% unless current_user == nil %>
   <% if  UserFav.where(:user_id => current_user.id, :piece_id => @piece.id).exists? %>
@@ -56,14 +56,14 @@
    </div>
    <%= render 'shared/collect', :piece => @piece %>
 </div>
-<h2>
-  <%= truncate(@piece.title.titleize, :length => 50) %><br/>
-  <small class="pull-left">by <%= link_to @piece.user.profile.display_name || @piece.user.name, vanity_url_path(@piece.user.profile) %></small>
+<br/>
+<h1 class="text-center">
+  <%= truncate(@piece.title.titleize, :length => 100) %><br/>
+  <small class="">by <%= link_to @piece.user.profile.display_name || @piece.user.name, vanity_url_path(@piece.user.profile) %></small>
   <span class="pull-left">
   <%#= render 'follow_form', :html => {class:  "pull-right"} %>
   </span>
-</h2  >
-  <br/>
+</h1  >
   <hr/>
 </div>
 
