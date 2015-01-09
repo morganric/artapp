@@ -1,11 +1,9 @@
 <h1>Search: <%= params[:q] %></h1>
 <hr/>
- 
- <h2> Results:</h2>
-
 <ul class="nav nav-tabs">
   <li class="active"><a href="#pieces" data-toggle="tab"><i class="glyphicon glyphicon-upload"></i> Pieces (<%= @pieces.count || 0 %>)</a></li>
   <li class=""><a href="#profiles" data-toggle="tab"><i class="glyphicon glyphicon-user"></i> Users (<%= @profiles.count || 0 %>)</a></li>
+  <li class=""><a href="#tags" data-toggle="tab"><i class="glyphicon glyphicon-tags"></i> Tags (<%= @tags.length || 0 %>)</a></li>
 </ul>
 
 <div id="myTabContent" class="tab-content">
@@ -27,5 +25,15 @@
 		<%= link_to res.display_name, vanity_url_path(res) %></li></h3>
 	<% end %>
 
+	</div>
+	<div class="tab-pane fade " id="tags">
+  	<ol>
+	<% @tags.each do |res| %>
+		<h3><li>
+			<%= link_to image_tag(res.image.url(:small), :class => 'img-thumbnail img-circle'), res %>
+			<%= link_to res.title, res %>
+			</li></h3>
+	<% end %>
+	</ol>
 	</div>
 </div>
