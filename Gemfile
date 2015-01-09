@@ -43,7 +43,7 @@ gem 'oauth2'
 gem 'mailboxer'
 gem "twitter"
 gem "chatterbot"
-
+gem 'ruby-sox'
 
 group :development do
   gem 'better_errors'
