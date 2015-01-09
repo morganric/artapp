@@ -1,11 +1,6 @@
 <h1>Search: <%= params[:q] %></h1>
 <hr/>
-<%= form_tag search_post_path, :method => 'post'  do %>
-   <%= text_field_tag :q, params[:q] %> &nbsp;
-   <%#= text_label "" %>
-   <%= submit_tag "Search", :name => nil, :class => "btn btn-sm"  %>
- <% end %>
- <br/>
+ 
  <h2> Results:</h2>
 
 <ul class="nav nav-tabs">

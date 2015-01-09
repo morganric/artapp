@@ -50,7 +50,7 @@ class ProfilesController < ApplicationController
     @pieces = Piece.where(:user_id => @profile.user.id).where(:hidden => false).order('created_at DESC').limit(12)
     @featured = Piece.where(:featured => true)
 
-    # @pieces.limit(12).each do |piece|
+    # @pieces.each do |piece|
     #   piece.views = piece.views.to_i + 1
     #   piece.save
     # end
