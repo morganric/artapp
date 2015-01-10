@@ -118,6 +118,10 @@
       <strong>Dimensions:</strong>
       <%= @piece.dimensions %>
     </p>
+    <p>
+      <strong>Uploaded on:</strong>
+      <%= @piece.created_at.to_formatted_s(:short) %>
+    </p>
 
      <!-- Nav tabs -->
   <!-- <ul class="nav nav-tabs" role="tablist">
