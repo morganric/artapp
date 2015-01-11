@@ -1,6 +1,9 @@
 <h1>Categories</h1>
 <hr/>
-    <% @categories.each do |category| %>
+<div class="row clearfix">
+<% @categories.each do |category| %>
+	<div class="col-md-3" >
       <h2><%= link_to category.name, category %></h2>
       <%= link_to image_tag(pieces(category).last.image.url(:mini)), category %>
-    <% end %>
+    </div>
+<% end %>
