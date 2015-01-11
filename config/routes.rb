@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :categories
+
   get 'search' => 'search#index', as: 'search', via: [:get, :post]
   post 'search' => 'search#index', as: 'search_post', via: [:get, :post]
 
@@ -34,8 +36,8 @@ Rails.application.routes.draw do
   get "/tagged/:tag" => "pieces#tag", :as => :tag_pieces
   get 'pages/:id' => 'visitors#index', as: 'static'
 
-  get "/categories" => "pieces#categories", :as => :categories
-  get "/categories/:tag" => "pieces#category", :as => :category
+  # get "/categories" => "pieces#categories", :as => :categories
+  # get "/categories/:tag" => "pieces#category", :as => :category
   get "oembed" => "pieces#oembed", constraints: { format: 'json' }, :as => :oembed
 
    get ':user_slug/:id'  => "pieces#show", as: :user_piece

@@ -1,0 +1,15 @@
+
+
+<button class="btn btn-default pull-right" ><%= link_to raw('<i class="glyphicon glyphicon-th"></i> Categories'), categories_path %></button>
+
+
+<h1>
+  <%= @category.name %>
+</h1>
+
+<hr/>
+
+
+<% @pieces.each do |piece| %>
+	<%= render 'shared/piece', :piece => piece %>
+<% end %>
