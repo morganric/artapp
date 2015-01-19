@@ -13,7 +13,7 @@ class Piece < ActiveRecord::Base
 	errors.add(:base, "Please only add 5 tags") if number_of_tags > 5
 	end
 
-	belongs_to :user
+	belongs_to :user, dependent: :destroy
 
 	has_many :user_favs
     has_many :favourited_by, :through => :user_favs, :source => :user
