@@ -2,8 +2,6 @@ ENV["MANDRILL_USERNAME"] = 'morganric+artup@gmail.com'
 ENV["MANDRILL_APIKEY"] = 'M3G7MmfWxDBYTxnRArXrYg'
 ENV["DOMAIN_NAME"] = "appart.herokuapp.com"
 
-ENV['STRIPE_CONNECT_CLIENT_ID'] = "ca_533sS0nMT4DTd9OED87f1ibhn73BjY8P"
-ENV['SECRET_KEY'] = "sk_test_oyy8hxLnVIy4lwxfjdbhchuS"
 ENV['PUBLISHABLE_KEY'] = "pk_test_gTBJNFb3AicnglEhCcyoWsQ3"
 
 
