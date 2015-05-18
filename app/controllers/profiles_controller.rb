@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_filter :authenticate_user!, except: [:show, :followers, :following, :embed]
+  before_filter :authenticate_user!, except: [:show, :followers, :following, :embed, :home]
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :following, :followers, :embed, :shop]
 
   after_filter :allow_iframe
@@ -27,6 +27,29 @@ class ProfilesController < ApplicationController
     end
     return @receipts 
 
+  end
+
+  def home
+    
+    @profile = User.where(:name => 'artupio')
+
+    if @profile == []
+      @profile = Profile.first
+    else
+       @profile = User.where(:name => 'artupio')
+    end
+
+    @pieces = Piece.where(:user_id => @profile.user.id).where(:hidden => false).page params[:page]
+    @featured = Piece.where(:featured => true)
+    @shop = @pieces.where(:sold => false ).where('price > ?', 0)
+    @conversations = @profile.user.mailbox.inbox
+    @receipts = []
+
+    @conversations.limit(6).each do |convo|
+      @receipts << convo.receipts_for(@profile.user)
+    end
+    return @receipts 
+    
   end
 
 

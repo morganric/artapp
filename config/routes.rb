@@ -91,7 +91,7 @@ Rails.application.routes.draw do
     end
 
   unauthenticated do
-    root to: "pieces#index"
+    root 'profiles#home', as: :root
   end
 
 end

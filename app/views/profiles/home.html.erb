@@ -1,0 +1,340 @@
+<% set_meta(
+    :keywords => @profile.display_name,
+    :description => @profile.bio,
+    :og => {:type => "website",
+            :title => "#{@profile.display_name} | ArtUp.io", 
+            :description => @profile.bio,
+            :image => @profile.image.url(:square)
+            }
+    ) 
+%>
+
+<% content_for(:head) do %>
+  <!-- <link rel="alternate" type="application/json+oembed"
+    href="<%= root_url %>oembed?url=<%= vanity_url_url(@profile) %>&format=json"
+    title="Bacon Lollys oEmbed Profile" /> -->
+
+
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+  <meta name="twitter:card" content="player">
+  <meta name="twitter:site" content="@artupio">
+  <meta name="twitter:title" content="<%= @profile.display_name %>">
+  <meta name="twitter:description" content="<%= @profile.bio %>">
+  <meta name="twitter:image" content="<%= @profile.image.url(:embed) %>">
+  <meta property="twitter:player" content="<%= "https://artupio.herokuapp.com#{profile_embed_path(:id => @profile.id)}" %>" >
+  <meta name="twitter:player:width" content="480">
+  <meta name="twitter:player:height" content="270">
+  <meta property="twitter:player:stream" content="<%= "https://artupio.herokuapp.com#{profile_embed_path(:id => @profile.id)}" %>" >
+  <meta name="twitter:player:stream:content_type" content="video/mp4">
+<% end %>
+
+
+<%= content_for :header do %>
+
+  <section style="background-image: url('<%= @profile.banner.url(:banner)  %>'); color:white; margin-top:60px; top: -10px; position: relative;" class="profile-header text-center">
+  <br/>
+  <%= image_tag @profile.image.url(:profile) || "http://res.cloudinary.com/artapp/image/upload/v1413470304/gntloo1fznwu9yylo1nu.png", :class => "img-responsive img-thumbnail img-circle title pull-center" %>
+  <br/><br/>
+
+  <%= render 'follow_form', :user => @profile.user   %>
+
+
+  <% if @profile.user ||= current_user %>
+    <div class="stats white badge badge-default">
+      <a href="<%= following_profile_path(@profile.slug || @profile.id) %>">
+        <strong id="following" class="stat ">
+          <%= @profile.user.following.count %>
+        </strong>
+        following
+      </a> | 
+      <a href="<%= followers_profile_path(@profile.slug || @profile.id) %>">
+        <strong id="followers" class="stat">
+          <%= @profile.user.followers.count %>
+        </strong>
+        followers
+      </a>
+    </div>
+
+    <br/><br/>
+    </div>
+  <% end %>
+<% end %>
+
+<h1 class="text-center"><%= @profile.display_name  %></h1>
+
+<div class="row">
+
+
+<div class="col-md-12">
+
+  <nav class="navbar navbar-static-top navbar-default " role="navigation">
+    <div class=" navbar-grey">
+    <ul class="nav navbar-nav">
+        <li><a href="#about" data-toggle="tab"><i class="glyphicon glyphicon-info-sign "></i> About</a></li>
+    <% if @profile.user.pieces.where(:hidden => false).count == 0 %>
+      <li class=""><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> Latest Pieces </a></li>
+    <% else %>
+      <li class="active"><a href="#new" data-toggle="tab"><i class="glyphicon glyphicon-upload "></i> My Pieces (<%= @profile.user.pieces.where(:hidden => false).count %>)</a></li>
+    <% end %>
+    <li><a href="#popular" data-toggle="tab"><i class="glyphicon glyphicon-eye-open "></i> Popular Pieces</a></li>
+    <% if @profile.user.pieces.where(:hidden => false).count  == 0 %>
+    <li class="active" ><a href="#loves" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
+    <% else %>
+    <li class="" ><a href="#loves" data-toggle="tab"><i class="glyphicon glyphicon-heart "></i> Favorite Pieces</a></li>
+    <% end %>
+
+    <% if  @profile.user.stripe_publishable_key != nil %>
+      <li><a href="#shop" data-toggle="tab"><i class="glyphicon glyphicon-shopping-cart "></i> Shop</a></li>
+    <% end %>
+    <% if @profile.user.collections.count > 0 %>
+      <li><a href="#collections" data-toggle="tab"><i class="glyphicon glyphicon-th-large "></i> Collections</a></li>
+    <% end %>
+    <% if @profile.inbox == true %>
+      <li><a href="#messages" data-toggle="tab"><i class="glyphicon glyphicon-envelope "></i> Messages</a></li>
+    <% end %>
+      <li>
+      <button type="button" class="btn btn-primary btn-sm navbar-btn pull-right" data-toggle="modal" data-target="#myModal">
+            <strong class="pull-left"><%= "</>".upcase %></strong> &nbsp; Embed Code
+          </button>
+
+      </li>
+    </ul>  
+    </div>
+  </nav>
+
+
+    <div id="myTabContent" class="tab-content">
+
+    <% if @profile.user.pieces.where(:hidden => false).count == 0 %>
+      <div class="tab-pane fade " id="new">
+    <% else %>
+      <div class="tab-pane fade active in" id="new">
+    <% end %> 
+      <div id="masonry-container" class="transitions-enabled centered infinite-scroll clearfix">
+      <% @pieces.order('created_at DESC').each do |piece| %>
+                    <%= render 'shared/piece', :piece => piece %>
+      <% end %>
+
+      </div>
+        <%= paginate @pieces, :html => {:class => "pagination"} %>
+      </div>
+
+
+    <div class="tab-pane fade" id="popular">
+      <div id="masonry-container" class="transitions-enabled centered infinite-scroll clearfix">
+      <% @pieces.order('views DESC').each do |piece| %>
+              <%= render 'shared/piece', :piece => piece %>
+      <% end %>
+
+      </div>
+    </div>
+
+    <% if @profile.user.pieces.where(:hidden => false).count  == 0 %>
+    <div class="tab-pane fade active in" id="loves">
+    <% else %>  
+      <div class="tab-pane fade " id="loves">
+    <% end %>
+
+      <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
+      <% @profile.user.favourites.where(:hidden => false).order('created_at DESC').each do |piece| %>
+                     <%= render 'shared/piece', :piece => piece %>
+      <% end %>
+
+      </div>
+      </div>
+
+
+      <div class="tab-pane fade" id="collections">
+      <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
+      <% if current_user == @profile.user %>
+        <%= link_to 'New Collection', new_collection_path, :class => "btn-default btn text-centered" %>
+       <% end %>
+        <hr/>
+          <% @profile.user.collections.each do |collection| %>
+            <div class="col-md-4" >
+                       <h2><%= link_to collection.title.titleize, user_collection_path(:id => collection.id, :slug => @profile.slug) %></h2>
+                       <% if collection.pieces.count > 0 %>
+                       <%= link_to image_tag(collection.pieces.first.image.url(:mini)), user_collection_path(:id => collection.id, :slug => @profile.slug) %>
+                       <% else %>
+                        <%= link_to image_tag("http://res.cloudinary.com/artapp/image/upload/v1413470304/gntloo1fznwu9yylo1nu.png"), user_collection_path(:id => collection.id, :slug => @profile.slug) %>
+                       <% end %>
+            </div>
+        <% end %>
+</div></div>
+
+      <div class="tab-pane fade" id="shop">
+      <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
+          <% @shop.where(:hidden => false).order('views DESC').each do |piece| %>
+                    <div class="box col3">
+                      <div class="text-center">
+                      <%= link_to image_tag(piece.image.url(:mini), :class =>'pull-left thumbnail'), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %>
+                      <h4 class=""><%= link_to truncate(piece.title, :length => 20), user_piece_path(:id => piece.slug, :user_slug => piece.user.profile.slug) %><br/>
+                      <small>by <%= link_to truncate(piece.user.profile.display_name,  :length => 20) || piece.user.name, vanity_url_path(piece.user.profile) %></small>
+                      </h4>
+                      <!-- <button class="btn btn-sm btn-default">
+                      <small><span class="caret caret-reversed"></span> Up</small>
+                      </button> -->
+
+                      <button class="btn white btn-primary"><%= link_to "Buy $#{ piece.price}", "#{piece_path(piece)}#buy", :class => " white" %></button>
+                      <br/><br/>
+                      </div>
+                    </div>
+          <% end %>
+        </div>
+      </div>
+
+       <div class="tab-pane fade" id="messages">
+          <div id="masonry-container" class="transitions-enabled infinite-scroll clearfix">
+        
+        <div class="col-md-8" >
+          <div id="inbox" >
+          <%= render 'messages' %>
+          </div>
+          </div>
+
+      </div>
+      </div>
+
+      <div class="tab-pane fade" id="about">
+      <div class="clearfix">
+      <div class="col-md-8" >
+      <div class="panel panel-default">
+        <div class="panel-heading"><h5><%= @profile.display_name || @profile.user.name %></h5></div>
+          <div class="panel-body">
+            <% if @profile.bio !=  "" && @profile.bio !=  nil %>
+              <p class="well">
+                <%= auto_link(@profile.bio.gsub(/\n/, '<br/>').html_safe, :html => { :target => '_blank' }) %>
+                  
+              </p>
+            <% end %>
+            <br/>
+                  <% if current_user %>
+                    <% if current_user == @profile.user || current_user.admin? %>
+                    <%= link_to 'Edit', edit_profile_path(@profile), class: "pull-left" %> 
+                    <% end %>
+                  <% end %>
+                  <br/>
+            <p>
+              <%= @profile.location %>
+              <br/>
+              <%= link_to @profile.website, url_with_protocol(@profile.website), :target => "blank"  %>
+            </p>
+            <% if @profile.twitter != "" %>
+              <p>
+                 <a href="http://twitter.com/<%= @profile.twitter %>" target="_blank">@<%= @profile.twitter %></a>
+              </p>
+            <% end %>
+          </div>
+          </div>
+
+          </div>
+            <div class="col-md-4">
+
+            <% if @profile.donations %>
+              <% unless @profile.user.stripe_publishable_key == "" || @profile.user.stripe_publishable_key == nil %>
+                <div class="panel panel-primary">
+                  <div class="panel-heading "><h5 class="white"><i class='white glyphicon glyphicon-shopping-cart'></i> Donate to <%= truncate(@profile.display_name, :length => 20) %></h5></div>
+                  <div class="panel-body">
+                    <p>$10 minimum donation</p>
+                      <%= form_tag charges_path do %>
+
+                      <%= number_field_tag :amount, number_with_precision(10, :precision => 2), :class=> "form-control", :width => "50%", :min => number_with_precision(10, :precision => 2), :step => 1 %>
+                      <br/>
+                      <%= hidden_field_tag :profile_id, @profile.id %>
+
+                      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                              data-key="<%= @profile.user.stripe_publishable_key %>"
+                              data-description="<%= @profile.display_name %>" data-email="<%#= current_user.email %>"
+                              data-image="<%= @profile.image.url(:small) %>"
+                              data-amount=""></script>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+             <div class="panel panel-default">
+                <div class="panel-heading "><h5 class=""><i class='glyphicon glyphicon-share-alt'></i> Share</h5></div>
+                <div class="panel-body">
+
+                   <%= like_button(402079716609857, :layout => :button_count, :send => true) %>
+                  <br/><br/>
+                  <%= tweet_button(via: "artupio", url: "#{vanity_url_path(@profile)}", text: "Checkout @#{@profile.twitter
+                  } #{@profile.user.name} on @artupio #{vanity_url_url(@profile.slug)}", count: "none") %>
+                  
+                  <%= pinit_button %>
+                  <%= google_plus_button %>
+
+
+                </div>
+                </div>
+            </div>    
+            </div>
+        </div>
+
+    
+    </div>
+
+</div>
+
+
+</div>
+
+
+       <!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Embed Code Preview</h4>
+      </div>
+      <div class="modal-body">
+        <iframe style="border:none;" src="<%= profile_embed_url(:id => @profile.id, :slug => @profile.slug) %>" width="500px" height="300px"/></iframe>
+
+          <textarea cols="55" rows="3" id="embed_code"
+         > <iframe style="border:none;" src="<%= profile_embed_url(:id => @profile.id, :slug => @profile.slug) %>" width="500px" height="300px"/></iframe>
+          <br/>
+          <a href="<%= vanity_url_url(@profile.slug) %>" target="_blank"><%= @profile.display_name || @profile.user.name %></a> on <a href="http://www.artup.io" target="_blank">artup.io</a>
+         </textarea>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button class='my_clip_button btn btn-primary btn-sm clip_board' data-clipboard-target='embed_code' data-clipboard-text='jfrkfjrj' id='embed_button' title='Click me to copy to clipboard.'>
+          <b>Copy To Clipboard</b>
+        </button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<style type="text/css">
+  
+  .affix {
+    top: 60px;
+width: 110%;
+margin-left: -15%;
+margin-right:15%;
+  }
+
+  
+  .navbar .nav,
+.navbar .nav > li {
+  float:none;
+  display:inline-block;
+  *display:inline; /* ie7 fix */
+  *zoom:1; /* hasLayout ie7 trigger */
+  vertical-align: top;
+}
+
+
+
+
+</style>
+
+
